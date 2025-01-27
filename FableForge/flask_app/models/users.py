@@ -1,5 +1,5 @@
 from flask_app.config.mySQLConnection import connectToMySQL
-from flask_app.models.charcter import Charcter
+from flask_app.models.charcters import Charcter
 from flask_app import DB
 
 
@@ -11,7 +11,7 @@ class User:
         self.username = data['username']
         self.email = data['email']
         self.password = data['password']
-        self.adminstration = data['adminstration']
+        self.adminstration = 'user'
         self.messages = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -33,4 +33,31 @@ class User:
             arr.append(cls(item))
         return arr
     
+    @classmethod
+    def get_one_id(cls, data):
+        query = 'select * from users where id = %(id)s)'
+        result = connectToMySQL(DB).query_db(query, data)
+        if result:
+            return cls(result[0])
+        else:
+            return False
+        
+    @classmethod
+    def update(cls, data):
+        query = 'update users set username = %(username)s, email = %(email)s, password = %(password)s where id = %(id)s'
+        return connectToMySQL(DB).query_db(query, data)
     
+    @classmethod
+    def ban(cls, data):
+        query = 'update users set adminstration = "ban" where id = %(id)s '
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def unban_demote(cls, data):
+        query = 'update users set adminstration = "user" where id = %(id)s'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def promote(cls, data):
+        query = 'update users set adminstration = "mod" where id = %(id)s'
+        return connectToMySQL(DB).query_db(query, data)
