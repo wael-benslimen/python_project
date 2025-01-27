@@ -1,7 +1,7 @@
 from flask_app.config.mySQLConnection import connectToMySQL
 from flask_app.models.charcters import Charcter
 from flask import flash
-from flask_app import DB
+from flask_app import DB, EMAIL_REGEX
 
 
 
@@ -69,4 +69,4 @@ class User:
         if data['username'] == '':
             is_valid = False
             flash('username should not be empty', 'username_eror')
-        if 
+        if EMAIL_REGEX.match(data['email']):
