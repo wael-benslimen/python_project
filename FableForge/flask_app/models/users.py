@@ -1,5 +1,6 @@
 from flask_app.config.mySQLConnection import connectToMySQL
 from flask_app.models.charcters import Charcter
+from flask import flash
 from flask_app import DB
 
 
@@ -61,3 +62,11 @@ class User:
     def promote(cls, data):
         query = 'update users set adminstration = "mod" where id = %(id)s'
         return connectToMySQL(DB).query_db(query, data)
+    
+    @staticmethod
+    def validate_user(data):
+        is_valid = True
+        if data['username'] == '':
+            is_valid = False
+            flash('username should not be empty', 'username_eror')
+        if 
