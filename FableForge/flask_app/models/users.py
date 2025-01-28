@@ -1,4 +1,8 @@
 from flask_app.config.mySQLConnection import connectToMySQL
+<<<<<<< Updated upstream
+=======
+# from flask_app.models.charcters import Charcter
+>>>>>>> Stashed changes
 from flask import flash
 from flask_app import DB
 import re
@@ -18,11 +22,10 @@ class User:
         self.HP= 4
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.charcter_id = data['charcter_id']
         
         
     @classmethod    
-    def create(cls, data):
+    def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s) ;"
         return connectToMySQL(DB).query_db(query, data)
     
@@ -35,6 +38,14 @@ class User:
         for row in result:
             all_users.append(cls(row))
         return all_users
+    
+    @classmethod
+    def get_by_email(cls, data):
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        if result:
+            return cls(result[0])
+        return False
     
     @classmethod
     def get_one_id(cls, data):
@@ -70,10 +81,10 @@ class User:
         if not EMAIL_REGEX.match(data['email']) :
             is_valid=False
             flash("Email not valid,try again","email_validation")
-        if len(data['password']) < 3 :
+        if len(data['password']) < 8 :
             is_valid= False
-            flash("Password must contain at least 5 characters","password_validation")
-        if data['password'] != data['password_confimation'] :
+            flash("Password must contain at least 8 characters","password_validation")
+        if data['password'] != data['confirm-password'] :
             is_valid=False 
-            flash("Passwords must match","password_confirmation")
+            flash("Passwords must match","confirm-password")
         return is_valid
