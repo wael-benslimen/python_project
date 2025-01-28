@@ -1,5 +1,9 @@
 from flask_app.config.mySQLConnection import connectToMySQL
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+# from flask_app.models.charcters import Charcter
+>>>>>>> Stashed changes
 =======
 # from flask_app.models.charcters import Charcter
 >>>>>>> Stashed changes
