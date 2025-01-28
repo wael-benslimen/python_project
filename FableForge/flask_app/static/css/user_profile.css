@@ -1,6 +1,9 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -45,7 +48,7 @@ body {
 }
 
 .nav_bar a:first-child {
-    text-decoration: none;
+    text-decoration: underline;
     color: white;
 }
 

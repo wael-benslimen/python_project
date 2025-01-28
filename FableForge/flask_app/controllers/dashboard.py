@@ -16,6 +16,17 @@ def dashboard() :
 
 
 
+@app.route('/create_quest',methods=['POST'])
+def create_quest():
+    if Task.validate_task(request.form) :
+        data={
+            **request.form,
+            'user_id':session['user_id']
+        }
+        Task.create(data)
+        return redirect('/dashboard')
+    return redirect('/dashboard')
+
 
 
 

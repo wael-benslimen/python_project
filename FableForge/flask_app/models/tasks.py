@@ -18,7 +18,6 @@ class Task :
     def create(cls,data) :
         query="""INSERT INTO tasks (task_name,task_description,task_difficulty,user_id)
         VALUES (%(task_name)s,%(task_description)s,%(task_difficulty)s,%(user_id)s) ;"""
-        return connectToMySQL(DB).query_db(query,data)
     
     @classmethod
     def get_all(cls) :
