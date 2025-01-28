@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-body {
+.main_register {
     width: 100vw;
     min-height: 100vh;
     display: flex;
@@ -12,6 +12,7 @@ body {
     align-items: center;
     background-image: url(../themes/Screenshot\ 2025-01-27\ 133628.png);
     background-repeat: no-repeat;
+    background-size: cover;
     background-size: cover;
     background-position: center center;
 }
@@ -52,11 +53,15 @@ i {
     color: black;
 }
 main{
-    background-image: url("../../static/themes/castle.jpeg");
+    background-image: url("../../static/themes/Screenshot\ 2025-01-27\ 133628.png");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
 }
+
+
 form{
     width: clamp(300px,40%,450px);
     display: flex;
@@ -71,6 +76,7 @@ form{
 }
 form h2 {
     text-align: center;
+    color: aliceblue;
 }
 form div{
     width: 100%;
