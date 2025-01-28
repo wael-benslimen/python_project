@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../themes/light\ mode\ back\ ground.png);
+    display: flex;
+    flex-direction: column;
+}
+
+.setting_icon {
+    display: flex;
+    justify-content: end;
+}
+
+.setting_icon img {
+    padding: 20px 50px 0px 80px;
+    cursor: pointer;
+    width: 3%;
+}
+
+.user_section {
+    margin: 15px 35px;
+    padding: 40px 50px;
+    background-color: #7eb9fcba;
+    border-radius: 30px;
+}
+
+.nav_bar {
+    margin: 35px;
+    padding: 25px 35px;
+    background-color: #7eb9fcba;
+    border-radius: 30px;
+    display: flex;
+    gap: 150px;
+    padding-left: 120px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.nav_bar a {
+    text-decoration: none;
+    color: #000;
+}
+
+.nav_bar a:first-child {
+    text-decoration: none;
+    color: white;
+}
+
+.user_section img {
+    padding-left: 5%;
+}
