@@ -61,11 +61,11 @@ form{
     justify-content: center;
     align-items: center;
     width: 100vw;
-    min-height: 100vh;
+    height: 100%;
 }
 main section.login-register{
     position: relative;
-    width: clamp(300px,60%,550px);
+    width: clamp(300px,45%,400px);
     height: 500px;
     transform-style:preserve-3d;
     transform: rotateY(0deg);
