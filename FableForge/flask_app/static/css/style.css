@@ -21,14 +21,6 @@
     background-position: center center;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: clamp(300px,40%,450px);
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -61,26 +53,55 @@ main{
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
 }
-
-
 form{
     width: clamp(300px,40%,450px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    height: 100%;
+}
+main section.login-register{
+    position: relative;
+    width: clamp(300px,45%,400px);
+    height: 500px;
+    transform-style:preserve-3d;
+    transform: rotateY(0deg);
+    transition: transform 0;
+    transform-origin:center center;
+}
+main section.login-register:not(.flip-2){
+    transform: rotateY(0deg);
+    transition: transform 1500ms;
+}
+main section.login-register form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 10px;
     padding: 20px;
     border-radius: 20px;
     border: 2px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
+    position: absolute;
+    top: 0;
+}
+main section.login-register form{
+    transform:rotateY(calc(90deg*var(--i)));
+    left:0%;
+}
+main section.login-register.flip-2{
+    transform: rotateY(-90deg);
+    transition: transform 1500ms;
 }
 form h2 {
     text-align: center;
-    color: aliceblue;
+    color: black;
 }
 form div{
     width: 100%;
@@ -103,4 +124,12 @@ form div input{
 form div:has(button[type="submit"]) button[type="submit"]{
     background-color: #1D293D;
     color: white;
+}
+main.dashboard{
+    background-image: url("..//themes/light\ mode\ back\ ground.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    min-height: 100vh;
 }
