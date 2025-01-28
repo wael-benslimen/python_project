@@ -91,9 +91,8 @@ main section.login-register form{
     position: absolute;
     top: 0;
 }
-main section.login-register form:nth-child(2){
-    transform: rotateY(90deg);
-    transform-origin: right;
+main section.login-register form{
+    transform:rotateY(calc(90deg*var(--i)));
     left:0%;
 }
 main section.login-register.flip-2{
