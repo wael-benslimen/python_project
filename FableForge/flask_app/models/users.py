@@ -1,5 +1,4 @@
 from flask_app.config.mySQLConnection import connectToMySQL
-from flask_app.models.charcters import Charcter
 from flask import flash
 from flask_app import DB
 import re
