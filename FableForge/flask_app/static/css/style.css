@@ -47,6 +47,47 @@ p {
 
 i {
     position: absolute;
-    top: 35px;
+    top: 30px;
     right: 10px;
+    color: black;
+}
+main{
+    background-image: url("../../static/themes/castle.jpeg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+form{
+    width: clamp(300px,40%,450px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+}
+form div{
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+    position: relative;
+    color: white;
+}
+form div input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: .25s;
+}
+form div:has(button[type="submit"]) button[type="submit"]{
+    background-color: #1D293D;
+    color: white;
 }
