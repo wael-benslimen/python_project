@@ -48,20 +48,49 @@
                 </div>
             </div>
         </div>
-        <div class="quests d-flex flex-column align-items-center justify-content-around col-3 mt-5">
-            <div class="questshead text-center mt-3">
-                <h3>Quests</h3>
-            </div>
-            <ul class="nav quest_list">
-                <li>
-                    <div class="d-flex justify-content-between quest">
-                        <p class="fw-bold">quest title</p>
-                        <button class="btn btn-danger">X</button>
+        <div class="d-flex justify-content-center mt-4">
+            <div class="quests d-flex flex-column justify-content-between col-3 mt-5">
+                <div class="questshead align-self-center text-center mt-3">
+                    <h3>Quests</h3>
+                </div>
+                <ul class="quest_list mt-3">
+                    <li class="quest p-2">
+                        <div class="d-flex justify-content-between">
+                            <p class="fw-bold">quest title</p>
+                            <button class="btn btn-danger">X</button>
+                        </div>
+                        <p>description</p>
+                    </li>
+                </ul>
+                <button class="btn align-self-end"><img src="../static/icons/plus.png" alt=""></button>
+                <form action="/create_quest">
+                    <input type="text" name="quest_name" class="form-control" placeholder="quest name *">
+                    <textarea name="description" class="form-control" placeholder="description"></textarea>
+                    <div class="d-flex justify-content-around align-content-center">
+                        <img src="../static/icons/easy.png" alt="easy"><img src="../static/icons/medium.png" alt=""><img
+                            src="../static/icons/hard.png" alt="">
+
                     </div>
-                    <p>description</p>
-                </li>
-            </ul>
-            <button class="btn"><img src="../static/icons/plus.png" alt=""></button>
+                </form>
+            </div>
+            <div class="character d-flex align-items-center flex-column">
+                <img src="../static/charecters/thief 1.png" alt="character" class="w-50">
+                <h3>EXP</h3>
+                <span class="exp"><span class="expfiller"></span></span>
+            </div>
+            <div class="quests d-flex flex-column justify-content-between col-3 mt-5">
+                <div class="questshead align-self-center text-center mt-3">
+                    <h3 class="">friend name</h3>
+                </div>
+                <div class="msg_history d-flex flex-column p-3">
+                    <p>message from user</p>
+                    <p class="align-self-end">message from friend</p>
+                </div>
+                <form action="/send_message" class="d-flex align-items-center">
+                    <input type="text" name="message" class="form-control">
+                    <button class="btn"><img src="../static/icons/plus.png" alt=""></button>
+                </form>
+            </div>
         </div>
     </section>
 </body>
