@@ -36,10 +36,26 @@
                 <h2>
                     Sign Up for FableForge
                 </h2>
-                <div class="w-100"><label class="form-label"></label><input type="text" class="form-control w-100" name="username" placeholder="Username"></div>
-                <div class="w-100"><label class="form-label" for=""></label><input type="email" class="form-control w-100" name="email" placeholder="Email"></div>
-                <div class="w-100 position-relative"><label class="form-label" for=""></label><input type="password" class="form-control w-100" name="password" placeholder="Password" ><i class="fa-solid fa-eye-slash"></i></div>
-                <div class="w-100 position-relative"><label class="form-label" for=""></label><input type="password" class="form-control w-100" name="confirm-password" placeholder="Re-enter Password"></div>
+                <div class="w-100"><label class="form-label"></label>
+                    {% for msg in get_flashed_messages(category_filter=["username_eror"]) %}
+                    <p class="text-danger"> {{msg}} </p>
+                    {% endfor %}
+                    <input type="text" class="form-control w-100" name="username" placeholder="Username"></div>
+                    <div class="w-100"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["email_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="email" class="form-control w-100" name="email" placeholder="Email"></div>
+                <div class="w-100 position-relative"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["password_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="password" class="form-control w-100" name="password" placeholder="Password" ><i class="fa-solid fa-eye-slash"></i></div>
+                <div class="w-100 position-relative"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["confirm-password"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="password" class="form-control w-100" name="confirm-password" placeholder="Re-enter Password"></div>
                 <div class="button w-100">
                     <button class="btn btn-primary w-100">Sign Up</button>
                 </div>
