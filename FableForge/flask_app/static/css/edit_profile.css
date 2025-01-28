@@ -1,0 +1,30 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+body{
+    background-image: url("../themes/360_F_719269705_L0sglwWqLgB5qs8zM0X4geXGCimf57el\ \(1\).jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+    border: 2px solid beige;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.436);
+    padding: 20px;
+    border-radius: 30px;
+    width: 100vw;
+    height: 100%;
+    width: clamp(300px,40%,450px)
+
+}
