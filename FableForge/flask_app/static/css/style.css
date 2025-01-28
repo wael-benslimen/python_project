@@ -1,7 +1,11 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
 }
+
 
 .main_register {
     width: 100vw;
