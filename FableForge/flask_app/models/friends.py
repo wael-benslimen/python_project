@@ -37,6 +37,8 @@ class Friend :
             all_friends.append(friend)
         return all_friends
     
+    @classmethod
+
     
     @classmethod
     def delete(cls,data) :
