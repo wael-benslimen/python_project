@@ -4,6 +4,7 @@
     font-family: "Luxurious Roman", serif;
     font-weight: 400;
     font-style: normal;
+    transition: .5s ease-in-out;
 }
 body{
     background-image: url("../themes/360_F_719269705_L0sglwWqLgB5qs8zM0X4geXGCimf57el\ \(1\).jpg");
@@ -27,4 +28,42 @@ body{
     height: 100%;
     width: clamp(300px,40%,450px)
 
+}
+.dropdown {
+    position: absolute;
+    display: inline-block;
+    top: 10px;
+    right: 20px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    min-width: 160px;
+    backdrop-filter: blur(1px); 
+    background-color: rgba(193, 223, 232, 0.5);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    padding: 10px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #1F3950;
+    border-radius: 30px;
+    color: aliceblue;
+
+}
+.show {display:block;
+}
+.image{
+    display: flex;
+    flex-direction: end;
 }

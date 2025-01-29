@@ -12,9 +12,14 @@
     <title>Document</title>
 </head>
 <body>
-    <section class="container-fluid mt-5 d-flex flex-column">
-        <div class="dropdown_menu">
-
+    <section class="container-fluid mt-5 d-flex flex-column position-relative">
+        <div class="dropdown">
+            <div class="image"><img src="../static/icons/Gear.png" class="gear_img align-self-end"   alt="gear" width="50px"  onclick="click_photo()"></div>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/dashboard">Home</a>
+                <a href="#">Edit profile</a>
+                <a href="#">Rest from battle</a>
+            </div>
         </div>
         <form action="/edit/profile" method="post" class="container" class="form-group" >
             <h3>Your account</h3>
@@ -28,5 +33,6 @@
             <button type="submit" style="padding: 10px 50px; border-radius: 10px;background-color: #1D293D ; color: white;">Save</button>
         </form>
     </section>
+    <script src="../static/edit_profile.js"></script>
 </body>
 </html>
