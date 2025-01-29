@@ -1,7 +1,11 @@
 const section1 = document.querySelector('.quest_create')
 const section2 = document.querySelector('.quest_view')
+const btn = document.querySelector('.plus_btn')
 
 function toggleClass() {
-    section1.classList.toggle("disp_hidden")
-    section2.classList.toggle("disp_hidden")
+    section1.classList.toggle("hidden_face")
+    section2.classList.toggle("hidden_face")
+    btn.classList.toggle("rotate_btn")
 }
+
+
