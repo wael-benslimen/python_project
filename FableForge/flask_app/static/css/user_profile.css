@@ -10,19 +10,66 @@ body {
     background-image: url(../themes/light\ mode\ back\ ground.png);
     display: flex;
     flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.user_nav_bar {
+nav {
     background-color: hsla(216, 81%, 62%, 0.621);
     margin: 15px 35px;
+    padding: 10px 20px;
     border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.setting_icon img {
-    padding: 10px 40px 0px 70px;
-    cursor: pointer;
-    width: 1%;
+nav ul {
+    display: flex;
+    gap: 150px;
+    list-style: none;
+    padding-left: 50px;
 }
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav img {
+    margin-right: 50px;
+    cursor: pointer;
+    width: 40px;
+    cursor: pointer;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    right: 45px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    min-width: 160px;
+}
+
+.dropdown_content a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropdown_content p a {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 2px 1px;
+    background-color: rgb(107, 107, 195);
+    border-radius: 20px;
+}
+
 
 .user_section {
     display: flex;
@@ -134,26 +181,17 @@ body {
     font-weight: bolder; 
 }
 .lvl_progress {
-    
-    padding: 125%;
+    padding: 140px;
     background-color: antiquewhite;
     border-radius: 50%;
 }
 
-
-
-
-.progress_bar {
-    width: 100%;
-    max-width: 500px;
-    background-color: #080202;
-    border-radius: 10px;
-    overflow: hidden;
+.dropdown_content.shown {
+    display: block;
 }
 
-.lvl {
-    width: 70%; /* Adjust this to control progress */
-    height: 20px;
-    background-color: #4caf50; /* Green color for the progress */
-    border-radius: 10px;
+.dropdown_content:not(.shown) {
+    display: none;
 }
+
+
