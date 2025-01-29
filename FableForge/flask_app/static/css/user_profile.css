@@ -1,6 +1,9 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -45,10 +48,38 @@ body {
 }
 
 .nav_bar a:first-child {
-    text-decoration: none;
+    text-decoration: underline;
     color: white;
 }
 
 .user_section img {
     padding-left: 5%;
+}
+
+.user_details_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 35px;
+}
+
+.left {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 50px;
+    background-color: #7eb9fcba;
+}
+
+.about_me{
+    width: 100%;
+    padding: 30px;
+    background-color: beige;
+    border-radius: 30px;
+}
+
+.lvl_progress {
+    width: 30%;
+    padding: 30px;
+    background-color: #000;
 }

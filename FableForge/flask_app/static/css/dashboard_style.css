@@ -1,0 +1,98 @@
+* {
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+body{
+    background-image: url('../themes/light\ mode\ back\ ground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+/* topbar */
+.topbar{
+    background-color: rgba(162, 211, 245, 0.7);
+    backdrop-filter: ;
+    border-radius: 1rem;
+}
+.user{
+    border-right:1px solid ;
+    height: 100%;
+    padding: 1%;
+    width: 10%;
+}
+.user img{
+    border-radius: 50%;
+}
+/* hp bar */
+.hpbar{
+    width: 70%;
+}
+.hp{
+    width: 70%;
+    height: 15px;
+    background-color: white;
+    border-radius: 15px;
+}
+.hpfiller{
+    width: 70%;
+    height: 15px;
+    background-color: red;
+    display: block;
+    border-radius: 15px;
+}
+/* invintory */
+.inventory{
+    border-left: 1px solid;
+    width: 10%;
+}
+
+.inventory img{
+    width: 58px;
+}
+/* quests */
+.quests{
+    background-color: rgba(162, 211, 245, 0.5);
+    border-radius: 15px;
+}
+.questshead{
+    width: 90%;
+    background-color: #26E79C;
+    border-radius: 15px;
+}
+.quest{
+    background-color: white;
+    border-radius: 15px;
+}
+.quest button{
+    border-radius: 50%;
+}
+.quests img{
+    width: 50px;
+}
+.quest_list{
+    width: 70%;
+    list-style: none;
+}
+/* character */
+.exp{
+    width: 75%;
+    height: 25px;
+    background-color: white;
+    border-radius: 15px;
+}
+.expfiller{
+    width: 70%;
+    height: 25px;
+    display: block;
+    background-color: lightblue;
+    border-radius: 15px;
+}
+/* chat */
+.msg_history p{
+    background-color: white;
+    width: 50%;
+    border-radius: 15px;
+    padding: 5px;
+}
