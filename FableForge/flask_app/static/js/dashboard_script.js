@@ -1,9 +1,7 @@
-const flipButtons = document.querySelectorAll("button.btn")
-const div1 = document.querySelector('')
+const section1 = document.querySelector('.quest_create')
+const section2 = document.querySelector('.quest_view')
 
-flipButtons.forEach((button) => {
-    button.onclick = function () {
-        section.classList.toggle("flip-2")
-    }
-})
-
+function toggleClass() {
+    section1.classList.toggle("disp_hidden")
+    section2.classList.toggle("disp_hidden")
+}

@@ -7,7 +7,19 @@ body{
     background-image: url('../themes/light\ mode\ back\ ground.png');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    min-height: 100vh;
+}
+/* navbar */
+.user_nav_bar {
+    background-color: hsla(216, 81%, 62%, 0.621);
+    margin: 15px 35px;
+    border-radius: 30px;
+}
+
+.setting_icon img {
+    padding: 10px 40px 0px 70px;
+    cursor: pointer;
+    width: 1%;
 }
 
 /* topbar */
@@ -55,6 +67,18 @@ body{
 .quests{
     background-color: rgba(162, 211, 245, 0.5);
     border-radius: 15px;
+    position: relative;
+}
+.quest_view{
+    position: absolute;
+    inset: 2px;
+    top: 20%;
+}
+.quest_create{
+    position: absolute;
+    inset: 1px;
+    top: 30%;
+    left: 10%;
 }
 .questshead{
     width: 90%;
@@ -129,12 +153,35 @@ body{
     color: white;
 }
 
-.dis_hidden{
-    transform: rotatey(90deg);
-    display: none;
-}
-.dis_shown{
-    transform: rotatey(0deg);
-    display: flex;
+.disp_hidden{
+    animation: rotate_out;
+    animation-fill-mode: forwards;
 }
 
+.disp_shown{
+    animation: rotate_in 1s;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes rotate_out {
+    0% {
+        transform: rotatey(0deg);
+        opacity: 1;
+    }
+    100%{
+        transform: rotatey(90deg);
+        opacity: 0;
+    }
+}
+@keyframes rotate_in{
+        0% {
+                transform: rotatey(90deg);
+                opacity: 0;
+            }
+        
+        100% {
+            transform: rotatey(0deg);
+            opacity: 1;
+        }
+}
