@@ -13,14 +13,21 @@
 </head>
 <body>
     <section class="container-fluid mt-5 d-flex flex-column position-relative">
-        <div class="dropdown">
-            <div class="image"><img src="../static/icons/Gear.png" class="gear_img align-self-end"   alt="gear" width="50px"  onclick="click_photo()"></div>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="/dashboard">Home</a>
-                <a href="#">Edit profile</a>
-                <a href="#">Rest from battle</a>
+        <nav>
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="">PROFILE</a></li>
+                <li><a href="">ADD FRIEND</a></li>
+            </ul>
+            <div class="dropdown">
+                <img src="../static/icons/Gear.png" alt="settings" class="image">
+                <div class="dropdown_content">
+                    <p><a href="" class="btn-secondary">Edit</a></p>
+                    <p><a href="" class="btn-secondary">Rest from battle</a></p>
+                    <p><a href="" class="btn-danger">logout</a></p>
+                </div>
             </div>
-        </div>
+        </nav>
         <form action="/edit/profile" method="post" class="container" class="form-group" >
             <h3>Your account</h3>
             <input name="email" type="email" placeholder="Email" class="form-control">
@@ -33,6 +40,6 @@
             <button type="submit" style="padding: 10px 50px; border-radius: 10px;background-color: #1D293D ; color: white;">Save</button>
         </form>
     </section>
-    <script src="../static/edit_profile.js"></script>
+    <script src="../static/js/nav-bar.js"></script>
 </body>
 </html>

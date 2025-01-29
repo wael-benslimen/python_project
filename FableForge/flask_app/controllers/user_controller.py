@@ -37,3 +37,25 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
+
+
+@app.route('/edit/form')
+def display_edit_form() :
+    if 'user_id' not in session :
+        return redirect('/')
+    user = User.get_one_id({'id':session['user_id']})
+    return render_template('edit_profile.html',user=user)
+
+
+@app.route('/edit/user',methods=['POST'])
+def edit_user() :
+    if 'user_id' not in session :
+        return redirect('/')
+    if User.validate_user(request.form) :
+        data={
+        **request.form,
+        'id':session['user_id']
+        }
+        User.update(data)
+        return redirect('/dashboard')
+    return redirect('/edit/form')
