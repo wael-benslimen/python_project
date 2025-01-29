@@ -13,7 +13,6 @@ body{
 /* topbar */
 .topbar{
     background-color: rgba(162, 211, 245, 0.7);
-    backdrop-filter: ;
     border-radius: 1rem;
 }
 .user{
@@ -135,6 +134,7 @@ body{
     display: none;
 }
 .dis_shown{
-    height: inherit;
+    transform: rotatey(0deg);
+    display: flex;
 }
 
