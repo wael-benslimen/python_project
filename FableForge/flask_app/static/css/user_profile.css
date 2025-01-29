@@ -12,23 +12,37 @@ body {
     flex-direction: column;
 }
 
-.setting_icon {
-    display: flex;
-    justify-content: end;
+.user_nav_bar {
+    background-color: hsla(216, 81%, 62%, 0.621);
+    margin: 15px 35px;
+    border-radius: 30px;
 }
 
 .setting_icon img {
-    padding: 20px 50px 0px 80px;
+    padding: 10px 40px 0px 70px;
     cursor: pointer;
-    width: 3%;
+    width: 1%;
 }
 
 .user_section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
     margin: 15px 35px;
     padding: 40px 50px;
     background-color: #7eb9fcba;
     border-radius: 30px;
 }
+
+.info ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    list-style: none;
+    font-size: larger;
+}
+
+
 
 .nav_bar {
     margin: 35px;
@@ -45,6 +59,7 @@ body {
 .nav_bar a {
     text-decoration: none;
     color: #000;
+    font-weight: bolder;
 }
 
 .nav_bar a:first-child {
@@ -60,26 +75,85 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 35px;
+    gap: 50px;
+    margin: 10px 35px;
 }
 
 .left {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
-    padding: 50px;
-    background-color: #7eb9fcba;
+    background-color: hsla(212, 95%, 74%, 0.729);
+    padding: 20px;
+    border-radius: 30px;
+    width: 65%;
 }
 
+
+.title_section_about_me {
+    padding-left: 30px;
+    font-size: larger;
+    font-weight: bolder;
+}
 .about_me{
-    width: 100%;
+    width: 95%;
     padding: 30px;
     background-color: beige;
     border-radius: 30px;
 }
 
-.lvl_progress {
-    width: 30%;
+.achievements{
+    width: 95%;
     padding: 30px;
-    background-color: #000;
+    background-color: beige;
+    border-radius: 30px;
+}
+
+.achievements p {
+    padding-bottom: 25px;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    background-color: hsla(212, 95%, 74%, 0.729);
+    padding: 20px 20px;
+    border-radius: 30px;
+    width: 35%;
+}
+
+.level {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+.title_section_lvl {
+    font-weight: bolder; 
+}
+.lvl_progress {
+    
+    padding: 125%;
+    background-color: antiquewhite;
+    border-radius: 50%;
+}
+
+
+
+
+.progress_bar {
+    width: 100%;
+    max-width: 500px;
+    background-color: #080202;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.lvl {
+    width: 70%; /* Adjust this to control progress */
+    height: 20px;
+    background-color: #4caf50; /* Green color for the progress */
+    border-radius: 10px;
 }
