@@ -24,6 +24,7 @@ body{
 }
 .user img{
     border-radius: 50%;
+    pointer-events: none;
 }
 /* hp bar */
 .hpbar{
@@ -96,3 +97,44 @@ body{
     border-radius: 15px;
     padding: 5px;
 }
+/* task form */
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    z-index: 10000;
+}
+
+
+[type=radio] {
+    cursor: pointer;
+
+}
+
+[type=radio]:checked+img {
+    outline: 2px solid #f00;
+    border-radius: 50%;
+
+}
+.lable_radio{
+    width: 50px !important;
+    height: 50px !important;
+    position: relative;
+
+}
+.quest_btn{
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+}
+
+.dis_hidden{
+    transform: rotatey(90deg);
+    display: none;
+}
+.dis_shown{
+    height: inherit;
+}
+

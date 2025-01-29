@@ -50,29 +50,46 @@
         </div>
         <div class="d-flex justify-content-center mt-4">
             <div class="quests d-flex flex-column justify-content-between col-3 mt-5">
-                <div class="questshead align-self-center text-center mt-3">
-                    <h3>Quests</h3>
-                </div>
-                <ul class="quest_list mt-3">
-                    <li class="quest p-2">
-                        <div class="d-flex justify-content-between">
-                            <p class="fw-bold">quest title</p>
-                            <button class="btn btn-danger">X</button>
-                        </div>
-                        <p>description</p>
-                    </li>
-                </ul>
-                <button class="btn align-self-end"><img src="../static/icons/plus.png" alt=""></button>
-                <form action="/create_quest">
-                    <input type="text" name="quest_name" class="form-control" placeholder="quest name *">
-                    <textarea name="description" class="form-control" placeholder="description"></textarea>
-                    <div class="d-flex justify-content-around align-content-center">
-                        <img src="../static/icons/easy.png" alt="easy"><img src="../static/icons/medium.png" alt=""><img
-                            src="../static/icons/hard.png" alt="">
-
+                <div class="dis_shown d-flex flex-column">
+                    <div class="questshead align-self-center text-center mt-3">
+                        <h3>Quests</h3>
                     </div>
-                </form>
+                    <ul class="quest_list mt-3">
+                        <li class="quest p-2">
+                            <div class="d-flex justify-content-between">
+                                <p class="fw-bold">quest title</p>
+                                <button class="btn btn-danger">X</button>
+                            </div>
+                            <p>description</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dis_hidden d-flex flex-column">
+                    <form action="/create_quest" class="d-flex flex-column">
+                        <input type="text" name="quest_name" class="form-control" placeholder="quest name *">
+                        <textarea name="description" class="form-control mt-3" placeholder="description"></textarea>
+                        <div class="d-flex justify-content-around align-content-center mt-3">
+                            <label for="" class="lable_radio">
+                                <input type="radio" class="dif" name="difficulty" value="1">
+                                <img src="../static/icons/easy.png" alt="">
+                            </label>
+                            <label for="">
+                                <input type="radio" class="dif" name="difficulty" class="lable_radio" value="2">
+                                <img src="../static/icons/medium.png" alt="">
+
+                            </label>
+                            <label for="">
+                                <input type="radio" class="dif" name="difficulty" class="lable_radio" value="3">
+                                <img src="../static/icons/hard.png" alt="">
+                            </label>
+
+                        </div>
+                        <input type="submit" class="quest_btn w-25 align-self-center mt-3" value="accept quest">
+                    </form>
+                </div>
+                <button class="btn align-self-end"><img src="../static/icons/plus.png" alt=""></button>
             </div>
+
             <div class="character d-flex align-items-center flex-column">
                 <img src="../static/charecters/thief 1.png" alt="character" class="w-50">
                 <h3>EXP</h3>
