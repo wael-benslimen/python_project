@@ -16,7 +16,7 @@ body {
 
 nav {
     background-color: hsla(216, 81%, 62%, 0.621);
-    margin: 15px 35px;
+    margin: 10px 35px;
     padding: 10px 20px;
     border-radius: 30px;
     display: flex;
@@ -29,6 +29,7 @@ nav ul {
     gap: 150px;
     list-style: none;
     padding-left: 50px;
+    margin-top: 15px;
 }
 
 nav ul li a {
@@ -46,7 +47,8 @@ nav img {
 .dropdown_content {
     display: none;
     position: absolute;
-    right: 45px;
+    right: -8px;
+    margin-top: 2px;
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 20px;
