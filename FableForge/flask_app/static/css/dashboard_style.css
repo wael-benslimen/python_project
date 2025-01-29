@@ -1,4 +1,6 @@
 * {
+    margin: 0;
+    padding: 0;
     font-family: "Luxurious Roman", serif;
     font-weight: 400;
     font-style: normal;
@@ -12,3 +14,39 @@ body{
 }
 /* navbar */
 
+.quests{
+    
+    background-color: rgba(122, 192, 240, 0.8);
+    padding: 20px;
+    height: 50vh;
+    width: 20vw;
+    border-radius: 20px;
+    text-align: center;
+}
+.quests ul li {
+    list-style: none;
+}
+.chats{
+    background-color: rgba(122, 192, 240, 0.8);
+    padding: 20px;
+    height: 50vh;
+    width: 20vw;
+    border-radius: 20px;
+    text-align: center;
+}
+.chats h6{
+    background-color: #26E79C;
+    padding: 10px;
+    border-radius: 30px;
+}
+.quests h5{
+    background-color: #26E79C;
+    padding: 10px;
+    border-radius: 30px;
+}
+.message{
+    background-color: #D9D9D9;
+    border-radius: 20px;
+    align-items: center;
+
+}
