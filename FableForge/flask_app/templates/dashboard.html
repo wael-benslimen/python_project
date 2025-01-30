@@ -20,13 +20,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 </head>
 
 <body>
-    <section class="container-fluid d-flex flex-column flex-wrap align-items-center">
-        <nav>
-
+    <section class="container-fluid">
+        <nav class="d-flex justify-content-between col-12 mt-3">
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="">PROFILE</a></li>
+                <li><a href="">ADD FRIEND</a></li>
+            </ul>
+            <div class="dropdown">
+                <img src="../static/icons/Gear.png" alt="gear" class="gear">
+                <div class="dropdown_menu">
+                    <a href="" class="dropdown_item">EDIT</a>
+                    <a href="" class="dropdown_item">REST FROM BATTLE</a>
+                    <a href="" class="dropdown_item">LOGOUT</a>
+                </div>
+            </div>
         </nav>
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
@@ -48,55 +59,18 @@
                     <img src="../static/items/bean 1.png" alt=""><img src="../static/items/apple.png" alt="">
                 </div>
             </div>
-            <div>
-
-            </div>
         </header>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        <main class="w-100 d-flex justify-content-between pt-5">
-                    <div class="quests">
-                        <h5>Quests</h5>
-                        <ul>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         <main class="d-flex justify-content-around mt-5 col-12">
             <div class="cards d-flex">
                 <div class="quests d-flex flex-column flex-wrap justify-content-between">
                     <h5>Quests</h5>
-                    <div class="quest_view">
+                    <div class="quest_view p-3">
                         <ul class="d-flex flex-column justify-content-center">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
                             <li>
                                 <p>Quest title</p>
                             </li>
                         </ul>
                     </div>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                    <div class="chats d-flex flex-column justify-content-between align-items-center">
-                        <h6>friend name</h6>
-                        <div class=" message d-flex justify-content-around align-items-center p-1">
-                            <form action="">
-                                <input type="text" class="form-control bg-transparent" placeholder="send message">
-                            </form>
-                            <img src="../static/icons/plus.png" alt="" width="25px">
-                        </div>
-                        
-=======
-=======
->>>>>>> Stashed changes
                     <div class="quest_create visible_face hidden_face">
                         <form action="" class="d-flex flex-column create_form_quest p-3">
                             <input type="text" name="quest_title" placeholder="enter the quest_title *"
@@ -122,98 +96,21 @@
                     <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
                             alt="" width="50px"></button>
                 </div>
-                <div class="character d-flex flex-column justify-content-center align-items-center">
-                    <div class="equipment d-flex flex-column justify-content-center align-items-center">
-                        <h3>equipment</h3>
-                        <form action="">
-                            <div class="d-flex justify-content-around align-items-center">
-                                <label for="">
-                                    <input type="radio" name="equipment" value="1">
-                                    <img src="../static/equipment/sword 1.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="equipment" value="2">
-                                    <img src="../static/equipment/kunai 1.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="equipment" value="3">
-                                    <img src="../static/equipment/bomb 1.png" alt="">
-                                </label>
-                            </div>
-                            <input type="submit" value="equip" class="btn_form w-50 align-self-center">
-                        </form>
-
+                <div>
+                    <div class="character d-flex flex-column justify-content-center align-items-center">
+                        <img src="../static/characters_img/thief 1.png" alt="character">
+                        <h1>EXP</h1>
+                        <span class="exp" class=""><span class="expfiller"></span></span>
                     </div>
-                    <img src="../static/charecters/thief 1.png" alt="">
-                    <h1>EXP</h1>
-                    <span class="exp"><span class="expfiller"></span></span>
+                    <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
+                        <img src="" alt="">
+                        <img src="" alt="">
+                        <img src="" alt="" id="no_border">
+                    </div>
                 </div>
                 <div class="chats d-flex flex-column justify-content-between align-items-center">
                     <h6>friend name</h6>
-                    <div class=" message d-flex justify-content-around align-items-center p-1">
-                        <form action="">
-                            <input type="text" class="form-control bg-transparent" placeholder="send message">
-                        </form>
-                        <img src="../static/icons/plus.png" alt="" width="25px">
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-                    </div>
-=======
-                    <div class="quest_create visible_face hidden_face">
-                        <form action="" class="d-flex flex-column create_form_quest p-3">
-                            <input type="text" name="quest_title" placeholder="enter the quest_title *"
-                                class="form-control">
-                            <textarea name="description" placeholder="description" class="form-control"></textarea>
-                            <div class="d-flex flex-wrap justify-content-around">
-                                <label for="">
-                                    <input type="radio" name="difficulty" value="1">
-                                    <img src="../static/icons/easy.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="difficulty" value="2">
-                                    <img src="../static/icons/medium.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="difficulty" value="3">
-                                    <img src="../static/icons/hard.png" alt="">
-                                </label>
-                            </div>
-                            <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
-                        </form>
-                    </div>
-                    <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
-                            alt="" width="50px"></button>
-                </div>
-<<<<<<< Updated upstream
-                <div class="character d-flex flex-column justify-content-center align-items-center">
-                    <div class="equipment d-flex flex-column justify-content-center align-items-center">
-                        <h3>equipment</h3>
-                        <form action="">
-                            <div class="d-flex justify-content-around align-items-center">
-                                <label for="">
-                                    <input type="radio" name="equipment" value="1">
-                                    <img src="../static/equipment/sword 1.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="equipment" value="2">
-                                    <img src="../static/equipment/kunai 1.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="equipment" value="3">
-                                    <img src="../static/equipment/bomb 1.png" alt="">
-                                </label>
-                            </div>
-                            <input type="submit" value="equip" class="btn_form w-50 align-self-center">
-                        </form>
-
-                    </div>
-                    <img src="../static/charecters/thief 1.png" alt="">
-                    <h1>EXP</h1>
-                    <span class="exp"><span class="expfiller"></span></span>
-                </div>
-                <div class="chats d-flex flex-column justify-content-between align-items-center">
-                    <h6>friend name</h6>
-                    <div class=" message d-flex justify-content-around align-items-center p-1">
+                    <div class="message d-flex justify-content-around align-items-center p-1">
                         <form action="">
                             <input type="text" class="form-control bg-transparent" placeholder="send message">
                         </form>
@@ -221,17 +118,30 @@
                     </div>
                 </div>
             </div>
->>>>>>> Stashed changes
-=======
-            </div>
->>>>>>> Stashed changes
-=======
-                    </div>
-                </div>
-            </div>
->>>>>>> Stashed changes
         </main>
     </section>
+    <div class="equipments d-flex flex-column">
+        <h5 class="text-center">pick your equipment</h5>
+        <form action="" class="d-flex flex-column">
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <input type="radio" name="equipment" value="sword">
+                    <img src="../static/equipment_img/sword 1.png" alt="sword" class="equipments_icon" width="50px">
+                </div>
+
+                <div for="">
+                    <input type="radio" name="equipment" value="shield">
+                    <img src="../static/equipment_img/kunai 1.png" alt="shield" class="equipments_icon" width="50px">
+                </div>
+
+                <div for="">
+                    <input type="radio" name="equipment" value="armor">
+                    <img src="../static/equipment_img/bomb 1.png" alt="armor" class="equipments_icon" width="50px">
+                </div>
+            </div>
+            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
+        </form>
+    </div>
     <script src="../static/js/dashboard_script.js"></script>
 </body>
 

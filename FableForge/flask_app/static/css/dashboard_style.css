@@ -6,61 +6,130 @@
     font-style: normal;
     overflow-x: hidden;
 }
-body{
+
+body {
     background-image: url('../themes/light\ mode\ back\ ground.png');
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+
 /* navbar */
+nav {
+    background-color: hsla(216, 80%, 69%, 0.621);
+    padding: 0% 2%;
+    border-radius: 30px;
+    align-items: center;*
+}
+
+nav ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+    padding-left: 5%;
+    margin-top: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li form {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li form input {
+    margin-right: 10px;
+}
+
+nav img {
+    margin-right: 1.8rem;
+    cursor: pointer;
+    width: 40px;
+    cursor: pointer;
+}
+.dropdown_menu{
+    display: none;
+    position: fixed;
+    right: -8px;
+    margin-top: 2px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    min-width: 160px;
+    z-index: 100000;
+}
+.dropdown_item{
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 2px 1px;
+    background-color: rgb(107, 107, 195);
+    border-radius: 20px;
+}
+.show{
+    display: block;
+}
 
 /* end navbar */
 /* header */
-header{
+header {
     height: fit-content;
     background-color: rgba(162, 211, 245, 0.7);
     border-radius: 25px;
 }
-.user_info{
+
+.user_info {
     border-right: 1px solid;
     width: 10%;
 }
-.user_info img{
+
+.user_info img {
     width: 90px;
 }
+
 /* hp */
-.hp{
+.hp {
     width: 80%;
 }
-.hpbar{
+
+.hpbar {
     width: 75%;
     height: 15px;
     background-color: white;
     display: block;
     border-radius: 25px;
 }
-.hpbar_filler{
+
+.hpbar_filler {
     width: 100%;
     height: 15px;
     background-color: red;
     display: block;
     border-radius: 25px;
 }
+
 /* inventory */
-.inventory{
+.inventory {
     border-left: 1px solid;
     width: 10%;
 }
-.inventory img{
+
+.inventory img {
     width: 50px;
 }
+
 /* end header */
 /* main */
 
-
 .chats {
     background-color: rgba(162, 211, 245, 0.7);
-    padding:1%;
+    padding: 1%;
     height: 50vh;
     width: 20vw;
     border-radius: 20px;
@@ -72,15 +141,15 @@ header{
     padding: 1%;
     border-radius: 30px;
 }
+
 .message {
     background-color: #dad5d5;
     border-radius: 10px;
     align-items: center;
-
 }
+
 /* quests */
 .quests {
-
     background-color: rgba(162, 211, 245, 0.7);
     padding: 1%;
     height: 50vh;
@@ -105,102 +174,122 @@ header{
     padding: 1%;
     border-radius: 30px;
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
-.message {
-    background-color: #D9D9D9;
-    border-radius: 10px;
-    align-items: center;
-
-}
-.cards{
-    display: flex;
-    justify-content: space-between;
-}
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 /* quest form */
-input[type = 'radio']{
+input[type='radio'] {
     width: 50px;
     height: 50px;
     z-index: 100000;
     position: absolute;
     opacity: 0;
 }
-input[type = 'radio']:checked+img{
+
+input[type='radio']:checked+img {
     border: 2px black solid;
     border-radius: 50%;
 }
-.create_form_quest{
+
+.create_form_quest {
     gap: 1rem;
 }
-.btn_form{
+
+.btn_form {
     border-radius: 25px;
     background-color: black;
     color: white;
 }
-.quest_create{
+
+.quest_create {
     position: absolute;
     inset: 1px;
     top: 30%;
 }
-.quest_view{
+
+.quest_view {
     position: absolute;
     inset: 1px;
     top: 20%;
 }
-.visible_face{
+
+.visible_face {
     opacity: 1;
     transition: transform, ease-in, 1.5s;
 }
-.hidden_face{
+
+.hidden_face {
     opacity: 0;
     transition: transform, ease-in, 1s;
 }
-.rotate_btn{
+
+.rotate_btn {
     transform: rotateZ(45deg);
     transition: transform, ease-in;
 }
-.plus_btn{
+
+.plus_btn {
     border-radius: 50%;
 }
-.plus_btn img{
+
+.plus_btn img {
     border: none;
 }
+
 /* character */
-.character img{
+.character {
+    padding: 1%;
+    height: 50vh;
+    width: 60vw;
+    text-align: center;
+}
+
+.character img {
     width: 30%;
 }
-.exp{
+
+.exp {
     background-color: white;
     display: block;
     width: 50%;
     height: 15px;
     border-radius: 25px;
 }
-.expfiller{
+
+.expfiller {
     background-color: rgb(133, 133, 255);
     display: block;
     width: 0%;
     height: 15px;
     border-radius: 25px;
 }
-/* end character */
-.equipment{
-    
+.char_equipments{
+    position: absolute;
+    height: 20vh;
+    width: 3%;
+    background-color:beige; 
+    padding: 1%;
+    border-radius: 20px;
+    left: 60%;
+    top: 30%;
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+.char_equipments img{
+    width: 50px;
+    height: 33%;
+    border-bottom: 1px solid black;
+    display: block;
+}
+#no_border{
+    border-bottom: none;
+}
+/* end character */
+.equipments{
+    position: absolute;
+    width: 20vw;
+    background-color:rgb(133, 133, 255, 0.2); 
+    padding: 1%;
+    border-radius: 20px;
+    left: 58%;
+    top: 30%;
+}
+
+
 /* end main */
->>>>>>> Stashed changes
-=======
-/* end main */
->>>>>>> Stashed changes
-=======
-/* end main */
->>>>>>> Stashed changes
