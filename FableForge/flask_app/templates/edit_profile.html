@@ -13,26 +13,46 @@
 </head>
 <body>
     <section class="container-fluid mt-5 d-flex flex-column position-relative">
-        <div class="dropdown">
-            <div class="image"><img src="../static/icons/Gear.png" class="gear_img align-self-end"   alt="gear" width="50px"  onclick="click_photo()"></div>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="/dashboard">Home</a>
-                <a href="#">Edit profile</a>
-                <a href="#">Rest from battle</a>
+        <nav>
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="">PROFILE</a></li>
+                <li><a href="">ADD FRIEND</a></li>
+            </ul>
+            <div class="dropdown">
+                <img src="../static/icons/Gear.png" alt="settings" class="image">
+                <div class="dropdown_content">
+                    <p><a href="" class="btn-secondary">Edit</a></p>
+                    <p><a href="" class="btn-secondary">Rest from battle</a></p>
+                    <p><a href="" class="btn-danger">logout</a></p>
+                </div>
             </div>
-        </div>
-        <form action="/edit/profile" method="post" class="container" class="form-group" >
+        </nav>
+        <form action="/edit/user" method="post" class="container" class="form-group" >
             <h3>Your account</h3>
-            <input name="email" type="email" placeholder="Email" class="form-control">
+            <input name="username" type="text" placeholder="username" class="form-control" value={{user.username}}>
+            {% for msg in get_flashed_messages(category_filter=[username_eror]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+            <input name="email" type="email" placeholder="Email" class="form-control" value={{user.email}}>
+            {% for msg in get_flashed_messages(category_filter=["email_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
             <input name="password" type="password" placeholder="password" class="form-control">
+            {% for msg in get_flashed_messages(category_filter=["password_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
             <input name="confirm-password" type="password" placeholder="re-enter password" class="form-control">
-            <input name="password" type="text" placeholder="interested in" class="form-control">
+            {% for msg in get_flashed_messages(category_filter=["confirm-password"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+            <input name="inetersts" type="text" placeholder="interested in" class="form-control">
             <input name="location" type="text" class="form-control" placeholder="location" class="form-control">
             <textarea name="about_me" placeholder="about me" class="form-control"></textarea >
             <input type="file" placeholder="upload a photo" class="form-control">
             <button type="submit" style="padding: 10px 50px; border-radius: 10px;background-color: #1D293D ; color: white;">Save</button>
         </form>
     </section>
-    <script src="../static/edit_profile.js"></script>
+    <script src="../static/js/nav-bar.js"></script>
 </body>
 </html>

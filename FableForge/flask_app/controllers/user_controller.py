@@ -6,7 +6,11 @@ bcrypt=Bcrypt(app)
 
 @app.route('/')
 def index():
-    return render_template("login.html")
+    return render_template("index.html")
+
+app.route('/dashb')
+def dash() :
+    return render_template('dash.html')
 
 @app.route("/create/new", methods = ["post"])
 def register():
@@ -30,10 +34,36 @@ def login():
     if not bcrypt.check_password_hash(user.password, request.form["password"]):
         flash("Invalid credentials!", "login")
         return redirect('/')
-    session["uer_id"] = user.id
+    session["user_id"] = user.id
     return redirect("/dashboard")
 
 @app.route('/logout', methods = ['post'])
 def logout():
     session.clear()
     return redirect('/')
+
+
+@app.route('/edit/form')
+def display_edit_form() :
+    if 'user_id' not in session :
+        return redirect('/')
+    user = User.get_one_id({'id':session['user_id']})
+    print("Session user_id:", session['user_id'])
+    return render_template('edit_profile.html',user=user)
+
+
+@app.route('/edit/user',methods=['POST'])
+def edit_user() :
+    if 'user_id' not in session :
+        return redirect('/')
+    if User.validate_user(request.form) :
+        data={
+        **request.form,
+        'id':session['user_id']
+        }
+        print(22222222222222222222222222222222222222222222222)
+        User.update(data)
+        print("*"*100)
+        print(data)
+        return redirect('/dashboard')
+    return redirect('/edit/form')

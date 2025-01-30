@@ -4,90 +4,314 @@
     font-family: "Luxurious Roman", serif;
     font-weight: 400;
     font-style: normal;
+    overflow-x: hidden;
 }
-body{
+
+body {
     background-image: url('../themes/light\ mode\ back\ ground.png');
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+
 /* navbar */
+nav {
+    background-color: hsla(216, 80%, 69%, 0.621);
+    padding: 0% 2%;
+    border-radius: 30px;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+    padding-left: 5%;
+    margin-top: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav ul li form {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li form input {
+    margin-right: 10px;
+}
+
+nav img {
+    margin-right: 1.8rem;
+    cursor: pointer;
+    width: 40px;
+    cursor: pointer;
+}
+
+.dropdown_menu {
+    display: none;
+    position: fixed;
+    right: -8px;
+    margin-top: 2px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    min-width: 160px;
+    z-index: 100000;
+}
+
+.dropdown_item {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+    padding: 2px 1px;
+    background-color: rgb(107, 107, 195);
+    border-radius: 20px;
+}
+
+.show {
+    display: block;
+}
 
 /* end navbar */
 /* header */
-header{
+header {
     height: fit-content;
     background-color: rgba(162, 211, 245, 0.7);
     border-radius: 25px;
 }
-.user_info{
+
+.user_info {
     border-right: 1px solid;
     width: 10%;
 }
+
+.user_info img {
+    width: 90px;
+}
+
 /* hp */
-.hp{
+.hp {
     width: 80%;
 }
-.hpbar{
+
+.hpbar {
     width: 75%;
     height: 15px;
     background-color: white;
     display: block;
     border-radius: 25px;
 }
-.hpbar_filler{
-    width: 70%;
+
+.hpbar_filler {
+    width: 100%;
     height: 15px;
     background-color: red;
     display: block;
     border-radius: 25px;
 }
+
 /* inventory */
-.inventory{
+.inventory {
     border-left: 1px solid;
     width: 10%;
 }
-.inventory img{
+
+.inventory img {
     width: 50px;
 }
-.quests {
 
-    background-color: rgba(162, 211, 245, 0.7);
-    padding: 20px;
-    height: 50vh;
-    width: 20vw;
-    border-radius: 20px;
-    text-align: center;
-}
-
-.quests ul li {
-    list-style: none;
-}
+/* end header */
+/* main */
 
 .chats {
     background-color: rgba(162, 211, 245, 0.7);
-    padding: 20px;
+    padding: 1%;
     height: 50vh;
     width: 20vw;
     border-radius: 20px;
     text-align: center;
 }
 
-.chats h6 {
+.chats h5 {
     background-color: #26E79C;
-    padding: 10px;
-    border-radius: 30px;
-}
-
-.quests h5 {
-    background-color: #26E79C;
-    padding: 10px;
+    padding: 1%;
     border-radius: 30px;
 }
 
 .message {
-    background-color: #D9D9D9;
-    border-radius: 20px;
+    background-color: #dad5d5;
+    border-radius: 10px;
     align-items: center;
-
 }
+
+/* quests */
+.quests {
+    background-color: rgba(162, 211, 245, 0.7);
+    padding: 1%;
+    height: 50vh;
+    width: 20vw;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.quests ul {
+    list-style: none;
+}
+
+.quests li {
+    background-color: #26E79C;
+    border-radius: 25px;
+    padding: 1%;
+}
+
+.quests h5 {
+    background-color: #26E79C;
+    padding: 1%;
+    border-radius: 30px;
+}
+
+/* quest form */
+input[type='radio'] {
+    width: 50px;
+    height: 50px;
+    z-index: 100000;
+    position: absolute;
+    opacity: 0;
+}
+
+input[type='radio']:checked+img {
+    border: 2px black solid;
+    border-radius: 50%;
+}
+
+.create_form_quest {
+    gap: 1rem;
+}
+
+.btn_form {
+    border-radius: 25px;
+    background-color: black;
+    color: white;
+}
+
+.quest_create {
+    position: absolute;
+    inset: 1px;
+    top: 30%;
+}
+
+.quest_view {
+    position: absolute;
+    inset: 1px;
+    top: 20%;
+}
+
+.visible_face {
+    opacity: 1;
+    transition: transform, ease-in, 1.5s;
+}
+
+.hidden_face {
+    display: none;
+}
+.card_info{
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: ease-out 0.2s;
+}
+.show_description{
+    height: 100px;
+    transition: ease-in 0.2s;
+}
+
+.rotate_btn {
+    transform: rotateZ(45deg);
+    transition: transform, ease-in;
+}
+
+.plus_btn {
+    border-radius: 50%;
+}
+
+.plus_btn img {
+    border: none;
+}
+
+/* character */
+.character {
+    padding: 1%;
+    height: 50vh;
+    width: 60vw;
+    text-align: center;
+}
+
+.character img {
+    width: 30%;
+}
+
+.exp {
+    background-color: white;
+    display: block;
+    width: 50%;
+    height: 15px;
+    border-radius: 25px;
+}
+
+.expfiller {
+    background-color: rgb(133, 133, 255);
+    display: block;
+    width: 0%;
+    height: 15px;
+    border-radius: 25px;
+}
+
+.char_equipments {
+    position: absolute;
+    height: 20vh;
+    width: 3%;
+    background-color: beige;
+    padding: 1%;
+    border-radius: 20px;
+    left: 60%;
+    top: 30%;
+}
+
+.char_equipments img {
+    width: 50px;
+    height: 33%;
+    border-bottom: 1px solid black;
+    display: block;
+}
+
+.no_border {
+    border-bottom: none !important;
+}
+
+/* end character */
+.equipments {
+    display: none;
+    position: absolute;
+    width: 20vw;
+    background-color: rgb(133, 133, 255, 0.2);
+    padding: 1%;
+    border-radius: 20px;
+    left: 58%;
+    top: 30%;
+}
+
+.show_equipments {
+    display: block;
+}
+.gap{
+    gap: 1rem;
+}
+/* end main */

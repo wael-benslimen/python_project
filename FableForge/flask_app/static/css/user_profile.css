@@ -16,7 +16,7 @@ body {
 
 nav {
     background-color: hsla(216, 81%, 62%, 0.621);
-    margin: 15px 35px;
+    margin: 10px 35px;
     padding: 10px 20px;
     border-radius: 30px;
     display: flex;
@@ -29,6 +29,7 @@ nav ul {
     gap: 150px;
     list-style: none;
     padding-left: 50px;
+    margin-top: 15px;
 }
 
 nav ul li a {
@@ -46,7 +47,8 @@ nav img {
 .dropdown_content {
     display: none;
     position: absolute;
-    right: 45px;
+    right: -8px;
+    margin-top: 2px;
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 20px;
@@ -68,6 +70,14 @@ nav img {
     padding: 2px 1px;
     background-color: rgb(107, 107, 195);
     border-radius: 20px;
+}
+
+.dropdown_content.shown {
+    display: block;
+}
+
+.dropdown_content:not(.shown) {
+    display: none;
 }
 
 
@@ -163,35 +173,40 @@ nav img {
 .right {
     display: flex;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     gap: 20px;
     background-color: hsla(212, 95%, 74%, 0.729);
-    padding: 20px 20px;
+    padding: 129px 20px;
     border-radius: 30px;
     width: 35%;
 }
 
-.level {
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #e0e0e0;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 30px;
-}
-.title_section_lvl {
-    font-weight: bolder; 
+    overflow: hidden;
 }
 .lvl_progress {
-    padding: 20px;
+    padding: 140px;
     background-color: antiquewhite;
-    border-radius: 50px;
+    border-radius: 50%;
 }
 
-.dropdown_content.shown {
-    display: block;
+.progress {
+    width: 70%;
+    height: 100%;
+    background: #76c7c0;
+    border-radius: 5px;
 }
 
-.dropdown_content:not(.shown) {
-    display: none;
-}
+
 
 

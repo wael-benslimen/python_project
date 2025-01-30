@@ -20,15 +20,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
 </head>
 
 <body>
     <section class="container-fluid d-flex flex-column flex-wrap align-items-center">
+        <nav>
+
+        </nav>
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <img src="../static/placeholders/User_cicrle.png" alt="user_image">
-                <h3>username</h3>
+                <h3 class="text-center">{{ user.username }}</h3>
+                <h3 class="text-center">lvl {{ user.char_lvl }}</h3>
             </div>
             <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <h1>HP</h1>
@@ -44,31 +47,90 @@
                     <img src="../static/items/bean 1.png" alt=""><img src="../static/items/apple.png" alt="">
                 </div>
             </div>
-            <div>
-
-            </div>
         </header>
-        <main>
-                <div class="cards d-flex justify-content-around">
-                    <div class="quests">
-                        <h5>Quests</h5>
-                        <ul>
-                            <li>
-                                <p>Quest title</p>
+        <main class="d-flex justify-content-around mt-5 col-12">
+            <div class="cards d-flex">
+                <div class="quests d-flex flex-column flex-wrap justify-content-between">
+                    <h5>Quests</h5>
+                    <div class="quest_view p-3">
+                        <ul class="d-flex flex-column justify-content-center gap">
+                            {% for quest in all_quests %}
+                            <li class="card_info">
+                                <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
+                                <p> description: {{quest.task_description}} </p>
                             </li>
+                            {% endfor %}
                         </ul>
                     </div>
-                    <div class="chats">
-                        <h6>friend name</h6>
-                        <div class="message d-flex justify-content-around align-items-center">
-                            <p>Send message</p>
-                            <img src="../static/icons/plus.png" alt="" width="25px">
-                        </div>
-                        
+                    <div class="quest_create visible_face hidden_face">
+                        <form action="/create_quest" method="post" class="d-flex flex-column create_form_quest p-3">
+                            <input type="text" name="task_name" placeholder="enter the quest_title *"
+                                class="form-control">
+                            <textarea name="task_description" placeholder="description" class="form-control"></textarea>
+                            <div class="d-flex flex-wrap justify-content-around">
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="1">
+                                    <img src="../static/icons/easy.png" alt="">
+                                    <label for="">
+                                        <input type="radio" name="task_difficulty" value="2">
+                                        <img src="../static/icons/medium.png" alt="">
+                                    </label>
+                                    <label for="">
+                                        <input type="radio" name="task_difficulty" value="3">
+                                        <img src="../static/icons/hard.png" alt="">
+                                    </label>
+                            </div>
+                            <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
+                        </form>
+                    </div>
+                    <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
+                            alt="" width="50px"></button>
+                </div>
+                <div>
+                    <div class="character d-flex flex-column justify-content-center align-items-center">
+                        <img src="../static/characters_img/thief 1.png" alt="character">
+                        <h1>EXP</h1>
+                        <span class="exp"><span class="expfiller"></span></span>
+                    </div>
+                    <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
+                        <img src="" alt="">
+                        <img src="" alt="">
+                        <img src="" alt="" class="no_border">
                     </div>
                 </div>
+                <div class="chats d-flex flex-column justify-content-between align-items-center">
+                    <h6>friend name</h6>
+                    <div class="message d-flex justify-content-around align-items-center p-1">
+                        <form action="">
+                            <input type="text" class="form-control bg-transparent" placeholder="send message">
+                        </form>
+                        <img src="../static/icons/plus.png" alt="" width="25px">
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
+    <div class="equipments">
+        <h5 class="text-center">pick your equipment</h5>
+        <form action="" class="d-flex flex-column">
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <input type="radio" name="equipment" value="sword">
+                    <img src="../static/equipment_img/sword 1.png" alt="sword" class="equipments_icon" width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="shield">
+                    <img src="../static/equipment_img/kunai 1.png" alt="shield" class="equipments_icon" width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="armor">
+                    <img src="../static/equipment_img/bomb 1.png" alt="armor" class="equipments_icon" width="50px">
+                </div>
+            </div>
+            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
+        </form>
+    </div>
+    <script src="../static/js/dashboard_script.js"></script>
 </body>
 
 </html>
