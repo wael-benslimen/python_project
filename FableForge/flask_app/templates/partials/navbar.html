@@ -1,0 +1,34 @@
+<header class="w-100 bg-dark">
+    <nav class="w-100 navbar d-flex justify-content-between navbar-expand-lg bg-dark">
+        <a class="navbar-brand text-light" href="/">Fable Forge</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-light opacity-75" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light opacity-75" href="/about">About</a>
+                </li>
+                {% if not user_id in session %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light opacity-75" href="/register">register</a>
+                    </li>
+                {%endif%}
+                {% if user_id in session %}
+                    <li class="nav-item">
+                        <a class="nav-link text-light opacity-75" href="/dashboard">dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light opacity-75" href="/profile">profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light bg-danger opacity-75" href="/logout">logout</a>
+                    </li>
+                {%endif%}
+            </ul>
+        </div>
+    </nav>
+</header>

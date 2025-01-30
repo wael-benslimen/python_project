@@ -181,9 +181,9 @@ nav img {
     font-weight: bolder; 
 }
 .lvl_progress {
-    padding: 140px;
+    padding: 20px;
     background-color: antiquewhite;
-    border-radius: 50%;
+    border-radius: 50px;
 }
 
 .dropdown_content.shown {

@@ -1,0 +1,91 @@
+body{
+    font-family: 'Press Start 2P', cursive;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+section#about {
+    background-image: url('../themes/darck\ theme.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#about > div{
+    width: clamp(300px,33%,450px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:2.5px;
+    border-radius: 10px;
+    background-color: #0056b3;
+    position: relative;
+    overflow: hidden;
+}
+section#about > div::before{
+    width: 150%;
+    height: 150%;
+    content: "";
+    position: absolute;
+    background:linear-gradient(transparent,rgb(255, 255, 255),transparent);
+    z-index: 5;
+    animation-name: rotation;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    transform-origin: center;
+    animation-duration: 5s;
+}
+@keyframes rotation{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+section#about > div > div{
+    width: calc(100% - 2.5px);
+    height: calc(100% - 2.5px);
+    padding:10px;
+    border-radius: 10px;
+    background-color: #0056b3;
+    z-index: 10;
+}
+.section-title {
+    font-size: 2.5rem;
+    color: #212529;
+    margin-bottom: 40px;
+}
+.btn-custom {
+    background: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+.btn-custom:hover {
+    background: #0056b3;
+}
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #dee2e6;
+    color: #212529;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.icon-box {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
