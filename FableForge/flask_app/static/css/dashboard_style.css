@@ -222,13 +222,15 @@ input[type='radio']:checked+img {
 .hidden_face {
     display: none;
 }
-.card_info{
+
+.card_info {
     height: 30px;
     overflow: hidden;
     cursor: pointer;
     transition: ease-out 0.2s;
 }
-.show_description{
+
+.show_description {
     height: 120px;
     transition: ease-in 0.2s;
 }
@@ -317,7 +319,9 @@ input[type='radio']:checked+img {
     left: 58%;
     top: 30%;
 }
-.gap{
+
+.gap {
     gap: 1rem;
 }
+
 /* end main */
