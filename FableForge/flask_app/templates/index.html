@@ -23,10 +23,10 @@
                         {% endfor %}
                 </div>
                 <div class="input-group">
-                    <input type="email" required placeholder="Email" name="email">
+                    <input type="email" placeholder="Email" name="email">
                 </div>
                 <div class="input-group">
-                    <input type="password" required placeholder="Password" name="password">
+                    <input type="password" placeholder="Password" name="password">
                 </div>
                 <button type="submit">Sign In</button>
                 <div class="signUp-link">
@@ -36,33 +36,33 @@
         </div>
         
         <div class="form-wrapper sign-up">
-            <form action="/create/user" method="post">
+            <form action="/create/new" method="post">
                 <h2>Welcome</h2>
                 <div class="input-group">
                         {% for msg in get_flashed_messages(category_filter=["username"]) %}
                             <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-                    <input type="text" required placeholder="Username" name="username">
+                    <input type="text" placeholder="Username" name="username">
                 </div>
                 <div class="input-group">
                         {% for msg in get_flashed_messages(category_filter=["email"]) %}
                             <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-                    <input type="email" required placeholder="Email" name="email">
+                    <input type="email" placeholder="Email" name="email">
                 </div>
                 <div class="input-group">
                         {% for msg in get_flashed_messages(category_filter=["password"]) %}
                             <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-                    <input type="password" required placeholder="Password" name="password">
+                    <input type="password" placeholder="Password" name="password">
                 </div>
                 <div class="input-group">
                         {% for msg in get_flashed_messages(category_filter=["confirm_password"]) %}
                             <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-                    <input type="password" required placeholder="Re-enter Password" name="confirm-passwrod">
+                    <input type="password" placeholder="Re-enter Password" name="confirm-password">
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" class="signUp">Sign Up</button>
                 <div class="signUp-link">
                     <p>Already have an account ?<a href="#" class="signInBtn-link">Sign In</a></p>
                 </div>

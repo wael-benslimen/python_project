@@ -77,13 +77,13 @@ class User:
         is_valid = True
         if data['username'] == '':
             is_valid = False
-            flash('username should not be empty', 'username_eror')
+            flash('username should not be empty', 'username')
         if not EMAIL_REGEX.match(data['email']) :
             is_valid=False
-            flash("Email not valid,try again","email_validation")
+            flash("Email not valid,try again","email")
         if len(data['password']) < 8 :
             is_valid= False
-            flash("Password must contain at least 8 characters","password_validation")
+            flash("Password must contain at least 8 characters","password")
         if data['password'] != data['confirm-password'] :
             is_valid=False 
             flash("Passwords must match","confirm-password")
