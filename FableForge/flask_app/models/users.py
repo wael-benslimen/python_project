@@ -18,6 +18,7 @@ class User:
         self.location = ""
         self.about_me = ""
         self.interests = ""
+        self.exp = data['exp']
         self.HP= 4
         self.image = ""
         self.created_at = data['created_at']
@@ -51,6 +52,8 @@ class User:
     def get_one_id(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s ;"
         result = connectToMySQL(DB).query_db(query, data)
+        print('*'*100)
+        print(result)
         if result:
             return cls(result[0])
         else:

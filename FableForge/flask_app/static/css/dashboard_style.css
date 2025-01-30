@@ -229,7 +229,7 @@ input[type='radio']:checked+img {
     transition: ease-out 0.2s;
 }
 .show_description{
-    height: 100px;
+    height: 120px;
     transition: ease-in 0.2s;
 }
 
@@ -269,7 +269,7 @@ input[type='radio']:checked+img {
 .expfiller {
     background-color: rgb(133, 133, 255);
     display: block;
-    width: 0%;
+    /* width: 0%; */
     height: 15px;
     border-radius: 25px;
 }
@@ -309,7 +309,13 @@ input[type='radio']:checked+img {
 }
 
 .show_equipments {
-    display: block;
+    position: absolute;
+    width: 20vw;
+    background-color: rgb(133, 133, 255, 0.2);
+    padding: 1%;
+    border-radius: 20px;
+    left: 58%;
+    top: 30%;
 }
 .gap{
     gap: 1rem;
