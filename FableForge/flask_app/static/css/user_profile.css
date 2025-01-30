@@ -72,6 +72,14 @@ nav img {
     border-radius: 20px;
 }
 
+.dropdown_content.shown {
+    display: block;
+}
+
+.dropdown_content:not(.shown) {
+    display: none;
+}
+
 
 .user_section {
     display: flex;
@@ -165,35 +173,43 @@ nav img {
 .right {
     display: flex;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     gap: 20px;
     background-color: hsla(212, 95%, 74%, 0.729);
-    padding: 20px 20px;
+    padding: 129px 20px;
     border-radius: 30px;
     width: 35%;
 }
 
-.level {
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #e0e0e0;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 30px;
-}
-.title_section_lvl {
-    font-weight: bolder; 
-}
-.lvl_progress {
-    padding: 140px;
-    background-color: antiquewhite;
-    border-radius: 50%;
+    overflow: hidden;
 }
 
-.dropdown_content.shown {
-    display: block;
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-.dropdown_content:not(.shown) {
-    display: none;
+.progress {
+    width: 70%;
+    height: 100%;
+    background: #76c7c0;
+    border-radius: 5px;
 }
+
+
 
 
