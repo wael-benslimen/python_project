@@ -137,7 +137,8 @@
             </div>
         </main>
     </section>
-    <div {% if user.char_lvl % 10 == 0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
+    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {%
+        endif %}>
         <h5 class="text-center">pick your equipment</h5>
         <form action="/lvl_up" class="d-flex flex-column">
 
