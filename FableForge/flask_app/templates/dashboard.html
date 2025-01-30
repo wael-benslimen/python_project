@@ -24,27 +24,7 @@
 
 <body>
     <section class="container-fluid">
-        <nav class="d-flex justify-content-between col-12 mt-3">
-            <ul>
-                <li><a href="">HOME</a></li>
-                <li><a href="">PROFILE</a></li>
-                <li><a href="">ADD FRIEND</a></li>
-            </ul>
-            <div class="dropdown">
-                <img src="../static/icons/Gear.png" alt="gear" class="gear">
-                <div class="dropdown_menu">
-                    <a href="" class="dropdown_item">EDIT</a>
-                    <a href="" class="dropdown_item">REST FROM BATTLE</a>
-                    <form action="/logout" method="post">
-<<<<<<< Updated upstream
-                        <button type="submit" class="dropdown_item">Logout</button>
-=======
-                        <input type="submit" value="LOGOUT" class="dropdown_item">
->>>>>>> Stashed changes
-                    </form>
-                </div>
-            </div>
-        </nav>
+
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <img src="../static/placeholders/User_cicrle.png" alt="user_image">
@@ -76,6 +56,14 @@
                             <li class="card_info">
                                 <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
                                 <p> description: {{quest.task_description}} </p>
+                                <div class="d-flex justify-content-center gap">
+                                    <form action="/cancle/{{quest.id}}" method="post">
+                                        <input type="submit" value="X" class="btn btn-danger">
+                                    </form>
+                                    <form action="/finished/{{quest.id}}" method="post">
+                                        <input type="submit" class="btn btn-success" value="✓">
+                                    </form>
+                                </div>
                             </li>
                             {% endfor %}
                         </ul>
@@ -89,14 +77,15 @@
                                 <label for="">
                                     <input type="radio" name="task_difficulty" value="1">
                                     <img src="../static/icons/easy.png" alt="">
-                                    <label for="">
-                                        <input type="radio" name="task_difficulty" value="2">
-                                        <img src="../static/icons/medium.png" alt="">
-                                    </label>
-                                    <label for="">
-                                        <input type="radio" name="task_difficulty" value="3">
-                                        <img src="../static/icons/hard.png" alt="">
-                                    </label>
+                                </label>
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="2">
+                                    <img src="../static/icons/medium.png" alt="">
+                                </label>
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="3">
+                                    <img src="../static/icons/hard.png" alt="">
+                                </label>
                             </div>
                             <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
                         </form>
@@ -107,8 +96,8 @@
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
                         <img src="../static/characters_img/thief 1.png" alt="character">
-                        <h1>EXP</h1>
-                        <span class="exp"><span class="expfiller"></span></span>
+                        <h3>EXP <br> {{user.exp}}%</h3>
+                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
                         <img src="" alt="">
@@ -128,20 +117,21 @@
             </div>
         </main>
     </section>
-    <div class="equipments">
+    <div {% if user.char_lvl % 10 == 0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
         <h5 class="text-center">pick your equipment</h5>
-        <form action="" class="d-flex flex-column">
+        <form action="/lvl_up" class="d-flex flex-column">
+
             <div class="d-flex w-100 justify-content-between">
                 <div>
                     <input type="radio" name="equipment" value="sword">
                     <img src="../static/equipment_img/sword 1.png" alt="sword" class="equipments_icon" width="50px">
                 </div>
                 <div for="">
-                    <input type="radio" name="equipment" value="shield">
+                    <input type="radio" name="equipment" value="kunai">
                     <img src="../static/equipment_img/kunai 1.png" alt="shield" class="equipments_icon" width="50px">
                 </div>
                 <div for="">
-                    <input type="radio" name="equipment" value="armor">
+                    <input type="radio" name="equipment" value="bomb">
                     <img src="../static/equipment_img/bomb 1.png" alt="armor" class="equipments_icon" width="50px">
                 </div>
             </div>
