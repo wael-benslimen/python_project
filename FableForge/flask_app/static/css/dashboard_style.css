@@ -106,6 +106,7 @@ header{
     border-radius: 30px;
 }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 .message {
     background-color: #D9D9D9;
@@ -118,6 +119,8 @@ header{
     justify-content: space-between;
 }
 =======
+=======
+>>>>>>> Stashed changes
 /* quest form */
 input[type = 'radio']{
     width: 50px;
@@ -188,5 +191,9 @@ input[type = 'radio']:checked+img{
 .equipment{
     
 }
+<<<<<<< Updated upstream
+/* end main */
+>>>>>>> Stashed changes
+=======
 /* end main */
 >>>>>>> Stashed changes
