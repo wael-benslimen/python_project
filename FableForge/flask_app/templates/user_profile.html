@@ -14,88 +14,65 @@
 </head>
 
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <body>
-        <div class="container">
-            <div class="user_info">
-                <nav>
+    <div class="container">
+        {% include 'partials/navbar.html' %}
+        <div class="user_info">
+            <div class="user_section">
+                <img src="../static/icons/user_icon.png" alt="user_icon">
+                <div class="info">
                     <ul>
-                        <li><a href="/dashboard">HOME</a></li>
-                        <li><a href="/profile">PROFILE</a></li>
-                        <li><a href="/search">ADD FRIEND</a></li>
+                        <li>Username</li>
+                        <li>Location</li>
+                        <li>Intrested In</li>
                     </ul>
-                    <div class="dropdown">
-                        <img src="../static/icons/Gear.png" alt="settings" class="image">
-                        <div class="dropdown_content">
-                            <p><a href="/edit/form">Edit</a></p>
-                            <p><a href="/offline">Rest from battle</a></p>
-                            <form action="/logout" method="post">
-                                <button type="submit">Logout</button>
-                            </form>
+                </div>
+            </div>
+            <div class="nav_bar">
+                <a href="/profile">Profile</a>
+                <a href="/profile/friends">Friends</a>
+            </div>
+            <div class="user_details_container">
+                <div class="left">
+                    <div class="title_section_about_me">Friend List</div>
+                    <div class="friend_section">
+                        <p>Wael Ben Slimen</p>
+                        <div class="images">
+                            <a href=""><img src="../static/icons/msg.png" alt=""></a>
+                            <a href=""><img src="../static/icons/user.png" alt=""></a>
                         </div>
                     </div>
-                </nav>
-                <div class="user_section">
-                    <img src="../static/icons/user_icon.png" alt="user_icon">
-                    <div class="info">
-                        <ul>
-                            <li>Username</li>
-                            <li>Location</li>
-                            <li>Intrested In</li>
-                        </ul>
+
+                    <div class="friend_section">
+                        <p>Wided Msakem</p>
+                        <div class="images">
+                            <a href=""><img src="../static/icons/msg.png" alt=""></a>
+                            <a href=""><img src="../static/icons/user.png" alt=""></a>
+                        </div>
+                    </div>
+
+                    <div class="friend_section">
+                        <p>Mortatha Houch</p>
+                        <div class="images">
+                            <a href=""><img src="../static/icons/msg.png" alt=""></a>
+                            <a href=""><img src="../static/icons/user.png" alt=""></a>
+                        </div>
                     </div>
                 </div>
-                <div class="nav_bar">
-                    <a href="/profile">Profile</a>
-                    <a href="/profile/friends">Friends</a>
-                </div>
-                <div class="user_details_container">
-                    <div class="left">
-                        <div class="title_section_about_me">Friend List</div>
-                        <div class="friend_section">
-                            <p>Wael Ben Slimen</p>
-                            <div class="images">
-                                <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                                <a href=""><img src="../static/icons/user.png" alt=""></a>
-                            </div>
-                        </div>
-
-                        <div class="friend_section">
-                            <p>Wided Msakem</p>
-                            <div class="images">
-                                <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                                <a href=""><img src="../static/icons/user.png" alt=""></a>
-                            </div>
-                        </div>
-
-                        <div class="friend_section">
-                            <p>Mortatha Houch</p>
-                            <div class="images">
-                                <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                                <a href=""><img src="../static/icons/user.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="level">
-                            <h1 class="title_section_lvl">Progress</h1>
-                            <div class="circle">
-                                <h3>Level 1</h3>
-                                <div class="progress-bar">
-                                    <div class="progress"></div>
-                                </div>
+                <div class="right">
+                    <div class="level">
+                        <h1 class="title_section_lvl">Progress</h1>
+                        <div class="circle">
+                            <h3>Level 1</h3>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="../static/js/nav-bar.js"></script>
-    </body>
-
-    </html>
+    </div>
+    <script src="../static/js/nav-bar.js"></script>
 </body>
 
 </html>
