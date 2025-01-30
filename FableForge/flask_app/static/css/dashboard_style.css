@@ -227,17 +227,17 @@ input[type='radio']:checked+img {
     height: 30px;
     overflow: hidden;
     cursor: pointer;
-    transition: ease-out 0.2s;
+    transition: height 0.2s ease-out;
 }
 
 .show_description {
     height: 120px;
-    transition: ease-in 0.2s;
+    transition: height 0.2s ease-in;
 }
 
 .rotate_btn {
-    transform: rotateZ(45deg);
-    transition: transform, ease-in;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
 }
 
 .plus_btn {

@@ -44,13 +44,8 @@ class Task:
         return all_tasks
 
     @classmethod
-    def delete(cls, data):
-        query = "DELETE FROM tasks WHERE id=%(id)s;"
-        return connectToMySQL(DB).query_db(query, data)
-    
-    @classmethod
     def lvl_up(cls, data):
-        query = "UPDATE users SET exp = exp + 5 WHERE id=%(id)s;"
+        query = "UPDATE users SET exp = exp + 100 WHERE id=%(id)s;"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -70,5 +65,4 @@ class Task:
             is_valid = False
             flash("Quest name should not be left BLANK", "task_name_validation")
         return is_valid
-    
-    
+
