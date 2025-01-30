@@ -220,8 +220,17 @@ input[type='radio']:checked+img {
 }
 
 .hidden_face {
-    opacity: 0;
-    transition: transform, ease-in, 1s;
+    display: none;
+}
+.card_info{
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: ease-out 0.2s;
+}
+.show_description{
+    height: 100px;
+    transition: ease-in 0.2s;
 }
 
 .rotate_btn {
@@ -302,5 +311,7 @@ input[type='radio']:checked+img {
 .show_equipments {
     display: block;
 }
-
+.gap{
+    gap: 1rem;
+}
 /* end main */

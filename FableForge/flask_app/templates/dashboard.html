@@ -36,7 +36,11 @@
                     <a href="" class="dropdown_item">EDIT</a>
                     <a href="" class="dropdown_item">REST FROM BATTLE</a>
                     <form action="/logout" method="post">
+<<<<<<< Updated upstream
                         <button type="submit" class="dropdown_item">Logout</button>
+=======
+                        <input type="submit" value="LOGOUT" class="dropdown_item">
+>>>>>>> Stashed changes
                     </form>
                 </div>
             </div>
@@ -67,11 +71,11 @@
                 <div class="quests d-flex flex-column flex-wrap justify-content-between">
                     <h5>Quests</h5>
                     <div class="quest_view p-3">
-                        <ul class="d-flex flex-column justify-content-center">
+                        <ul class="d-flex flex-column justify-content-center gap">
                             {% for quest in all_quests %}
-                            <li>
-                                <label>quest title: {{ quest.task_name }} <br> difficulty {{ quest.task_difficulty }} <br>
-                                    description: {{ quest.task_description }}</label>
+                            <li class="card_info">
+                                <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
+                                <p> description: {{quest.task_description}} </p>
                             </li>
                             {% endfor %}
                         </ul>
@@ -85,15 +89,14 @@
                                 <label for="">
                                     <input type="radio" name="task_difficulty" value="1">
                                     <img src="../static/icons/easy.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="task_difficulty" value="2">
-                                    <img src="../static/icons/medium.png" alt="">
-                                </label>
-                                <label for="">
-                                    <input type="radio" name="task_difficulty" value="3">
-                                    <img src="../static/icons/hard.png" alt="">
-                                </label>
+                                    <label for="">
+                                        <input type="radio" name="task_difficulty" value="2">
+                                        <img src="../static/icons/medium.png" alt="">
+                                    </label>
+                                    <label for="">
+                                        <input type="radio" name="task_difficulty" value="3">
+                                        <img src="../static/icons/hard.png" alt="">
+                                    </label>
                             </div>
                             <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
                         </form>
