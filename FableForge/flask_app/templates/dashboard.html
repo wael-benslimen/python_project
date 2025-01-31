@@ -23,7 +23,6 @@
 </head>
 
 <body>
-    {% include 'partials/navbar.html' %}
     <section class="container-fluid">
 
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
@@ -113,7 +112,7 @@
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equimpents == "kunai" %}
+                        <img {% if user.equimpents=="kunai" %}
                             src="../static/equipment_img/wepon_img/{{user.equipments}}.png" {% endif %} alt="">
                         <img src="" alt="">
                         <img src="" alt="" class="no_border">
