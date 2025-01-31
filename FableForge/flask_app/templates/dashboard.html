@@ -97,20 +97,24 @@
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <img {% if user.equipments==kunai and user.char_lvl>= 10
+=======
+                        <img {% if user.equipments=="kunai" and user.char_lvl>= 10
+>>>>>>> Stashed changes
                         %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
-                        user.equipments==kunai and user.char_lvl >= 20
+                        user.equipments=="kunai" and user.char_lvl >= 20
                         %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
-                        user.equipments==bomb and 20> user.char_lvl >= 10
+                        user.equipments=="bomb" and 20> user.char_lvl >= 10
                         %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_10.png" {% elif
-                        user.equipments==bomb and user.char_lvl >= 20
+                        user.equipments=="bomb" and user.char_lvl >= 20
                         %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_20.png" {% elif
-                        user.equipments==sword and 20> user.char_lvl >= 10
+                        user.equipments=="sword" and 20> user.char_lvl >= 10
                         %}src="../static/characters_img/{{user.type}}_with_sword_lvl_10.png" {% elif
-                        user.equipments==sword and user.char_lvl >= 20
+                        user.equipments=="sword" and user.char_lvl >= 20
                         %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
                         %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
-                        <h3>EXP <br> {{user.exp}}% {{user.type}} {{user}}</h3>
+                        <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
 =======
                         <img src="../static/characters_img/thief 1.png" alt="character">
@@ -119,7 +123,8 @@
 >>>>>>> Stashed changes
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img  alt="">
+                        <img {% if user.equimpents !="" %} src="../static/equipment_img/{{user.equimpents}}.png" {%
+                            endif %} alt="">
                         <img src="" alt="">
                         <img src="" alt="" class="no_border">
                     </div>
@@ -136,23 +141,25 @@
             </div>
         </main>
     </section>
-    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 and user.exp==100 %} class="show_equipments" {% else %}
-        class="equipments" {% endif %}>
+    <div {% if user.char_lvl==10 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
         <h5 class="text-center">pick your equipment</h5>
         <form action="/lvl_up" method="post" class="d-flex flex-column">
 
             <div class="d-flex w-100 justify-content-between">
                 <div>
                     <input type="radio" name="equipment" value="sword">
-                    <img src="../static/equipment_img/sword 1.png" alt="sword" class="equipments_icon" width="50px">
+                    <img src="../static/equipment_img/wepon_img/sword.png" alt="sword" class="equipments_icon"
+                        width="50px">
                 </div>
                 <div for="">
                     <input type="radio" name="equipment" value="kunai">
-                    <img src="../static/equipment_img/kunai 1.png" alt="shield" class="equipments_icon" width="50px">
+                    <img src="../static/equipment_img/wepon_img/kunai.png" alt="kunai" class="equipments_icon"
+                        width="50px">
                 </div>
                 <div for="">
                     <input type="radio" name="equipment" value="bomb">
-                    <img src="../static/equipment_img/bomb 1.png" alt="armor" class="equipments_icon" width="50px">
+                    <img src="../static/equipment_img/wepon_img/bomb.png" alt="bomb" class="equipments_icon"
+                        width="50px">
                 </div>
             </div>
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
