@@ -67,3 +67,8 @@ def edit_user() :
         print(data)
         return redirect('/dashboard')
     return redirect('/edit/form')
+
+
+@app.route('/friends/suggestions')
+def friends_suggestions_page() :
+    all_users=User.not_friends_users() :

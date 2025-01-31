@@ -55,7 +55,7 @@ class User:
     @classmethod
     def update(cls, data):
         query = """UPDATE users SET username = %(username)s, email = %(email)s, password = %(password)s,
-                   location = %(location)s, about_me = %(about_me)s, interests = %(interests)s WHERE id = %(id)s;"""
+        location = %(location)s, about_me = %(about_me)s, interests = %(interests)s WHERE id = %(id)s;"""
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -69,16 +69,28 @@ class User:
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
-<<<<<<< Updated upstream
     def add_equipments(cls, data):
         query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
-=======
-    def get_users_not_friends(cls,data) :
-        query= ''
+
+
     
->>>>>>> Stashed changes
-    
+    @classmethod
+    def not_friends_users(cls):
+        query = """
+        SELECT * FROM users
+        LEFT JOIN friendships ON users.id = friendships.friend_id AND friendships.user_id = 1
+        LEFT JOIN friendships f2 ON users.id = f2.user_id AND f2.friend_id = 1
+        WHERE users.id != 1 AND friendships.friend_id IS NULL AND f2.user_id IS NULL;
+        """
+        results = connectToMySQL(DB).query_db(query)
+        users_not_friends = []
+        for row in results:
+            user_not_friend = cls(row)
+            users_not_friends.append(user_not_friend)
+        return users_not_friends
+
+        
     @staticmethod
     def validate_user(data):
         is_valid = True
