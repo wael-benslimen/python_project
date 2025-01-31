@@ -43,6 +43,21 @@ class Task:
             all_tasks.append(task)
         return all_tasks
 
+    @classmethod
+    def lvl_up(cls, data):
+        query = "UPDATE users SET exp = exp + 100 WHERE id=%(id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def lvl_plus(cls, data):
+        query = "UPDATE users SET char_lvl = char_lvl + 1 WHERE id=%(id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def reset_exp(cls, data):
+        query = "UPDATE users SET exp = 0 WHERE id=%(id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    
     @staticmethod
     def validate_task(data):
         is_valid = True
@@ -50,3 +65,4 @@ class Task:
             is_valid = False
             flash("Quest name should not be left BLANK", "task_name_validation")
         return is_valid
+

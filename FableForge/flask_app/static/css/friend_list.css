@@ -152,8 +152,7 @@ nav img {
     font-size: larger;
     font-weight: bolder;
 }
-
-.about_me {
+.about_me{
     width: 95%;
     padding: 20px;
     background-color: beige;
@@ -189,10 +188,13 @@ nav img {
     flex-direction: column;
     overflow: hidden;
 }
-.lvl_progress {
-    padding: 140px;
-    background-color: antiquewhite;
-    border-radius: 50%;
+
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .progress {
@@ -219,11 +221,9 @@ button {
     padding: 20px;
     border-radius: 30px;
 }
-
-.friend_section p {
+.friend_section p{
     margin: 0;
 }
-
 .friend_section img {
     width: 40px;
 }

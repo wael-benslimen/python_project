@@ -24,6 +24,22 @@ def create_quest():
         return redirect('/dashboard')
     return redirect('/dashboard')
 
+@app.route('/cancle/<int:id>', methods=['POST'])
+def delete_quest(id):
+    Task.delete({'id': id})
+    return redirect('/dashboard')
 
+@app.route('/finished/<int:id>', methods=['POST'])
+def finished_quest(id):
+    user = User.get_one_id({'id': session['user_id']})
+    if user.exp < 100:
+        Task.lvl_up({'id': session['user_id']})
+        Task.delete({'id': id})
+    else:
+        Task.reset_exp({'id': session['user_id']})
+        Task.lvl_plus({'id': session['user_id']})
+    return redirect('/dashboard')
 
-
+@app.route('/lvl_up', methods=['POST'])
+def lvl_up():
+    return redirect('/dashboard')

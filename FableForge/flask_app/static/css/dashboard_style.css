@@ -222,20 +222,22 @@ input[type='radio']:checked+img {
 .hidden_face {
     display: none;
 }
-.card_info{
+
+.card_info {
     height: 30px;
     overflow: hidden;
     cursor: pointer;
-    transition: ease-out 0.2s;
+    transition: height 0.2s ease-out;
 }
-.show_description{
-    height: 100px;
-    transition: ease-in 0.2s;
+
+.show_description {
+    height: 120px;
+    transition: height 0.2s ease-in;
 }
 
 .rotate_btn {
-    transform: rotateZ(45deg);
-    transition: transform, ease-in;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
 }
 
 .plus_btn {
@@ -269,7 +271,7 @@ input[type='radio']:checked+img {
 .expfiller {
     background-color: rgb(133, 133, 255);
     display: block;
-    width: 0%;
+    /* width: 0%; */
     height: 15px;
     border-radius: 25px;
 }
@@ -309,9 +311,17 @@ input[type='radio']:checked+img {
 }
 
 .show_equipments {
-    display: block;
+    position: absolute;
+    width: 20vw;
+    background-color: rgb(133, 133, 255, 0.2);
+    padding: 1%;
+    border-radius: 20px;
+    left: 58%;
+    top: 30%;
 }
-.gap{
+
+.gap {
     gap: 1rem;
 }
+
 /* end main */
