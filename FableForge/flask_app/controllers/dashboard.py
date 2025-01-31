@@ -40,15 +40,13 @@ def finished_quest(id):
         Task.lvl_plus({'id': session['user_id']})
     return redirect('/dashboard')
 
+
 @app.route('/lvl_up', methods=['POST'])
-def lvl_up():
-    return redirect('/dashboard')
-
-
-@app.route('/lvl_up' methods=['POST'])
 def lvl_up():
     data = {
         **request.form,
         'id': session['user_id']
     }
+    User.add_equipments(data)
+    Task.reset_exp({'id': session['user_id']})
     return redirect('/dashboard')

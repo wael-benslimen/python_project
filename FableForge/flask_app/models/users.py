@@ -17,6 +17,8 @@ class User:
         self.interests = data.get('interests', "")
         self.exp = data['exp']
         self.HP = data.get('HP', 4)
+        self.type = data.get('type')
+        self.equipments = data.get('equipments', "")
         self.image = data.get('image', "")
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -55,7 +57,7 @@ class User:
     @classmethod
     def update(cls, data):
         query = """UPDATE users SET username = %(username)s, email = %(email)s, password = %(password)s,
-        location = %(location)s, about_me = %(about_me)s, interests = %(interests)s WHERE id = %(id)s;"""
+                location = %(location)s, about_me = %(about_me)s, interests = %(interests)s WHERE id = %(id)s;"""
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -70,7 +72,7 @@ class User:
     
     @classmethod
     def add_equipments(cls, data):
-        query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
+        query = 'UPDATE users SET equipments = equipments + %(equipment)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
 
 

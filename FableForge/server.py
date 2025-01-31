@@ -1,5 +1,5 @@
 from flask_app import app
-from flask_app.controllers import user_controller,landing_page_controller
+from flask_app.controllers import user_controller,landing_page_controller, dashboard
 
 if __name__ == "__main__":
-    app.run(debug=True, port= 5001)
+    app.run(debug=True, port= 5000)
