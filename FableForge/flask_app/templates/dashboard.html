@@ -96,15 +96,24 @@
                 </div>
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments==kunai and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif user.equipments == kunai
-                        and 30> user.char_lvl >= 20 %} src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {%
-                        elif %} alt="character">
-                        <h3>EXP <br> {{user.exp}}%</h3>
+                        <img {% if user.equipments==kunai and user.char_lvl>= 10
+                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
+                        user.equipments==kunai and user.char_lvl >= 20
+                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
+                        user.equipments==bomb and 20> user.char_lvl >= 10
+                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_10.png" {% elif
+                        user.equipments==bomb and user.char_lvl >= 20
+                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_20.png" {% elif
+                        user.equipments==sword and 20> user.char_lvl >= 10
+                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_10.png" {% elif
+                        user.equipments==sword and user.char_lvl >= 20
+                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
+                        %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
+                        <h3>EXP <br> {{user.exp}}% {{user.type}} {{user}}</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img src="" alt="">
+                        <img  alt="">
                         <img src="" alt="">
                         <img src="" alt="" class="no_border">
                     </div>

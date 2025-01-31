@@ -17,6 +17,8 @@ class User:
         self.interests = data.get('interests', "")
         self.exp = data['exp']
         self.HP = data.get('HP', 4)
+        self.type = data.get('type')
+        self.equipments = data.get('equipments', "")
         self.image = data.get('image', "")
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
