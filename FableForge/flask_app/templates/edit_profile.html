@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< Updated upstream
     {% include 'partials/navbar.html' %}
 
     <section class="container-fluid mt-5 d-flex flex-column position-relative">
@@ -28,8 +29,23 @@
                     <p><a href="" class="btn-secondary">Rest from battle</a></p>
                     <p><a href="" class="btn-danger">logout</a></p>
                 </div>
+=======
+    <nav>
+        <ul>
+            <li><a href="">HOME</a></li>
+            <li><a href="">PROFILE</a></li>
+            <li><a href="">ADD FRIEND</a></li>
+        </ul>
+        <div class="dropdown">
+            <img src="../static/icons/Gear.png" alt="settings" class="image">
+            <div class="dropdown_content">
+                <p><a href="" class="btn-secondary">Rest from battle</a></p>
+                <p><a href="" class="btn-danger">logout</a></p>
+>>>>>>> Stashed changes
             </div>
-        </nav>
+        </div>
+    </nav>
+    <section class="container-fluid mt-5 d-flex flex-column position-relative">
         <form action="/edit/user" method="post" class="container" class="form-group" >
             <h3>Your account</h3>
             <input name="username" type="text" placeholder="username" class="form-control" value={{user.username}}>
@@ -48,7 +64,7 @@
             {% for msg in get_flashed_messages(category_filter=["confirm-password"]) %}
                         <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-            <input name="inetersts" type="text" placeholder="interested in" class="form-control">
+            <input name="interests" type="text" placeholder="interested in" class="form-control">
             <input name="location" type="text" class="form-control" placeholder="location" class="form-control">
             <textarea name="about_me" placeholder="about me" class="form-control"></textarea >
             <input type="file" placeholder="upload a photo" class="form-control">

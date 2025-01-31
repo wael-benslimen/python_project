@@ -69,9 +69,15 @@ class User:
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
+<<<<<<< Updated upstream
     def add_equipments(cls, data):
         query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
+=======
+    def get_users_not_friends(cls,data) :
+        query= ''
+    
+>>>>>>> Stashed changes
     
     @staticmethod
     def validate_user(data):
