@@ -4,6 +4,7 @@
     font-family: "Luxurious Roman", serif;
     font-weight: 400;
     font-style: normal;
+    
 }
 
 body {
@@ -12,6 +13,7 @@ body {
     flex-direction: column;
     width: 100%;
     margin: 0 auto;
+    overflow-x: hidden;
 }
 
 nav {
@@ -42,6 +44,15 @@ nav img {
     cursor: pointer;
     width: 40px;
     cursor: pointer;
+}
+
+nav button {
+    border: none;
+    background-color: #6B6BC3;
+    padding: 0 45px;
+    color: #fff;
+    border-radius: 30px;
+    margin-bottom: 10px;
 }
 
 .dropdown_content {
@@ -80,7 +91,7 @@ nav img {
     display: none;
 }
 
-
+/* ! User General Information Section ! */
 .user_section {
     display: flex;
     align-items: center;
@@ -119,10 +130,6 @@ nav img {
     font-weight: bolder;
 }
 
-.nav_bar a:last-child {
-    text-decoration: underline;
-    color: white;
-}
 
 .user_section img {
     padding-left: 5%;
@@ -136,6 +143,8 @@ nav img {
     margin: 10px 35px;
 }
 
+/* ! User Information Section ! */
+
 .left {
     display: flex;
     flex-direction: column;
@@ -144,25 +153,61 @@ nav img {
     padding: 20px;
     border-radius: 30px;
     width: 65%;
+    height: fit-content;
 }
 
 
-.title_section_about_me {
-    padding-left: 30px;
+.about-me-section p, .achievements_section p {
     font-size: larger;
     font-weight: bolder;
+    margin-left: 20px;
 }
-.about_me{
-    width: 95%;
-    padding: 20px;
-    background-color: beige;
-    border-radius: 30px;
+
+.about-me-section {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 50px;
+}
+
+.about-me-section textarea {
+    width: 550px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.about-me-section button {
+    border: none;
+    background-color: #6B6BC3;
+    padding: 0 45px;
+    color: #fff;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+.achievements_section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.trophies {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #fff;
+    width: 550px;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #767676;
+}
+
+.trophies p {
+    margin: 10px 30px;
 }
 
 
-
+/* ! User level progress Information Section ! */
 .right {
     display: flex;
     align-items: center;
@@ -181,20 +226,17 @@ nav img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: #e0e0e0;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
 }
-
-.progress-bar {
-    width: 80%;
-    height: 10px;
-    background: #ccc;
-    border-radius: 5px;
-    overflow: hidden;
+.lvl_progress {
+    padding: 140px;
+    background-color: antiquewhite;
+    border-radius: 50%;
 }
 
 .progress {
@@ -204,28 +246,39 @@ nav img {
     border-radius: 5px;
 }
 
-button {
-    border: none;
-    background-color: #6B6BC3;
-    padding: 0 45px;
-    color: #fff;
-    border-radius: 30px;
-    margin-bottom: 10px;
+
+
+
+
+
+
+/* ! User friend list Information Section ! */
+
+.friend_details_container .left{
+    display: flex;
+    width: 40%;
+    margin-left: 45px;
+
+    height: fit-content;
 }
 
-.friend_section {
+.title_section_about_me {
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+.friend_details_container .left .friend_section {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #ccc;
-    padding: 20px;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
     border-radius: 30px;
 }
-.friend_section p{
-    margin: 0;
-}
-.friend_section img {
-    width: 40px;
+
+.friend_section p {
+    margin-bottom: 0;
 }
 
 .images {
@@ -236,5 +289,26 @@ button {
 .images img {
     background-color: #413190;
     padding: 3px;
+    width: 35px;
     border-radius: 50%;
+}
+
+
+/* ! Animation ! */
+
+.left {
+    transition: 1s ease-in-out;
+}
+
+.main.active .user_details_container .left {
+    transform: scale(1) translate(2300px, -500px);
+}
+.main .friend_details_container .left {
+    position: absolute;
+    top: 540px;
+    transform: scale(0) translate(200px, -500px);
+}
+
+.main.active .friend_details_container .left {
+    transform: scale(1) ;
 }

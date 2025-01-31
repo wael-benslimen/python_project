@@ -34,15 +34,15 @@ def register():
         return redirect('/dashboard')
     return redirect('/register')
 
-@app.route("/login", methods = ['POST'])
+@app.route("/user/login", methods = ['POST'])
 def login():
     user = User.get_by_email({"email": request.form['email']})
     if not user:
         flash("Ivalid credentials!", "login")
-        return redirect('/')
+        return redirect('/login')
     if not bcrypt.check_password_hash(user.password, request.form["password"]):
         flash("Invalid credentials!", "login")
-        return redirect('/')
+        return redirect('/login')
     session["user_id"] = user.id
     return redirect("/dashboard")
 
@@ -66,9 +66,11 @@ def edit_user() :
     if 'user_id' not in session :
         return redirect('/')
     if User.validate_user(request.form) :
-        data={
-        **request.form,
-        'id':session['user_id']
+        hached_pw = bcrypt.generate_password_hash(request.form["password"])
+        data = {
+            **request.form,
+            "password": hached_pw,
+            'id':session['user_id']
         }
         print(22222222222222222222222222222222222222222222222)
         User.update(data)

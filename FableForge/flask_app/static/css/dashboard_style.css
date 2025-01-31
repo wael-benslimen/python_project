@@ -248,6 +248,16 @@ input[type='radio']:checked+img {
     transform: rotate(45deg);
     transition: transform 0.3s ease-in-out;
 }
+
+.plus_btn {
+    border-radius: 50%;
+    z-index: 100000;
+}
+
+.plus_btn img {
+    border: none;
+}
+
 /* character */
 .character {
     padding: 1%;

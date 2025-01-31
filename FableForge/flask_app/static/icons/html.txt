@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/dashboard_style.css">
+</head>
+
+<body>
+    {% include 'partials/navbar.html' %}
+    <section class="container-fluid">
+
+        <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
+            <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
+                <img src="../static/placeholders/User_cicrle.png" alt="user_image">
+                <h3 class="text-center">{{ user.username }}</h3>
+                <h3 class="text-center">lvl {{user.char_lvl}}</h3>
+            </div>
+            <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
+                <h1>HP</h1>
+                <span class="hpbar"><span class="hpbar_filler"></span></span>
+            </div>
+            <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap">
+                <h3 class="align-self-center">inventory</h3>
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <img src="../static/items/potion hp 1.png" alt="" class="inventory_icon"><img
+                        src="../static/items/revive potion 1.png" alt="">
+                </div>
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <img src="../static/items/bean 1.png" alt=""><img src="../static/items/apple.png" alt="">
+                </div>
+            </div>
+        </header>
+        <main class="d-flex justify-content-around mt-5 col-12">
+            <div class="cards d-flex">
+                <div class="quests d-flex flex-column flex-wrap justify-content-between">
+                    <h5>Quests</h5>
+                    <div class="quest_view p-3">
+                        <ul class="d-flex flex-column justify-content-center gap">
+                            {% for quest in all_quests %}
+                            <li class="card_info">
+                                <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
+                                <p> description: {{quest.task_description}} </p>
+                                <div class="d-flex justify-content-center gap">
+                                    <form action="/cancle/{{quest.id}}" method="post">
+                                        <input type="submit" value="X" class="btn btn-danger">
+                                    </form>
+                                    <form action="/finished/{{quest.id}}" method="post">
+                                        <input type="submit" class="btn btn-success" value="✓">
+                                    </form>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="quest_create hidden_face">
+                        <form action="/create_quest" method="post" class="d-flex flex-column create_form_quest p-3">
+                            <input type="text" name="task_name" placeholder="enter the quest_title *"
+                                class="form-control">
+                            <textarea name="task_description" placeholder="description" class="form-control"></textarea>
+                            <div class="d-flex flex-wrap justify-content-around">
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="1">
+                                    <img src="../static/icons/easy.png" alt="">
+                                </label>
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="2">
+                                    <img src="../static/icons/medium.png" alt="">
+                                </label>
+                                <label for="">
+                                    <input type="radio" name="task_difficulty" value="3">
+                                    <img src="../static/icons/hard.png" alt="">
+                                </label>
+                            </div>
+                            <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
+                        </form>
+                    </div>
+                    <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
+                            alt="" width="50px"></button>
+                </div>
+                <div>
+                    <div class="character d-flex flex-column justify-content-center align-items-center">
+                        <img src="../static/characters_img/thief 1.png" alt="character">
+                        <h3>EXP <br> {{user.exp}}%</h3>
+                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
+                    </div>
+                    <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
+                        <img src="" alt="">
+                        <img src="" alt="">
+                        <img src="" alt="" class="no_border">
+                    </div>
+                </div>
+                <div class="chats d-flex flex-column justify-content-between align-items-center">
+                    <h6>friend name</h6>
+                    <div class="message d-flex justify-content-around align-items-center p-1">
+                        <form action="">
+                            <input type="text" class="form-control bg-transparent" placeholder="send message">
+                        </form>
+                        <img src="../static/icons/plus.png" alt="" width="25px">
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {%
+        endif %}>
+        <h5 class="text-center">pick your equipment</h5>
+        <form action="/lvl_up" class="d-flex flex-column">
+
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <input type="radio" name="equipment" value="sword">
+                    <img src="../static/equipment_img/sword 1.png" alt="sword" class="equipments_icon" width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="kunai">
+                    <img src="../static/equipment_img/kunai 1.png" alt="shield" class="equipments_icon" width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="bomb">
+                    <img src="../static/equipment_img/bomb 1.png" alt="armor" class="equipments_icon" width="50px">
+                </div>
+            </div>
+            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
+        </form>
+    </div>
+    <script src="../static/js/dashboard_script.js"></script>
+</body>
+
+</html>
+
+
+const section1 = document.querySelector('.quest_create')
+const section2 = document.querySelector('.quest_view')
+const btn = document.querySelector('.plus_btn')
+const description = document.querySelectorAll(".card_info")
+
+function toggleClass() {
+    section1.classList.toggle("hidden_face")
+    section2.classList.toggle("hidden_face")
+    btn.classList.toggle("rotate_btn")
+}
+
+description.forEach(item => {
+    item.onclick = function () {
+        item.classList.toggle('show_description')
+    }
+})
