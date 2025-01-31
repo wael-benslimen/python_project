@@ -8,4 +8,5 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
+    socketio.run(app, debug=True, port=5000, cors_allowed_origins=["http://localhost:5000", "http://127.0.0.1:5000"])

@@ -1,4 +1,5 @@
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO
+
 from flask import Flask
 app = Flask(__name__)
 app.secret_key = "secret_key"

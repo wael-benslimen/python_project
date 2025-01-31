@@ -9,7 +9,6 @@ flask = "*"
 pymysql = "*"
 bcrypt = "*"
 python-socketio = "*"
-flask-socketio = "*"
 flask-cors = "*"
 
 [dev-packages]
