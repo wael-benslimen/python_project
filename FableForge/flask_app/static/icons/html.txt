@@ -96,30 +96,12 @@
                 </div>
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-<<<<<<< Updated upstream
-                        <img {% if user.equipments==kunai and user.char_lvl>= 10
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
-                        user.equipments==kunai and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
-                        user.equipments==bomb and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_10.png" {% elif
-                        user.equipments==bomb and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_20.png" {% elif
-                        user.equipments==sword and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_10.png" {% elif
-                        user.equipments==sword and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
-                        %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
-                        <h3>EXP <br> {{user.exp}}% {{user.type}} {{user}}</h3>
-                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
-=======
                         <img src="../static/characters_img/thief 1.png" alt="character">
                         <h3>EXP <br> {{user.exp}}%</h3>
-                        <span class="exp"><span class="expfiller"style = "width: {{user.exp}}%;"></span></span>
->>>>>>> Stashed changes
+                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img  alt="">
+                        <img src="" alt="">
                         <img src="" alt="">
                         <img src="" alt="" class="no_border">
                     </div>
@@ -136,10 +118,10 @@
             </div>
         </main>
     </section>
-    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 and user.exp==100 %} class="show_equipments" {% else %}
-        class="equipments" {% endif %}>
+    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {%
+        endif %}>
         <h5 class="text-center">pick your equipment</h5>
-        <form action="/lvl_up" method="post" class="d-flex flex-column">
+        <form action="/lvl_up" class="d-flex flex-column">
 
             <div class="d-flex w-100 justify-content-between">
                 <div>
@@ -162,3 +144,21 @@
 </body>
 
 </html>
+
+
+const section1 = document.querySelector('.quest_create')
+const section2 = document.querySelector('.quest_view')
+const btn = document.querySelector('.plus_btn')
+const description = document.querySelectorAll(".card_info")
+
+function toggleClass() {
+    section1.classList.toggle("hidden_face")
+    section2.classList.toggle("hidden_face")
+    btn.classList.toggle("rotate_btn")
+}
+
+description.forEach(item => {
+    item.onclick = function () {
+        item.classList.toggle('show_description')
+    }
+})
