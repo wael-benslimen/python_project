@@ -16,7 +16,7 @@ body {
 
 .container {
     position: relative;
-    width: 100%;
+    width: 100vw !important;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ body {
     background-image:url(../themes/Purple\ Green\ Pixel\ Illustration\ Game\ Presentation\ jpggggg.jpg);
     padding: 20px;
     text-align: center;
-    background-size: cover;
+    background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center center;
     gap: 100px;

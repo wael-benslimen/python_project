@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Task Master</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/about.css">
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+
+    <section id="about">
+        <div>
+            <div class="bg-gradient">
+                <h1 class="section-title">About Us</h1>
+                <p class="text-light text-lg">
+                    TaskMaster is a revolutionary platform that brings together creative professionals, freelancers, and aspiring artists, to create and collaborate on unique and innovative projects. We strive to empower individuals and create a thriving community where they can share their passion and expertise, and find inspiration to achieve their dreams.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="values">
+        <div class="container text-center">
+            <h2 class="section-title">Our Values</h2>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-shield-lock icon-box"></i>
+                        <h4>Integrity</h4>
+                        <p>We uphold transparency and honesty in every step.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-lightbulb icon-box"></i>
+                        <h4>Innovation</h4>
+                        <p>We constantly strive to redefine the standard of excellence in everything we do.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-people icon-box"></i>
+                        <h4>Teamwork</h4>
+                        <p>We work together, across boundaries, to meet the needs of our customers and to help our company succeed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="objectives">
+        <div class="container text-center">
+            <h2 class="section-title">Our Objectives</h2>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-emoji-smile icon-box"></i>
+                        <h4>Customer Satisfaction</h4>
+                        <p>We aim to exceed customer expectations with our innovative solutions.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-graph-up icon-box"></i>
+                        <h4>Growth</h4>
+                        <p>We strive for continuous growth and improvement in all aspects of our business.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <i class="bi bi-globe icon-box"></i>
+                        <h4>Community</h4>
+                        <p>We are committed to making a positive impact in the communities where we live and work.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="team" class="w-100 d-flex flex-column justify-content-center align-items-center">
+        <h2 class="section-title">Meet the Team</h2>
+        <div class="container d-flex flex-row justify-content-center align-items-center gap-2 flex-wrap">
+            <div class="col-sm-11 col-md-4 col-lg-3">
+                <div class="card">
+                    <h4>Wael</h4>
+                    <p>Game Designer & UX Expert</p>
+                </div>
+            </div>
+            <div class="col-sm-11 col-md-4 col-lg-3">
+                <div class="card">
+                    <h4>Wided</h4>
+                    <p>Lead Developer & Tech Wizard</p>
+                </div>
+            </div>
+            <div class="col-sm-11 col-md-4 col-lg-3">
+                <div class="card">
+                    <h4>Mortadha</h4>
+                    <p>Data & Gamification Specialist</p>
+                </div>
+            </div>
+            <div class="col-sm-11 col-md-4 col-lg-3">
+                <div class="card">
+                    <h4>Raed</h4>
+                    <p>Data & Gamification Specialist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="w-100 d-flex flex-column flex-wrap justify-content-center align-items-center bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; Task Master 2025. All rights reserved.</p>
+            <ul class="list-unstyled d-flex justify-content-center mb-3">
+                <li class="mx-3"><a href="#" class="text-white">Privacy Policy</a></li>
+                <li class="mx-3"><a href="#" class="text-white">Terms of Service</a></li>
+                <li class="mx-3"><a href="#" class="text-white">Contact Us</a></li>
+            </ul>
+            <div class="social-media d-flex justify-content-center mb-3">
+                <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-youtube"></i></a>
+            </div>
+            <div class="scroll-to-top mt-3">
+                <a href="#" class="text-white"><i class="bi bi-arrow-up-short"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script>
+        gsap.from(".section-title", { duration: 1, y: -50, opacity: 0, ease: "power2.out", stagger: 0.3 });
+        gsap.from(".card", { duration: 1, y: 50, opacity: 0, ease: "power2.out", stagger: 0.3 });
+    </script>
+</body>
+</html>

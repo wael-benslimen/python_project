@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/logRegis-style.css">
+    <title>FableForge</title>
+</head>
+<body>
+    {% include 'partials/navbar.html' %}
+    <main class="min-wh-100 min-vh-100 d-flex flex-col justify-content-center align-items-center">
+        <section class="login-register">
+            <form action="/login" method="post" style="--i:0;">
+                <h2>
+                    Welcome Back Adventurer
+                </h2>
+                <div>
+                    <label for="email form-label"></label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                </div>
+                <div>
+                    <label for="password form-label"></label>
+                    <input type="password" class="form-control" placeholder="Password" id="password" name="password">
+                </div>
+                <div>
+                    <button type="submit" class="btn w-100">login</button>
+                    <p class="text-white">You don't have an account ?</p>
+                    <button class="btn btn-secondary w-100 flip-1" type="button">Sign Up</button>
+                </div>
+            </form>
+            <form action="/create/new" method="post" class="w-100" style="--i:1;">
+                <h2>
+                    Sign Up for FableForge
+                </h2>
+                <div class="w-100"><label class="form-label"></label>
+                    {% for msg in get_flashed_messages(category_filter=["username_eror"]) %}
+                    <p class="text-danger"> {{msg}} </p>
+                    {% endfor %}
+                    <input type="text" class="form-control w-100" name="username" placeholder="Username"></div>
+                    <div class="w-100"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["email_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="email" class="form-control w-100" name="email" placeholder="Email"></div>
+                <div class="w-100 position-relative"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["password_validation"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="password" class="form-control w-100" name="password" placeholder="Password" ><i class="fa-solid fa-eye-slash"></i></div>
+                <div class="w-100 position-relative"><label class="form-label" for=""></label>
+                        {% for msg in get_flashed_messages(category_filter=["confirm-password"]) %}
+                        <p class="text-danger"> {{msg}} </p>
+                        {% endfor %}
+                    <input type="password" class="form-control w-100" name="confirm-password" placeholder="Re-enter Password"></div>
+                <div class="button w-100">
+                    <button class="btn btn-primary w-100">Sign Up</button>
+                </div>
+                <p>You already have an account ?</p>
+                <div class="signup_button w-100">
+                    <button class="btn btn-secondary w-100 flip-1" type="button">Sign In</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

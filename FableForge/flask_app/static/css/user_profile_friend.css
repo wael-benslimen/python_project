@@ -233,13 +233,10 @@ nav button {
     flex-direction: column;
     overflow: hidden;
 }
-
-.progress-bar {
-    width: 80%;
-    height: 10px;
-    background: #ccc;
-    border-radius: 5px;
-    overflow: hidden;
+.lvl_progress {
+    padding: 140px;
+    background-color: antiquewhite;
+    border-radius: 50%;
 }
 
 .progress {

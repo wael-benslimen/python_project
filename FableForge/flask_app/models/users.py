@@ -22,12 +22,13 @@ class User:
         self.image = data.get('image', "")
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        
+        self.is_active = data.get('is_active', 0)
     @classmethod    
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
-        return connectToMySQL(DB).query_db(query, data)
-    
+        new_id = connectToMySQL(DB).query_db(query, data)
+        new_user = cls.get_one_id({'id': new_id})
+        return new_user
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
@@ -36,6 +37,41 @@ class User:
         for row in result:
             all_users.append(cls(row))
         return all_users
+    
+    @classmethod
+    def get_users_by_amount(cls,data):
+        query = "SELECT * FROM users LIMIT %(limit)s OFFSET %(offset)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        all_users = []
+        for row in result:
+            all_users.append(cls(row))
+        return all_users
+    @classmethod
+    def get_latest_users_by_amount(cls,data):
+        query = "SELECT * FROM users ORDER BY created_at DESC LIMIT %(limit)s OFFSET %(offset)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        all_users = []
+        for row in result:
+            all_users.append(cls(row))
+        return all_users
+    
+    @classmethod
+    def get_latest_users_count(cls):
+        query = "SELECT COUNT(*) FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY);"
+        result = connectToMySQL(DB).query_db(query)
+        return result[0][0]
+    
+    @classmethod
+    def get_active_users(cls):
+        query = "SELECT COUNT(*) FROM users WHERE adminstration = 'user' AND is_active = 1;"
+        result = connectToMySQL(DB).query_db(query)
+        return result[0][0]
+    
+    @classmethod
+    def get_users_count(cls):
+        query = "SELECT COUNT(*) FROM users;"
+        result = connectToMySQL(DB).query_db(query)
+        return result[0][0]
     
     @classmethod
     def get_by_email(cls, data):

@@ -8,10 +8,20 @@ from flask_app.models.messages import Message
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
-        return redirect('/')
+        return redirect('/register')
     user = User.get_one_id({'id': session['user_id']})
     all_quests = Task.get_user_tasks({'user_id': session['user_id']})
-    return render_template('dashboard.html', user=user, all_quests=all_quests)
+    if user:
+        if user.adminstration == "admin":
+            latest_users = User.get_latest_users_count()
+            active_users = User.get_active_users()
+            users_count = User.get_users_count()
+            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
+        else:
+            return render_template('dashboard.html', user=user, all_quests=all_quests)
+    else:
+        flash("Invalid user_id", "error")
+        return redirect('/register')
 
 @app.route('/create_quest', methods=['POST'])
 def create_quest():
@@ -24,7 +34,7 @@ def create_quest():
         return redirect('/dashboard')
     return redirect('/dashboard')
 
-@app.route('/cancle/<int:id>', methods=['POST'])
+@app.route('/cancel/<int:id>', methods=['POST'])
 def delete_quest(id):
     Task.delete({'id': id})
     return redirect('/dashboard')

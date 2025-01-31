@@ -4,11 +4,22 @@ from flask_app.models.users import User
 from flask_bcrypt import Bcrypt 
 bcrypt=Bcrypt(app)
 
-@app.route('/login')
-def index():
+@app.route('/')
+def landing_page():
+    return render_template("landing_page.html")
+
+@app.route('/register')
+def register_ui():
     return render_template("index.html")
 
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+app.route('/dashboard')
+def dashboard() :
+    return render_template('dashboard.html')
 
 @app.route("/create/new", methods = ["post"])
 def register():
@@ -21,7 +32,7 @@ def register():
         user_id = User.register(data)
         session["user_id"] = user_id
         return redirect('/dashboard')
-    return redirect('/')
+    return redirect('/register')
 
 @app.route("/user/login", methods = ['POST'])
 def login():

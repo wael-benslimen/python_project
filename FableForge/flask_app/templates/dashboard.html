@@ -20,6 +20,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/dashboard_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../static/css/navbar.css">
 </head>
 
@@ -31,7 +32,10 @@
             <li><a href="/search">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
-            <img src="../static/icons/Gear.png" alt="settings" class="image">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+            </svg>
             <div class="dropdown_content">
                 <p><a href="/edit/form">Edit</a></p>
                 <p><a href="/offline">Rest from battle</a></p>
@@ -43,7 +47,6 @@
     </nav>
 
     <section class="container-fluid">
-
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <img src="../static/placeholders/User_cicrle.png" alt="user_image">
@@ -71,20 +74,25 @@
                     <h5>Quests</h5>
                     <div class="quest_view p-3">
                         <ul class="d-flex flex-column justify-content-center gap">
-                            {% for quest in all_quests %}
-                            <li class="card_info">
-                                <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
-                                <p> description: {{quest.task_description}} </p>
-                                <div class="d-flex justify-content-center gap">
-                                    <form action="/cancle/{{quest.id}}" method="post">
-                                        <input type="submit" value="X" class="btn btn-danger">
-                                    </form>
-                                    <form action="/finished/{{quest.id}}" method="post">
-                                        <input type="submit" class="btn btn-success" value="✓">
-                                    </form>
-                                </div>
-                            </li>
-                            {% endfor %}
+                            {% if all_quests %}
+                                {% for quest in all_quests %}
+                                <li class="card_info">
+                                    <p> quest title : {{quest.task_name}} difficulty : {{quest.task_difficulty}} </p>
+                                    <p> description: {{quest.task_description}} </p>
+                                    <div class="d-flex justify-content-center gap">
+                                        <form action="/cancel/{{quest.id}}" method="post">
+                                            <input type="submit" value="X" class="btn btn-danger">
+                                        </form>
+                                        <form action="/finished/{{quest.id}}" method="post">
+                                            <input type="submit" class="btn btn-success" value="✓">
+                                        </form>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            {% endif %}
+                            {% if not all_quests %}
+                                <img src="../static/icons/not-found.jpg" class="justify-self-center align-self-center" width="150" height="150" alt="">
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="quest_create hidden_face">
@@ -109,8 +117,11 @@
                             <input type="submit" value="Accept quest" class="btn_form w-50 align-self-center">
                         </form>
                     </div>
-                    <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
-                            alt="" width="50px"></button>
+                    <button class="plus_btn align-self-end btn btn-primary d-flex justify-content-center align-items-center" onclick="toggleClass()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                          </svg>
+                    </button>
                 </div>
                 <div>
 
@@ -139,11 +150,13 @@
                 </div>
                 <div class="chats d-flex flex-column justify-content-between align-items-center">
                     <h6>friend name</h6>
-                    <div class="message d-flex justify-content-around align-items-center p-1">
-                        <form action="">
-                            <input type="text" class="form-control bg-transparent" placeholder="send message">
+                    <div class="message w-100 d-flex justify-content-around align-items-center">
+                        <div class="messages-container d-flex flex-column justify-content-center align-items-center">
+                        </div>
+                        <form action="" class="chat_form w-100 d-flex flex-row justify-content-center align-items-center">
+                            <input type="text" id="message-input" class="form-control bg-transparent" name="message" placeholder="send message"><button class="btn btn-primary" id="send-button"><i class="fa-solid fa-paper-plane"></i></button>
                         </form>
-                        <img src="../static/icons/plus.png" alt="" width="25px">
+                        <!-- <img src="../static/icons/plus.png" alt="" width="25px"> -->
                     </div>
                 </div>
             </div>
@@ -221,5 +234,40 @@
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
 </body>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://localhost:5000');
+    const chat_form = document.querySelector("form.chat_form")
+    const chat_message_input = chat_form["message"]
+    var chatDiv = document.querySelector('.messages-container');
+    const textInput = document.querySelector("input#message-input");
+    const sendButton = document.querySelector("button#send-button");
+    socket.on('connect', function() {
+        console.log('Connected to Socket.IO server');
+    });
+    socket.on('message', function(msg) {
+        console.log('Received message:', msg);
+        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p>${msg.username}: ${msg.message}</p></div>`;
+    });
+    socket.on("typing",function(){
+        console.log("User is typing...");
+        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+    })
+    textInput.addEventListener('input', function() {
+        if(textInput.value.length == 0){
+            sendButton.disabled = true;
+        }else{
+            socket.emit('typing', { username: '{{ user.username }}' });
+        }
+    });
+    chat_form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var message = chat_message_input.value;
+        if(message.length === 0){
+            socket.emit('message', { message, username: '{{ user.username }}' });
+            message = '';
+        }
+    });
 
+</script>
 </html>
