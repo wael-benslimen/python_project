@@ -1,5 +1,5 @@
 from flask_app import socketio
-from flask_socketio import SocketIO, send
+from flask_socketio import send
 from flask import session,request
 @socketio.on('message')
 def handle_message(msg):
