@@ -96,7 +96,10 @@
                 </div>
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-                        <img src="../static/characters_img/thief 1.png" alt="character">
+                        <img {% if user.equipments==kunai and 20> user.char_lvl >= 10
+                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif user.equipments == kunai
+                        and 30> user.char_lvl >= 20 %} src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {%
+                        elif %} alt="character">
                         <h3>EXP <br> {{user.exp}}%</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
@@ -118,10 +121,10 @@
             </div>
         </main>
     </section>
-    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 %} class="show_equipments" {% else %} class="equipments" {%
-        endif %}>
+    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 and user.exp==100 %} class="show_equipments" {% else %}
+        class="equipments" {% endif %}>
         <h5 class="text-center">pick your equipment</h5>
-        <form action="/lvl_up" class="d-flex flex-column">
+        <form action="/lvl_up" method="post" class="d-flex flex-column">
 
             <div class="d-flex w-100 justify-content-between">
                 <div>

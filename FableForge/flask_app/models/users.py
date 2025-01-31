@@ -68,6 +68,11 @@ class User:
         query = 'UPDATE users SET adminstration = "user" WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
+    @classmethod
+    def add_equipments(cls, data):
+        query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
     @staticmethod
     def validate_user(data):
         is_valid = True
