@@ -20,6 +20,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/dashboard_style.css">
+    <link rel="stylesheet" href="../static/css/navbar.css">
 </head>
 
 <body>
@@ -109,7 +110,7 @@
                         %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
                         %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
-                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
+                        <span class="exp"><span class="expfiller"style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
                         <img {% if user.equimpents=="kunai" %}
@@ -203,6 +204,7 @@
         </form>
     </div>
     <script src="../static/js/dashboard_script.js"></script>
+    <script src="../static/js/nav-bar.js"></script>
 </body>
 
 </html>
