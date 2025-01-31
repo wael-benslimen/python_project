@@ -24,6 +24,24 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><a href="/dashboard">HOME</a></li>
+            <li><a href="/profile">PROFILE</a></li>
+            <li><a href="/search">ADD FRIEND</a></li>
+        </ul>
+        <div class="dropdown">
+            <img src="../static/icons/Gear.png" alt="settings" class="image">
+            <div class="dropdown_content">
+                <p><a href="/edit/form">Edit</a></p>
+                <p><a href="/offline">Rest from battle</a></p>
+                <form action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
     <section class="container-fluid">
 
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
@@ -110,7 +128,7 @@
                         %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
                         %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
-                        <span class="exp"><span class="expfiller"style=" width: {{user.exp}}%;"></span></span>
+                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
                         <img {% if user.equimpents=="kunai" %}
