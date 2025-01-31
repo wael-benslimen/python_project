@@ -267,7 +267,7 @@ input[type='radio']:checked+img {
 }
 
 .character img {
-    width: 30%;
+    /* width: 30%; */
 }
 
 .exp {
@@ -297,8 +297,9 @@ input[type='radio']:checked+img {
 }
 
 .char_equipments img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    border-bottom: 1px solid black;
     display: block;
 }
 

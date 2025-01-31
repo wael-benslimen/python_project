@@ -59,4 +59,5 @@ def lvl_up():
     }
     User.add_equipments(data)
     Task.reset_exp({'id': session['user_id']})
+    Task.lvl_plus({'id': session['user_id']})
     return redirect('/dashboard')
