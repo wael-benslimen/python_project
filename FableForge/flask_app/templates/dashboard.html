@@ -49,7 +49,7 @@
     <section class="container-fluid">
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
-                <img src="../static/placeholders/User_cicrle.png" alt="user_image">
+                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image">
                 <h3 class="text-center">{{ user.username }}</h3>
                 <h3 class="text-center">lvl {{user.char_lvl}}</h3>
             </div>
@@ -231,6 +231,16 @@
                 <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
             </form>
         </div>
+        <section class="popup change-avatar hidden">
+            <form action="/update" method="POST">
+                <button class="btn btn-close bg-danger close-button" type="button"><i class="fa-solid fa-xmark"></i></button>
+                <div class="d-flex flex-column justify-content-center align-items-center" style="width: 100px;height: 100px;border-radius: 50%;overflow: hidden;">
+                    <input type="file" id="avatar" name="avatar" class="form-control" style="opacity: 0;">
+                    <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image" style="position: absolute;">
+                </div>
+                <input type="submit" class="btn_form w-50 align-self-center" value="Change"/>
+            </form>
+        </section>
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
 </body>
@@ -242,6 +252,10 @@
     var chatDiv = document.querySelector('.messages-container');
     const textInput = document.querySelector("input#message-input");
     const sendButton = document.querySelector("button#send-button");
+    const avatarInput = document.querySelector("input[type='file']");
+    const changeAvatar = document.querySelector("img[alt='user_image']")
+    const section = document.querySelector("section.popup")
+    const closeButton = document.querySelector("button.close-button");
     socket.on('connect', function() {
         console.log('Connected to Socket.IO server');
     });
@@ -268,6 +282,11 @@
             message = '';
         }
     });
-
+    closeButton.addEventListener("click",function(){
+        section.classList.add("hidden")
+    })
+    changeAvatar.addEventListener("click",function(){
+        section.classList.remove("hidden")
+    })
 </script>
 </html>

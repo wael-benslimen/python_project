@@ -59,19 +59,19 @@ class User:
     def get_latest_users_count(cls):
         query = "SELECT COUNT(*) FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY);"
         result = connectToMySQL(DB).query_db(query)
-        return result[0][0]
+        return result[0]
     
     @classmethod
     def get_active_users(cls):
         query = "SELECT COUNT(*) FROM users WHERE adminstration = 'user' AND is_active = 1;"
         result = connectToMySQL(DB).query_db(query)
-        return result[0][0]
+        return result[0]
     
     @classmethod
     def get_users_count(cls):
         query = "SELECT COUNT(*) FROM users;"
         result = connectToMySQL(DB).query_db(query)
-        return result[0][0]
+        return result[0]
     
     @classmethod
     def get_by_email(cls, data):

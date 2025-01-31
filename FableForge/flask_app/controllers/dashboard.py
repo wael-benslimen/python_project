@@ -12,13 +12,13 @@ def dashboard():
     user = User.get_one_id({'id': session['user_id']})
     all_quests = Task.get_user_tasks({'user_id': session['user_id']})
     if user:
-        if user.adminstration == "admin":
+        if user.adminstration == "adminstration":
             latest_users = User.get_latest_users_count()
             active_users = User.get_active_users()
             users_count = User.get_users_count()
-            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
+            return render_template('admin_dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
         else:
-            return render_template('dashboard.html', user=user, all_quests=all_quests)
+            return render_template('admin_dashboard.html', user=user, all_quests=all_quests)
     else:
         flash("Invalid user_id", "error")
         return redirect('/register')

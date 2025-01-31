@@ -17,9 +17,12 @@ def register_ui():
 def about():
     return render_template("about.html")
 
-app.route('/dashboard')
-def dashboard() :
-    return render_template('dashboard.html')
+@app.route('/admin_dashboard')
+def admin_dashboard() :
+    if "user_id" in session:
+        user = User.get_one_id({"id":session["user_id"]})
+        if user.adminstration == "adminstration":
+            return render_template('admin_dashboard.html')
 
 @app.route("/create/new", methods = ["post"])
 def register():

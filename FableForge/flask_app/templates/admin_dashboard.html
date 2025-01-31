@@ -17,7 +17,7 @@
 <body class="d-flex flex-column min-vh-100">
     {% include 'partials/navbar.html' %}
 
-    <aside class="bg-secondary text-white position-fixed top-0 start-0 vh-100 d-flex flex-column justify-content-start align-items-center">
+    <!-- <aside class="bg-secondary text-white position-fixed top-0 start-0 vh-100 d-flex flex-column justify-content-start align-items-center">
         <button class="btn btn-primary toggle-menu">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -31,26 +31,26 @@
             <li class="nav-item"><a href="#" class="nav-link text-white"><i class="fa-solid fa-question"></i> Feedback</a></li>
             <li class="nav-item"><a href="admin.html" class="nav-link text-white"><i class="fa-solid fa-question"></i> Admin</a></li>
         </ul>
-    </aside>
+    </aside> -->
     <main class="container mt-5 pt-5 shadow">
         <section class="w-100">
             <div class="row bg-transparent g-3">
                 <div class="col-md-4">
                     <div class="card p-3 shadow-sm">
                         <h2 class="h5">Total Users</h2>
-                        <!-- <p class="h3">{{len(users)}}</p> -->
+                        <p class="h3">{{users or "no users"}}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card p-3 shadow-sm">
                         <h2 class="h5">Active Users</h2>
-                        <!-- <p class="h3">{{len(active_users)}}</p> -->
+                        <p class="h3">{{active_users or "no active users"}}</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card p-3 shadow-sm">
                         <h2 class="h5">New Users</h2>
-                        <!-- <p class="h3">{{len(new_users)}}</p> -->
+                        <p class="h3">{{new_users or "no new users"}}</p>
                     </div>
                 </div>
             </div>
@@ -88,13 +88,19 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <!-- {% for u in users %}
-                                            <td>{{ u.id }}</td>
-                                            <td>{{ u.name }}</td>
-                                            <td>{{ u.email }}</td>
-                                            <td><span class="badge bg-success">Active</span></td>
-                                            <td>{{ u.registration_date }}</td>
-                                        {% endfor %} -->
+                                        {%if users %}
+                                            {% for u in users %}
+                                                <td>{{ u.id }}</td>
+                                                <td>{{ u.name }}</td>
+                                                <td>{{ u.email }}</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>{{ u.registration_date }}</td>
+                                            {% endfor %}
+                                            
+                                        {% endif %}
+                                        {% if not users %}
+                                            <p>No users found.</p>
+                                        {% endif %}
                                     </tr>
                                 </tbody>
                             </table>
@@ -117,13 +123,18 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <!-- {% for u in users %}
-                                            <td>{{ u.id }}</td>
-                                            <td>{{ u.name }}</td>
-                                            <td>{{ u.email }}</td>
-                                            <td><span class="badge bg-success">Active</span></td>
-                                            <td>{{ u.registration_date }}</td>
-                                        {% endfor %} -->
+                                        {%if users %}
+                                            {% for u in users %}
+                                                <td>{{ u.id }}</td>
+                                                <td>{{ u.name }}</td>
+                                                <td>{{ u.email }}</td>
+                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>{{ u.registration_date }}</td>
+                                            {% endfor %}
+                                        {% endif %}
+                                        {% if not users %}
+                                            <p>No new users found.</p>
+                                        {% endif %}
                                     </tr>
                                 </tbody>
                             </table>
@@ -135,35 +146,35 @@
     </main>
 </body>
 <script>
-    const toggleMenu = document.querySelector("button.toggle-menu")
-    const aside = document.querySelector("aside")
-    const lineChartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'users added',
-            data: [12, 19, 3, 5, 2, 3, 10],
-            backgroundColor: 'rgba(75, 192, 192, 1)',
-            borderColor: 'rgba(75, 192, 192, .5)',
-            borderWidth: 1
-        }]
-    };
-    const lineChart = new Chart(document.getElementById('chart-1'), {
-        type: 'line',
-        data: lineChartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                },
-                title: {
-                    display: true
-                }
-            }
-        }
-    });
-    toggleMenu.addEventListener("click",function(){
-        aside.classList.toggle("fade-out")
-    })
+    // const toggleMenu = document.querySelector("button.toggle-menu")
+    // const aside = document.querySelector("aside")
+    // const lineChartData = {
+    //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    //     datasets: [{
+    //         label: 'users added',
+    //         data: [12, 19, 3, 5, 2, 3, 10],
+    //         backgroundColor: 'rgba(75, 192, 192, 1)',
+    //         borderColor: 'rgba(75, 192, 192, .5)',
+    //         borderWidth: 1
+    //     }]
+    // };
+    // const lineChart = new Chart(document.getElementById('chart-1'), {
+    //     type: 'line',
+    //     data: lineChartData,
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 position: 'bottom'
+    //             },
+    //             title: {
+    //                 display: true
+    //             }
+    //         }
+    //     }
+    // });
+    // toggleMenu.addEventListener("click",function(){
+    //     aside.classList.toggle("fade-out")
+    // })
 </script>
 </html>

@@ -334,3 +334,57 @@ input[type='radio']:checked+img {
 }
 
 /* end main */
+section.change-avatar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px) grayscale(10);
+}
+
+section.change-avatar > form{
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    width: clamp(300px,350px,400px);
+    height: clamp(300px,350px,400px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .5s ease-in-out;
+    overflow: hidden;
+    position: relative;
+}
+
+section.change-avatar img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    pointer-events: none;
+    background-color: #f9f9f9;
+    scale: 1;
+}
+section.change-avatar input:hover img{
+    scale: 1.2;
+    transition: scale .5s ease-in-out;
+}
+section.change-avatar form button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+section.change-avatar.hidden{
+    clip-path: circle(0% at 50% 50%);
+    transition:clip-path .5s ease-in-out;
+}
+section.change-avatar:not(.hidden){
+    clip-path: circle(100% at 50% 50%);
+    transition:clip-path .5s ease-in-out;
+}
