@@ -72,7 +72,7 @@ class User:
     
     @classmethod
     def add_equipments(cls, data):
-        query = 'UPDATE users SET equipments = equipments + %(equipment)s WHERE id = %(id)s;'
+        query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
     @staticmethod
