@@ -6,6 +6,7 @@
     font-style: normal;
     transition: .5s ease-in-out;
 }
+
 body{
     background-image: url("../themes/360_F_719269705_L0sglwWqLgB5qs8zM0X4geXGCimf57el\ \(1\).jpg");
     background-position: center center;
@@ -106,25 +107,6 @@ nav img {
     font-size: larger;
 }
 
-
-
-.nav_bar {
-    margin: 35px;
-    padding: 25px 35px;
-    background-color: #7eb9fcba;
-    border-radius: 30px;
-    display: flex;
-    gap: 150px;
-    padding-left: 120px;
-    font-weight: bolder;
-    font-size: larger;
-}
-
-.nav_bar a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bolder;
-}
 
 .nav_bar a:first-child {
     text-decoration: underline;

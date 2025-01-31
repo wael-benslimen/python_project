@@ -4,13 +4,11 @@ from flask_app.models.users import User
 from flask_bcrypt import Bcrypt 
 bcrypt=Bcrypt(app)
 
-@app.route('/')
+@app.route('/login')
 def index():
     return render_template("index.html")
 
-app.route('/dashb')
-def dash() :
-    return render_template('dash.html')
+
 
 @app.route("/create/new", methods = ["post"])
 def register():
@@ -25,7 +23,7 @@ def register():
         return redirect('/dashboard')
     return redirect('/')
 
-@app.route("/login", methods = ['POST'])
+@app.route("/user/login", methods = ['POST'])
 def login():
     user = User.get_by_email({"email": request.form['email']})
     if not user:
@@ -57,9 +55,11 @@ def edit_user() :
     if 'user_id' not in session :
         return redirect('/')
     if User.validate_user(request.form) :
-        data={
-        **request.form,
-        'id':session['user_id']
+        hached_pw = bcrypt.generate_password_hash(request.form["password"])
+        data = {
+            **request.form,
+            "password": hached_pw,
+            'id':session['user_id']
         }
         print(22222222222222222222222222222222222222222222222)
         User.update(data)
