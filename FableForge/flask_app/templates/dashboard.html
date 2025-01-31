@@ -96,12 +96,7 @@
                 </div>
                 <div>
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                        <img {% if user.equipments==kunai and user.char_lvl>= 10
-=======
                         <img {% if user.equipments=="kunai" and user.char_lvl>= 10
->>>>>>> Stashed changes
                         %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
                         user.equipments=="kunai" and user.char_lvl >= 20
                         %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
@@ -116,11 +111,6 @@
                         %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
-=======
-                        <img src="../static/characters_img/thief 1.png" alt="character">
-                        <h3>EXP <br> {{user.exp}}%</h3>
-                        <span class="exp"><span class="expfiller"style = "width: {{user.exp}}%;"></span></span>
->>>>>>> Stashed changes
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
                         <img {% if user.equimpents !="" %} src="../static/equipment_img/{{user.equimpents}}.png" {%
@@ -141,7 +131,8 @@
             </div>
         </main>
     </section>
-    <div {% if user.char_lvl==10 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
+    <div {% if user.char_lvl % 10==0 and user.char_lvl < 30 and user.exp==100 %} class="show_equipments" {% else %}
+        class="equipments" {% endif %}>
         <h5 class="text-center">pick your equipment</h5>
         <form action="/lvl_up" method="post" class="d-flex flex-column">
 
