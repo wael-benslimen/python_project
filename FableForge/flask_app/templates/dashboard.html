@@ -52,17 +52,36 @@
             </div>
             <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <h1>HP</h1>
-                <span class="hpbar"><span class="hpbar_filler"></span></span>
+                <span class="hpbar"><span class="hpbar_filler" style="width: {{user.HP}}%;"></span></span>
             </div>
             <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap">
                 <h3 class="align-self-center">inventory</h3>
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <img src="../static/items/potion hp 1.png" alt="" class="inventory_icon"><img
-                        src="../static/items/revive potion 1.png" alt="">
-                </div>
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <img src="../static/items/bean 1.png" alt=""><img src="../static/items/apple.png" alt="">
-                </div>
+                <form action="/inv_items" method="post">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        {% if user.char_lvl > 10 and 'hp' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="hp">
+                            <img src="../static/items/potion hp 1.png" alt="">
+                        </button>
+                        {% endif %}
+                        {% if user.char_lvl > 30 and 'revive' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="revive">
+                            <img src="../static/items/revive potion 1.png" alt="">
+                        </button>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        {% if user.char_lvl > 20 and 'bean' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="bean">
+                            <img src="../static/items/bean 1.png" alt="">
+                        </button>
+                        {% endif %}
+                        {% if user.char_lvl > 15 and 'apple' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="apple">
+                            <img src="../static/items/apple.png" alt="">
+                        </button>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
         </header>
         <main class="d-flex justify-content-around mt-5 col-12">
@@ -132,8 +151,10 @@
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments=="kunai" %} src="../static/equipment_img/wepon_img/kunai.png" {%
-                            endif %} alt="">
+                        <img {% if user.equipments=="kunai" %} src="../static/equipment_img/wepon_img/kunai.png" {% elif
+                            user.equipments=="sword" %} src="../static/equipment_img/wepon_img/sword.png" {% elif
+                            user.equipments=='bomb' %} src='../static/equipment_img/wepon_img/bomb.png' {% endif %}
+                            alt="">
                         <img src="" alt="" class="no_border">
                     </div>
                 </div>
@@ -250,7 +271,7 @@
 </body>
 <script src="../static/js/nav-bar.js"></script>
 </body>
-<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script>
     var socket = io.connect('http://localhost:5000');
     const chat_form = document.querySelector("form.chat_form")
@@ -258,7 +279,7 @@
     var chatDiv = document.querySelector('.messages-container');
     const textInput = document.querySelector("input#message-input");
     const sendButton = document.querySelector("button#send-button");
-    socket.on('connect', function() {
+    socket.on('connect', function () {
         console.log('Connected to Socket.IO server');
     });
     socket.on('message', function (msg) {
@@ -284,11 +305,12 @@
             message = '';
         }
     });
-    closeButton.addEventListener("click",function(){
+    closeButton.addEventListener("click", function () {
         section.classList.add("hidden")
     })
-    changeAvatar.addEventListener("click",function(){
+    changeAvatar.addEventListener("click", function () {
         section.classList.remove("hidden")
     })
-</script>
+</script> -->
+
 </html>

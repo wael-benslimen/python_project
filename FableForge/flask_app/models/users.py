@@ -23,6 +23,7 @@ class User:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.is_active = data.get('is_active', 0)
+        self.inv_items = data.get('inv_items', 'applehprevivebean')
     @classmethod    
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
@@ -109,6 +110,26 @@ class User:
     @classmethod
     def add_equipments(cls, data):
         query = 'UPDATE users SET equipments = %(equipment)s WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def depleat_HP(cls, data):
+        query = 'UPDATE users SET HP = HP - 25 WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def add_HP(cls, data):
+        query = 'UPDATE users SET HP = hp + 25 WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def max_HP(cls, data):
+        query = 'UPDATE users SET HP = 100 WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def update_inv(cls, data):
+        query = 'UPDATE users SET inv_items = %(inv_items)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
     @staticmethod

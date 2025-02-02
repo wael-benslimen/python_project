@@ -10,6 +10,7 @@ pymysql = "*"
 bcrypt = "*"
 python-socketio = "*"
 flask-cors = "*"
+schedule = "*"
 
 [dev-packages]
 
