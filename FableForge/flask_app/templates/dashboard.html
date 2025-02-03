@@ -271,7 +271,7 @@
 </body>
 <script src="../static/js/nav-bar.js"></script>
 </body>
-<!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <script>
     var socket = io.connect('http://localhost:5000');
     const chat_form = document.querySelector("form.chat_form")
@@ -290,6 +290,12 @@
         console.log("User is typing...");
         chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
     })
+    const io = require("socket.io")(httpServer, {
+        cors: {
+            origin: "https://example.com",
+            methods: ["GET", "POST"]
+        }
+    });
     textInput.addEventListener('input', function () {
         if (textInput.value.length == 0) {
             sendButton.disabled = true;
@@ -311,6 +317,6 @@
     changeAvatar.addEventListener("click", function () {
         section.classList.remove("hidden")
     })
-</script> -->
+</script>
 
 </html>
