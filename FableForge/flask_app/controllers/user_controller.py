@@ -46,7 +46,7 @@ def login():
     user = User.get_by_email({"email": request.form['email']})
     if not user:
         flash("Ivalid credentials!", "login")
-        return redirect('/login')
+        return redirect('/register')
     if not bcrypt.check_password_hash(user.password, request.form["password"]):
         flash("Invalid credentials!", "login")
         return redirect('/register')

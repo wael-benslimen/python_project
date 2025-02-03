@@ -52,7 +52,7 @@
             </div>
             <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <h1>HP</h1>
-                <span class="hpbar"><span class="hpbar_filler" style="width: {{user.HP}}%;"></span></span>
+                <span class="hpbar"><span class="hpbar_filler"style="width: {{user.HP}}%;"></span></span>
             </div>
             <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap">
                 <h3 class="align-self-center">inventory</h3>
@@ -148,7 +148,7 @@
                         %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
                         %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
-                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
+                        <span class="exp"><span class="expfiller"style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
                         <img {% if user.equipments=="kunai" %} src="../static/equipment_img/wepon_img/kunai.png" {% elif
