@@ -15,6 +15,8 @@ description.forEach(item => {
     }
 })
 
-
+window.onload = function () {
+    alert("Let's get stronger, warrior");
+};
 
 

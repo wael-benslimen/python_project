@@ -11,6 +11,7 @@ bcrypt = "*"
 python-socketio = "*"
 flask-cors = "*"
 schedule = "*"
+flask-socketio = "*"
 
 [dev-packages]
 
