@@ -18,7 +18,7 @@ def dashboard():
             latest_users = User.get_latest_users_count()
             active_users = User.get_active_users()
             users_count = User.get_users_count()
-            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
+            return render_template('dashboard.html', user=user.to_dict(), all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
         else:
             return render_template('dashboard.html', user=user, all_quests=all_quests)
     else:

@@ -23,6 +23,10 @@ def admin_dashboard() :
         user = User.get_one_id({"id":session["user_id"]})
         if user.adminstration == "adminstration":
             return render_template('admin_dashboard.html')
+        
+@app.route('/profile')
+def profile():
+    return render_template("user_profile_friend.html")
 
 @app.route("/create/new", methods = ["post"])
 def register():
@@ -45,7 +49,7 @@ def login():
         return redirect('/login')
     if not bcrypt.check_password_hash(user.password, request.form["password"]):
         flash("Invalid credentials!", "login")
-        return redirect('/login')
+        return redirect('/register')
     session["user_id"] = user.id
     return redirect("/dashboard")
 
