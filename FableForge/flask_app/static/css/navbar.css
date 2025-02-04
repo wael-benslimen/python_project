@@ -50,7 +50,7 @@ nav button {
 
 .dropdown_content {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 10000000000000;
     right: 2.3%;
     margin-top: 2px;
