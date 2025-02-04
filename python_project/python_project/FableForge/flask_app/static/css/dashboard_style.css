@@ -33,6 +33,7 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: #fff;
+    /* padding:5px 10px; */
 }
 
 nav ul li form {
@@ -239,7 +240,14 @@ input[type='radio']:checked+img {
     transform: rotate(45deg);
     transition: transform 0.3s ease-in-out;
 }
-
+nav ul li a:hover {
+    background-color: #2d9153;
+    border-radius: 20px;
+    text-decoration: none;
+    color: aliceblue;
+    transition:  0.3s  ease-in-out;
+}
+    
 .plus_btn {
     border-radius: 50%;
     z-index: 1000000000;
