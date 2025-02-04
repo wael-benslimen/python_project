@@ -18,15 +18,22 @@ def interest_select():
 
 @app.route("/choose/character", methods = ["post"])
 def select_char():
-    User.select_char(request.form)
-    print(request.form)
+    data={
+        **request.form,
+        "id":session["user_id"]
+    }
+    User.select_char(data)
     return redirect("/choose/interests")
 
 
 
 @app.route("/select/interests", methods=["POST"])
 def inter_select():
-    User.choose_inter(request.form)
+    data={
+        **request.form,
+        "id":session["user_id"]
+    }
+    User.choose_inter(data)
     return redirect("/dashboard")
 
 @app.route("/create/new", methods = ["post"])
@@ -38,7 +45,9 @@ def register():
             "password": hached_pw
         }
         user_id = User.register(data)
+        print("test register route")
         session["user_id"] = user_id
+        print("user id",user_id)
         return redirect('/select/char')
     return redirect('/')
 
@@ -80,7 +89,10 @@ def edit_user() :
             "password": hached_pw,
             'id':session['user_id']
         }
+        print(22222222222222222222222222222222222222222222222)
         User.update(data)
+        print("*"*100)
+        print(data)
         return redirect('/dashboard')
     return redirect('/edit/form')
 

@@ -1,3 +1,4 @@
+
 /* ! navbar styling ! */
 
 *{
@@ -50,7 +51,7 @@ nav button {
 .dropdown_content {
     display: none;
     position: absolute;
-    z-index: 1000;
+    z-index: 10000000000000;
     right: 2.3%;
     margin-top: 2px;
     text-align: center;
@@ -61,7 +62,7 @@ nav button {
 
 .dropdown_content a {
     text-decoration: none;
-    color: #000;
+    color: #fff;
     display: flex;
     justify-content: center;
     flex-direction: column;

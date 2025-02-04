@@ -28,8 +28,8 @@ class User:
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
         new_id = connectToMySQL(DB).query_db(query, data)
+        
         return new_id
-    
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
@@ -67,6 +67,16 @@ class User:
         query = "SELECT COUNT(*) FROM users WHERE adminstration = 'user' AND is_active = 1;"
         result = connectToMySQL(DB).query_db(query)
         return result[0]
+    
+    @classmethod
+    def select_char(cls, data):
+        query = """UPDATE users SET type = %(type)s where id = %(id)s"""
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def choose_inter(cls, data):
+        query = """UPDATE users SET interests = %(interests)s where id = %(id)s"""
+        return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
     def get_users_count(cls):
@@ -131,27 +141,6 @@ class User:
     def update_inv(cls, data):
         query = 'UPDATE users SET inv_items = %(inv_items)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
-    
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "created_at": self.created_at,
-            "updated_at": self.updated_at,
-            "is_active": self.is_active,
-            "adminstration": self.adminstration,
-            "char_lvl": self.char_lvl,
-            "location": self.location,
-            "about_me": self.about_me,
-            "interests": self.interests,
-            "exp": self.exp,
-            "HP": self.HP,
-            "type": self.type,
-            "equipments": self.equipments,
-            "image": self.image,
-            "views": self.views,
-        }
     
     @staticmethod
     def validate_user(data):
