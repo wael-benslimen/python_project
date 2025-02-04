@@ -161,11 +161,14 @@
                 </div>
                 <div class="chats d-flex flex-column justify-content-between align-items-center">
                     <h6>friend name</h6>
+                    <ul id="messages"></ul>
                     <div class="message d-flex justify-content-around align-items-center p-1">
-                        <form action="">
-                            <input type="text" class="form-control bg-transparent" placeholder="send message">
+                        <form id="chat-form" action="">
+                            <input type="text" id="chat-input" class="form-control bg-transparent"
+                                placeholder="send message">
+                            <button class="btn"><img src="../static/icons/plus.png" alt="" width="25px"></button>
                         </form>
-                        <img src="../static/icons/plus.png" alt="" width="25px">
+
                     </div>
                 </div>
             </div>
@@ -245,17 +248,117 @@
     </div>
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
-</body>
-<script src="../static/js/nav-bar.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
-    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
-    crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function () {
-        socket.emit('my event', { data: 'I\'m connected!' });
-    });
-</script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:5000');
+        const chat_form = document.querySelector("form.form-message")
+        const chat_message_input = chat_form["message"]
+        var chatDiv = document.querySelector('.messages-container');
+        const textInput = document.querySelector("input#message-input");
+        const sendButton = document.querySelector("button#send-button");
+        const changeAvatar = document.querySelector("section.change-avatar")
+        const closeButton = changeAvatar.querySelector("button.btn-close")
+        const avatar = document.querySelector("img.avatar")
+        const avatarPlaceholder = document.querySelector("img.avatar-placeholder")
+        const avatarInput = document.querySelector("input.avatar-input")
+        const avatarForm = document.querySelector("form.avatar-form");
+        const submitButton = document.querySelector("button.submit-button");
+        let newBlob = ""
+        closeButton.addEventListener("click", function () {
+            changeAvatar.classList.add("hidden")
+        })
+        avatar.addEventListener("click", function () {
+            changeAvatar.classList.remove("hidden")
+        })
+        function fileReader(file) {
+            return new Promise((resolve, reject) => {
+                if (!file.type.match('image.*')) {
+                    reject('Not an image!');
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    resolve(e.target.result);
+                }
+                reader.onerror = function (e) {
+                    reject(e);
+                }
+                reader.readAsDataURL(file);
+            })
+        }
+        avatarInput.addEventListener("change", async function () {
+            const avatarURL = await fileReader(avatarInput.files[0]);
+            if (avatarURL || typeof avatarURL === "string") {
+                avatarPlaceholder.src = avatarURL
+                newBlob = avatarURL
+                // var resize = new Croppie(avatarPlaceholder, {
+                //     viewport: { width: 100, height: 100,type:"circle" },
+                //     boundary: { width: 300, height: 300 },
+                //     showZoomer: true,
+                //     enableResize: true,
+                //     enableOrientation: true,
+                //     mouseWheelZoom: 'ctrl'
+                // });
+                // resize.result('base64').then(function(blob) {
+                //     console.log(blob);
+
+                // });
+                submitButton.disabled = false;
+            }
+        })
+        avatarForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            try {
+                const request = await fetch("/update-avatar", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ avatar: newBlob })
+                })
+                if (!request.ok) {
+                    throw new Error(`HTTP error! status: ${request.status}`);
+                }
+                const data = await request.json();
+                avatarPlaceholder.src = data.avatar;
+                avatar.src = data.avatar;
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        document.body.classList.toggle("dark-theme", localStorage.getItem("theme") === "dark")
+        socket.on('connect', function () {
+            console.log('Connected to Socket.IO server');
+        });
+        socket.on('message', function (msg) {
+            console.log('Received message:', msg);
+            chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p>${msg.username}: ${msg.message}</p></div>`;
+        });
+        socket.on("typing", function () {
+            console.log("User is typing...");
+            chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+        })
+        textInput.addEventListener('input', function () {
+            if (textInput.value.length == 0) {
+                sendButton.disabled = true;
+            } else {
+                socket.emit('typing', { username: '{{ user.username }}' });
+            }
+        });
+        chat_form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var message = chat_message_input.value;
+            if (message.length === 0) {
+                socket.emit('message', { message, username: '{{ user.username }}' });
+                message = '';
+            }
+        });
+        closeButton.addEventListener("click", function () {
+            section.classList.add("hidden")
+        })
+        changeAvatar.addEventListener("click", function () {
+            section.classList.remove("hidden")
+        })
+    </script>
 </body>
 
 </html>
