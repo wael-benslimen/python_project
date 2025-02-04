@@ -44,7 +44,7 @@
     <section class="container-fluid">
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
-                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image">
+                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image" class="avatar">
                 <h3 class="text-center">{{ user.username }}</h3>
                 <h3 class="text-center">lvl {{user.char_lvl}}</h3>
             </div>
@@ -161,14 +161,15 @@
                 </div>
                 <div class="chats d-flex flex-column justify-content-between align-items-center">
                     <h6>friend name</h6>
-                    <ul id="messages"></ul>
+                    <div class="signal"></div>
+                    <ul id="messages">
+                    </ul>
                     <div class="message d-flex justify-content-around align-items-center p-1">
-                        <form id="chat-form" action="">
-                            <input type="text" id="chat-input" class="form-control bg-transparent"
+                        <form id="chat-form" action="" class="d-flex justify-content-between align-items-center w-100">
+                            <input type="text" id="message-input" name="message" class="form-control bg-transparent"
                                 placeholder="send message">
                             <button class="btn"><img src="../static/icons/plus.png" alt="" width="25px"></button>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -245,15 +246,27 @@
             </div>
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
+        <section class="change-avatar hidden">
+            <form class="avatar-form" action="">
+                <h5>Change your avatar</h5>
+                <div>
+                    <input type="file" class="form-control avatar-input" id="">
+                    <img class="avatar-placeholder" src="{{user.image or '../static/placeholders/User_cicrle.png'}}"
+                        alt="">
+                </div>
+                <button type="button" class="btn btn-close bg-danger"><i class="fa-solid fa-xmark"></i></button>
+                <button type="submit" class="btn btn-primary submit-button" disabled>Save</button>
+            </form>
+        </section>
     </div>
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
         var socket = io.connect('http://localhost:5000');
-        const chat_form = document.querySelector("form.form-message")
+        const chat_form = document.querySelector("form#chat-form")
         const chat_message_input = chat_form["message"]
-        var chatDiv = document.querySelector('.messages-container');
+        var chatMessages = document.querySelector('#messages');
         const textInput = document.querySelector("input#message-input");
         const sendButton = document.querySelector("button#send-button");
         const changeAvatar = document.querySelector("section.change-avatar")
@@ -263,7 +276,9 @@
         const avatarInput = document.querySelector("input.avatar-input")
         const avatarForm = document.querySelector("form.avatar-form");
         const submitButton = document.querySelector("button.submit-button");
-        let newBlob = ""
+        const signal = document.querySelector(".signal")
+        document.cookie = 'username={{user.username}}'
+        let newBlob = "";
         closeButton.addEventListener("click", function () {
             changeAvatar.classList.add("hidden")
         })
@@ -329,26 +344,34 @@
         socket.on('connect', function () {
             console.log('Connected to Socket.IO server');
         });
-        socket.on('message', function (msg) {
+        socket.on('receive-message', function (msg) {
             console.log('Received message:', msg);
-            chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p>${msg.username}: ${msg.message}</p></div>`;
+            if (msg.username == '{{ user.username }}') {
+                chatMessages.innerHTML += `<li class="message d-flex justify-content-around align-self-end bg-info p-1"><p>${msg.username}: ${msg.message}</p></li>`;
+            } else {
+                chatMessages.innerHTML += `<li class="message d-flex justify-content-around align-items-start bg-light p-1"><p>${msg.username}: ${msg.message}</p></li>`;
+            }
         });
-        socket.on("typing", function () {
+        socket.on("typing", function (msg) {
             console.log("User is typing...");
-            chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+            signal.innerHTML = `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+            setTimeout(() => {
+                signal.innerHTML = "";
+            }, 2000);
         })
         textInput.addEventListener('input', function () {
+            var message = chat_message_input.value;
             if (textInput.value.length == 0) {
                 sendButton.disabled = true;
             } else {
-                socket.emit('typing', { username: '{{ user.username }}' });
+                socket.emit('typing', { message, username: '{{ user.username }}' });
             }
         });
         chat_form.addEventListener('submit', function (event) {
             event.preventDefault();
             var message = chat_message_input.value;
-            if (message.length === 0) {
-                socket.emit('message', { message, username: '{{ user.username }}' });
+            if (message.length > 0) {
+                socket.emit('send-message', { message, username: '{{ user.username }}' });
                 message = '';
             }
         });
