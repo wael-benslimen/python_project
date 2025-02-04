@@ -31,11 +31,7 @@
             </nav>
             <div class="user_section d-flex justify-content-between" >
                 <div class="d-flex gap-5 align-items-center">
-                    <div class="d-flex flex-column gap-5">
-                        <img src="../static/icons/user_icon.png" alt="user_icon" style="border:4px solid {{'green' if friend.is_active else 'red'}} ; border-radius:50% ;padding:0;">
-                        <a href="/profile/friends"><img src="../static/icons/left arrow.png" alt="" width="50px" height="50px" style="border-radius: 50%;padding: 0;"></a>
-                    </div>
-                    
+                    <img src="../static/icons/user_icon.png" alt="user_icon" style="border:3px solid {{'green' if friend.is_active else 'red'}} ; border-radius:50% ;padding:0;">
                     <div class="info">
                         <ul>
                             <li style="width: 400px;"><span style="text-decoration: underline;">Friend's name </span> : {{friend.username}}</li>
@@ -43,11 +39,10 @@
                             <li style="width: 400px;"><span style="text-decoration: underline;">Friend's interests </span> : {{friend.interests if friend.interests else "Unknown"}}</li>
                         </ul>
                     </div>
-                    
                 </div>
                 <form action="/remove/friend/" method="post">
                     <input type="hidden" name="friend_id" value="{{ friend.id }}">
-                    <button type="submit"  class="btn_remove" >Unfriend</button>
+                    <button type="submit"  class="btn_remove" >Remove friend</button>
                 </form>
             </div>
             <div class="main">

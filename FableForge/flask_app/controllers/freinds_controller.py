@@ -55,9 +55,6 @@ def view_friend(friend_id):
         flash("Friend not found!")
         return redirect('/dashboard') 
 
-
-
-
 @app.route("/friend/by-name/<username>")
 def get_friends(username):
     print(username)

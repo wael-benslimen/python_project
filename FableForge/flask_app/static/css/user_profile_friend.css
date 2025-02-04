@@ -75,7 +75,7 @@ nav button {
     background-color: #f9f9f9;
     border-radius: 20px;
     min-width: 160px;
-    z-index: ;
+    z-index: 1000;
 }
 
 .dropdown_content a {

@@ -4,11 +4,37 @@ from flask_app.models.users import User
 from flask_bcrypt import Bcrypt 
 bcrypt=Bcrypt(app)
 
-@app.route('/login')
+@app.route('/register')
 def index():
     return render_template("index.html")
 
+@app.route("/select/char")
+def char_select():
+    return render_template("popup1.html")
 
+@app.route("/choose/interests")
+def interest_select():
+    return render_template("popup2.html")
+
+@app.route("/choose/character", methods = ["post"])
+def select_char():
+    data={
+        **request.form,
+        "id":session["user_id"]
+    }
+    User.select_char(data)
+    return redirect("/choose/interests")
+
+
+
+@app.route("/select/interests", methods=["POST"])
+def inter_select():
+    data={
+        **request.form,
+        "id":session["user_id"]
+    }
+    User.choose_inter(data)
+    return redirect("/dashboard")
 
 @app.route("/create/new", methods = ["post"])
 def register():
@@ -19,8 +45,10 @@ def register():
             "password": hached_pw
         }
         user_id = User.register(data)
+        print("test register route")
         session["user_id"] = user_id
-        return redirect('/dashboard')
+        print("user id",user_id)
+        return redirect('/select/char')
     return redirect('/')
 
 @app.route("/user/login", methods = ['POST'])
@@ -28,10 +56,10 @@ def login():
     user = User.get_by_email({"email": request.form['email']})
     if not user:
         flash("Ivalid credentials!", "login")
-        return redirect('/login')
+        return redirect('/register')
     if not bcrypt.check_password_hash(user.password, request.form["password"]):
         flash("Invalid credentials!", "login")
-        return redirect('/login')
+        return redirect('/register')
     session["user_id"] = user.id
     return redirect("/dashboard")
 

@@ -16,10 +16,11 @@ body {
 
 /* navbar */
 nav {
-    background-color: hsla(216, 80%, 69%, 0.621);
+    background-color: hsla(216, 80%, 69%, 0.27);
     padding: 0% 2%;
     border-radius: 30px;
     align-items: center;
+    backdrop-filter: blur(10px);
 }
 
 nav ul {
@@ -33,7 +34,6 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: #fff;
-    /* padding:5px 10px; */
 }
 
 nav ul li form {
@@ -86,6 +86,7 @@ header {
     height: fit-content;
     background-color: rgba(162, 211, 245, 0.7);
     border-radius: 25px;
+    backdrop-filter: blur(10px);
 }
 
 .user_info {
@@ -94,7 +95,8 @@ header {
 }
 
 .user_info img {
-    width: 90px;
+    width: 50px;
+    height: 50px;
 }
 
 /* hp */
@@ -111,7 +113,6 @@ header {
 }
 
 .hpbar_filler {
-    width: 100%;
     height: 15px;
     background-color: red;
     display: block;
@@ -133,11 +134,16 @@ header {
 
 .chats {
     background-color: rgba(162, 211, 245, 0.7);
+    backdrop-filter: blur(10px);
     padding: 1%;
     height: 50vh;
     width: 20vw;
     border-radius: 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .chats h5 {
@@ -161,6 +167,7 @@ header {
     border-radius: 20px;
     text-align: center;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
 .quests ul {
@@ -240,17 +247,10 @@ input[type='radio']:checked+img {
     transform: rotate(45deg);
     transition: transform 0.3s ease-in-out;
 }
-nav ul li a:hover {
-    background-color: #2d9153;
-    border-radius: 20px;
-    text-decoration: none;
-    color: aliceblue;
-    transition:  0.3s  ease-in-out;
-}
-    
+
 .plus_btn {
     border-radius: 50%;
-    z-index: 1000000000;
+    z-index: 100000;
 }
 
 .plus_btn img {
@@ -265,9 +265,7 @@ nav ul li a:hover {
     text-align: center;
 }
 
-.character img {
-    width: 30%;
-}
+.character img {}
 
 .exp {
     background-color: white;
@@ -287,9 +285,8 @@ nav ul li a:hover {
 
 .char_equipments {
     position: absolute;
-    height: 20vh;
-    width: 3%;
-    background-color: beige;
+    background-color: rgba(202, 202, 255, 0.25);
+    backdrop-filter: blur(10px);
     padding: 1%;
     border-radius: 20px;
     left: 60%;
@@ -298,7 +295,7 @@ nav ul li a:hover {
 
 .char_equipments img {
     width: 50px;
-    height: 33%;
+    height: 50px;
     border-bottom: 1px solid black;
     display: block;
 }
@@ -334,3 +331,60 @@ nav ul li a:hover {
 }
 
 /* end main */
+section.change-avatar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px) grayscale(10);
+}
+
+section.change-avatar>form {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    width: clamp(300px, 350px, 400px);
+    height: clamp(300px, 350px, 400px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color .5s ease-in-out;
+    overflow: hidden;
+    position: relative;
+}
+
+section.change-avatar img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    pointer-events: none;
+    background-color: #f9f9f9;
+    scale: 1;
+}
+
+section.change-avatar input:hover img {
+    scale: 1.2;
+    transition: scale .5s ease-in-out;
+}
+
+section.change-avatar form button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+section.change-avatar.hidden {
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path .5s ease-in-out;
+}
+
+section.change-avatar:not(.hidden) {
+    clip-path: circle(100% at 50% 50%);
+    transition: clip-path .5s ease-in-out;
+}
