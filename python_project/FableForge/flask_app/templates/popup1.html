@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/popup.css">
     <title>Fable Forge</title>
 </head>
+
 <body>
     <div class="popup">
         <div class="characters">
             <h1>Choose your character</h1>
-                <form action="/choose/character" method="post" class="d-flex align-items-center">
-                    <label for="option1">
-                        <input type="radio" name="type" id="option1" class="radio" >
-                        <img src="../static/characters_img/thief.png" alt="thief" id="thief" class="image">
-                    </label>
-                    <label for="option2">
-                        <input type="radio" name="type" id="option2" class="radio" >
-                        <img src="../static/characters_img/knight.png" alt="knight" id="knight" class="image">
-                    </label>
-                    <label for="option3">
-                        <input type="radio" name="type" id="option3" class="radio" >
-                        <img src="../static/characters_img/wizard.png" alt="wizard" name="wizard" id="wizard" class="image">
-                    </label>
-                    <button type="submit">Next</button>
+            <form action="/choose/character" method="post" class="d-flex align-items-center">
+                <label for="option1">
+                    <input type="radio" name="type" id="option1" class="radio" value="thief">
+                    <img src="../static/characters_img/thief.png" alt="thief" id="thief" class="image">
+                </label>
+                <label for="option2">
+                    <input type="radio" name="type" id="option2" class="radio" value="knight">
+                    <img src="../static/characters_img/knight.png" alt="knight" id="knight" class="image">
+                </label>
+                <label for="option3">
+                    <input type="radio" name="type" id="option3" class="radio" value="wizard">
+                    <img src="../static/characters_img/wizard.png" alt="wizard" name="wizard" id="wizard" class="image">
+                </label>
+                <button type="submit">Next</button>
             </form>
         </div>
         <div class="bground">
         </div>
     </div>
-        
-    
+
+
 </body>
+
 </html>

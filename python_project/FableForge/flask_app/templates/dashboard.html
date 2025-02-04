@@ -27,7 +27,7 @@
     <nav>
         <ul>
             <li><a href="/dashboard">HOME</a></li>
-            <li><a href="/profile">PROFILE</a></li>
+            <li><a href="/profile/friends">PROFILE</a></li>
             <li><a href="/search">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
@@ -41,7 +41,6 @@
             </div>
         </div>
     </nav>
-
     <section class="container-fluid">
 
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
@@ -271,46 +270,5 @@
 </body>
 <script src="../static/js/nav-bar.js"></script>
 </body>
-<!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-<script>
-    var socket = io.connect('http://localhost:5000');
-    const chat_form = document.querySelector("form.chat_form")
-    const chat_message_input = chat_form["message"]
-    var chatDiv = document.querySelector('.messages-container');
-    const textInput = document.querySelector("input#message-input");
-    const sendButton = document.querySelector("button#send-button");
-    socket.on('connect', function () {
-        console.log('Connected to Socket.IO server');
-    });
-    socket.on('message', function (msg) {
-        console.log('Received message:', msg);
-        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p>${msg.username}: ${msg.message}</p></div>`;
-    });
-    socket.on("typing", function () {
-        console.log("User is typing...");
-        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
-    })
-    textInput.addEventListener('input', function () {
-        if (textInput.value.length == 0) {
-            sendButton.disabled = true;
-        } else {
-            socket.emit('typing', { username: '{{ user.username }}' });
-        }
-    });
-    chat_form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        var message = chat_message_input.value;
-        if (message.length === 0) {
-            socket.emit('message', { message, username: '{{ user.username }}' });
-            message = '';
-        }
-    });
-    closeButton.addEventListener("click", function () {
-        section.classList.add("hidden")
-    })
-    changeAvatar.addEventListener("click", function () {
-        section.classList.remove("hidden")
-    })
-</script> -->
 
 </html>

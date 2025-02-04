@@ -28,8 +28,8 @@ class User:
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
         new_id = connectToMySQL(DB).query_db(query, data)
-        new_user = cls.get_one_id({'id': new_id})
-        return new_user
+        return new_id
+    
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM users;"
@@ -131,6 +131,27 @@ class User:
     def update_inv(cls, data):
         query = 'UPDATE users SET inv_items = %(inv_items)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "is_active": self.is_active,
+            "adminstration": self.adminstration,
+            "char_lvl": self.char_lvl,
+            "location": self.location,
+            "about_me": self.about_me,
+            "interests": self.interests,
+            "exp": self.exp,
+            "HP": self.HP,
+            "type": self.type,
+            "equipments": self.equipments,
+            "image": self.image,
+            "views": self.views,
+        }
     
     @staticmethod
     def validate_user(data):
