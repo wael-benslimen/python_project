@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
+
+    
+    }
+        
+    body {
+    background-image: url('../themes/darck\ theme.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 0 auto  ;
+    }
+    h1{
+        font-size: 60px;
+        font-weight: bold;
+        text-shadow: 
+        1px 1px 2px rgba(75, 34, 152, 0.8), 
+        2px 2px 5px rgba(92, 36, 175, 0.8), 
+        3px 3px 10px rgba(0, 0, 0, 0.8), 
+        4px 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    
+    nav {
+        background-color: #f8f9fa;
+        background: rgba(255,255,255,0.2);
+        margin: 10px 35px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+        0 6px 20px rgba(0, 0, 0, 0.2); 
+        
+    }
+    
+    nav ul {
+        display: flex;
+        gap: 150px;
+        list-style: none;
+        padding-left: 50px;
+        margin-top: 15px;
+    }
+    .dropdown_menu {
+        display: none; 
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: #f9f9f9;
+        border-radius: 20px;
+        min-width: 160px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        z-index: 1000; 
+    }
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        padding:5px 10px;
+    }
+    nav ul li a:hover {
+        background-color: #e7cdc2;
+        border-radius: 20px;
+        text-decoration: none;
+        color: #413190;
+        transition:  0.3s ease-in-out ;
+    }
+    
+    nav img {
+        margin-right: 50px;
+        cursor: pointer;
+        width: 40px;
+        cursor: pointer;
+    }
+    
+    .dropdown_content {
+        display: none;
+        position: absolute;
+        right: -8px;
+        margin-top: 2px;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-radius: 20px;
+        min-width: 160px;
+    }
+    
+    .dropdown_content a {
+        text-decoration: none;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .dropdown_content p a {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        padding: 2px 1px;
+        background-color: rgb(107, 107, 195);
+        border-radius: 20px;
+    }
+    
+    .dropdown_content.shown {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .dropdown_content.shown *{
+        width: 100%;
+        padding: 5px 10px;
+    }
+    .dropdown_content:not(.shown) {
+        display: none;
+    }
+    
+    .swiper {
+    width: 100%;
+    max-width: 900px;
+    height: 350px;
+    position: relative;
+    }
+    
+    .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    
+    .card {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff ;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(30px);
+    width: 100%;
+    max-width: 300px; 
+    }
+    
+    .card-body img {
+    border-radius: 50%;
+    }
+    .swiper-pagination-bullet {
+        background-color: #413190;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background-color: #5649c3;
+    }
+    .search-bar{
+        width: 80%;
+        max-width: 23rem;
+        display: flex;
+        align-items: center;
+        background: rgba(255,255,255,0.5);
+        padding: 10px 20px;
+        border-radius: 60px;
+        backdrop-filter: blur(4px) saturate(180%);
+    }
+    .search-bar input{
+        background: transparent;
+        flex: 1;
+        border: 0;
+        outline: none;
+        font-size: 20px ;
+        color: #413190;
+    }
+    
+
+    .search-bar button{
+        background: transparent;
+        border: 0;
+        border: none;
+        border-radius: 20%;
+        width: 35px;
+        outline: none;
+
+    }
+    button:focus{
+        border: none;
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+        color: aliceblue;
+        cursor: pointer;
+        
+    }

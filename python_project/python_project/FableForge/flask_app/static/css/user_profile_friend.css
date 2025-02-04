@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Luxurious Roman", serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+body {
+    background-image: url(../themes/light\ mode\ back\ ground.png);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+nav {
+    background-color: hsla(216, 81%, 62%, 0.621);
+    margin: 10px 35px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 150px;
+    list-style: none;
+    padding-left: 50px;
+    margin-top: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding:5px 10px;
+}
+nav ul li a:hover {
+    background-color: #2d9153;
+    border-radius: 20px;
+    text-decoration: none;
+    color: aliceblue;
+    transition:  0.3s  ease-in-out;
+}
+
+nav img {
+    margin-right: 50px;
+    cursor: pointer;
+    width: 40px;
+    cursor: pointer;
+}
+
+nav button {
+    border: none;
+    background-color: #6B6BC3;
+    padding: 0 45px;
+    color: #fff;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    right: -8px;
+    margin-top: 2px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.dropdown_content a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropdown_content p a {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 2px 1px;
+    background-color: rgb(107, 107, 195);
+    border-radius: 20px;
+}
+
+.dropdown_content.shown {
+    display: block;
+}
+
+.dropdown_content:not(.shown) {
+    display: none;
+}
+
+/* ! User General Information Section ! */
+.user_section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 15px 35px;
+    padding: 40px 50px;
+    background-color: #7eb9fcba;
+    border-radius: 30px;
+}
+
+.info ul {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    list-style: none;
+    font-size: larger;
+}
+
+
+
+.nav_bar {
+    margin: 35px;
+    padding: 25px 35px;
+    background-color: #7eb9fcba;
+    border-radius: 30px;
+    display: flex;
+    gap: 150px;
+    padding-left: 120px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.nav_bar a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bolder;
+}
+
+
+.user_section img {
+    padding-left: 5%;
+}
+
+.user_details_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    margin: 10px 35px;
+}
+
+/* ! User Information Section ! */
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: hsla(212, 95%, 74%, 0.729);
+    padding: 20px;
+    border-radius: 30px;
+    width: 65%;
+    height: fit-content;
+}
+
+
+.about-me-section p, .achievements_section p {
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+.about-me-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 50px;
+}
+
+.about-me-section textarea {
+    width: 550px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.about-me-section button {
+    border: none;
+    background-color: #6B6BC3;
+    padding: 0 45px;
+    color: #fff;
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+.achievements_section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.trophies {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #fff;
+    width: 550px;
+    height: 50px;
+    border-radius: 30px;
+    border: 1px solid #767676;
+}
+
+.trophies p {
+    margin: 10px 30px;
+}
+
+
+/* ! User level progress Information Section ! */
+.right {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 20px;
+    vertical-align: top;
+    background-color: hsla(212, 95%, 74%, 0.729);
+    padding: 110px 20px;
+    border-radius: 30px;
+    width: 35%;
+}
+
+
+.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 70%;
+    height: 100%;
+    background: #76c7c0;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+/* ! User friend list Information Section ! */
+
+.friend_details_container .left{
+    display: flex;
+    width: 40%;
+    margin-left: 45px;
+
+    height: fit-content;
+}
+
+.title_section_about_me {
+    font-size: larger;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+.friend_details_container .left .friend_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.friend_section p {
+    margin-bottom: 0;
+}
+
+.images {
+    display: flex;
+    gap: 20px;
+}
+
+.images img {
+    background-color: #413190;
+    padding: 3px;
+    width: 35px;
+    border-radius: 50%;
+}
+
+
+/* ! Animation ! */
+
+.left {
+    transition: 1s ease-in-out;
+}
+
+.main.active .user_details_container .left {
+    transform: scale(1) translate(2300px, -500px);
+}
+.main .friend_details_container .left {
+    position: absolute;
+    top: 540px;
+    transform: scale(0) translate(200px, -500px);
+}
+
+.main.active .friend_details_container .left {
+    transform: scale(1) ;
+}
