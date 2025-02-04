@@ -45,7 +45,7 @@ class Task:
 
     @classmethod
     def lvl_up(cls, data):
-        query = "UPDATE users SET exp = exp + 100 WHERE id=%(id)s;"
+        query = "UPDATE users SET exp = exp + 5 WHERE id=%(id)s;"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod

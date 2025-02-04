@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,9 +26,9 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/">HOME</a></li>
-            <li><a href="/profile/friends">PROFILE</a></li>
-            <li><a href="/friends/suggestions">ADD FRIEND</a></li>
+            <li><a href="/dashboard">HOME</a></li>
+            <li><a href="/profile">PROFILE</a></li>
+            <li><a href="/search">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
             <img src="../static/icons/Gear.png" alt="settings" class="image">
@@ -40,26 +41,47 @@
             </div>
         </div>
     </nav>
+
     <section class="container-fluid">
+
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
-                <img src="../static/placeholders/User_cicrle.png" alt="user_image">
+                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image">
                 <h3 class="text-center">{{ user.username }}</h3>
                 <h3 class="text-center">lvl {{user.char_lvl}}</h3>
             </div>
             <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
                 <h1>HP</h1>
-                <span class="hpbar"><span class="hpbar_filler"></span></span>
+                <span class="hpbar"><span class="hpbar_filler" style="width: {{user.HP}}%;"></span></span>
             </div>
             <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap">
                 <h3 class="align-self-center">inventory</h3>
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <img src="../static/items/potion hp 1.png" alt="" class="inventory_icon"><img
-                        src="../static/items/revive potion 1.png" alt="">
-                </div>
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <img src="../static/items/bean 1.png" alt=""><img src="../static/items/apple.png" alt="">
-                </div>
+                <form action="/inv_items" method="post">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        {% if user.char_lvl > 10 and 'hp' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="hp">
+                            <img src="../static/items/potion hp 1.png" alt="">
+                        </button>
+                        {% endif %}
+                        {% if user.char_lvl > 30 and 'revive' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="revive">
+                            <img src="../static/items/revive potion 1.png" alt="">
+                        </button>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        {% if user.char_lvl > 20 and 'bean' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="bean">
+                            <img src="../static/items/bean 1.png" alt="">
+                        </button>
+                        {% endif %}
+                        {% if user.char_lvl > 15 and 'apple' in user.inv_items %}
+                        <button class="btn" type="submit" name="item" value="apple">
+                            <img src="../static/items/apple.png" alt="">
+                        </button>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
         </header>
         <main class="d-flex justify-content-around mt-5 col-12">
@@ -110,6 +132,7 @@
                             alt="" width="50px"></button>
                 </div>
                 <div>
+
                     <div class="character d-flex flex-column justify-content-center align-items-center">
                         <img {% if user.equipments=="kunai" and user.char_lvl>= 10
                         %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
@@ -128,9 +151,10 @@
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
                     <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equimpents=="kunai" %}
-                            src="../static/equipment_img/wepon_img/{{user.equipments}}.png" {% endif %} alt="">
-                        <img src="" alt="hello">
+                        <img {% if user.equipments=="kunai" %} src="../static/equipment_img/wepon_img/kunai.png" {% elif
+                            user.equipments=="sword" %} src="../static/equipment_img/wepon_img/sword.png" {% elif
+                            user.equipments=='bomb' %} src='../static/equipment_img/wepon_img/bomb.png' {% endif %}
+                            alt="">
                         <img src="" alt="" class="no_border">
                     </div>
                 </div>
@@ -218,8 +242,75 @@
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
     </div>
+    <div {% if user.char_lvl==30 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
+        <h5 class="text-center">pick your accessory</h5>
+        <form action="/lvl_up" method="post" class="d-flex flex-column">
+
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <input type="radio" name="equipment" value="sword">
+                    <img src="../static/equipment_img/wepon_img/sword.png" alt="sword" class="equipments_icon"
+                        width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="kunai">
+                    <img src="../static/equipment_img/wepon_img/kunai.png" alt="kunai" class="equipments_icon"
+                        width="50px">
+                </div>
+                <div for="">
+                    <input type="radio" name="equipment" value="bomb">
+                    <img src="../static/equipment_img/wepon_img/bomb.png" alt="bomb" class="equipments_icon"
+                        width="50px">
+                </div>
+            </div>
+            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
+        </form>
+    </div>
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
 </body>
+<script src="../static/js/nav-bar.js"></script>
+</body>
+<!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    var socket = io.connect('http://localhost:5000');
+    const chat_form = document.querySelector("form.chat_form")
+    const chat_message_input = chat_form["message"]
+    var chatDiv = document.querySelector('.messages-container');
+    const textInput = document.querySelector("input#message-input");
+    const sendButton = document.querySelector("button#send-button");
+    socket.on('connect', function () {
+        console.log('Connected to Socket.IO server');
+    });
+    socket.on('message', function (msg) {
+        console.log('Received message:', msg);
+        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p>${msg.username}: ${msg.message}</p></div>`;
+    });
+    socket.on("typing", function () {
+        console.log("User is typing...");
+        chatDiv.innerHTML += `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+    })
+    textInput.addEventListener('input', function () {
+        if (textInput.value.length == 0) {
+            sendButton.disabled = true;
+        } else {
+            socket.emit('typing', { username: '{{ user.username }}' });
+        }
+    });
+    chat_form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var message = chat_message_input.value;
+        if (message.length === 0) {
+            socket.emit('message', { message, username: '{{ user.username }}' });
+            message = '';
+        }
+    });
+    closeButton.addEventListener("click", function () {
+        section.classList.add("hidden")
+    })
+    changeAvatar.addEventListener("click", function () {
+        section.classList.remove("hidden")
+    })
+</script> -->
 
 </html>
