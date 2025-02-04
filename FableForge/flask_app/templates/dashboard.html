@@ -132,19 +132,22 @@
                 <div>
 
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments=="kunai" and user.char_lvl>= 10
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
-                        user.equipments=="kunai" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
-                        user.equipments=="bomb" and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_10.png" {% elif
-                        user.equipments=="bomb" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_20.png" {% elif
-                        user.equipments=="sword" and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_10.png" {% elif
-                        user.equipments=="sword" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
-                        %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
+                        <img {% if user.equipments=="kunai" and user.char_lvl>= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20.png"
+                        {% elif user.equipments == "kunai" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_10.png"
+                        {% elif user.equipments == "bomb" and user.char_lvl >= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20.png"
+                        {% elif user.equipments == "bomb" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_10.png"
+                        {% elif user.equipments == "sword" and user.char_lvl >= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_20.png"
+                        {% elif user.equipments == "sword" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_10.png"
+                        {% else %}
+                        src="../static/characters_img/{{ user.type }}.png"
+                        {% endif %}
+                        alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
@@ -244,6 +247,15 @@
     <script src="../static/js/nav-bar.js"></script>
 </body>
 <script src="../static/js/nav-bar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('connect', function () {
+        socket.emit('my event', { data: 'I\'m connected!' });
+    });
+</script>
 </body>
 
 </html>
