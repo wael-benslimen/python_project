@@ -16,30 +16,41 @@ class Friend :
     def create(cls,data) :
         query="INSERT INTO friends (user_id,friend_id) VALUES (%(user_id)s,%(friend_id)s) ;"
         return connectToMySQL(DB).query_db(query,data)
+        
     
     
     @classmethod
-    def get_one(cls,data) :
-        query="SELECT * FROM friends WHERE id=%(id)s ;"
+    def get_friends_by_user(cls, user_id):
+        query = """
+        SELECT users.id, users.username, users.image, users.interests 
+        FROM friends
+        JOIN users ON (friends.friend_id = users.id OR friends.user_id = users.id)
+        WHERE (%(user_id)s IN (friends.user_id, friends.friend_id)) 
+        AND users.id != %(user_id)s;
+        """
+        data = {'user_id': user_id}
+        results = connectToMySQL(DB).query_db(query, data)
+        return results
+
+    @classmethod
+    def get_one_friend(cls,friend_id):
+        query = "SELECT * FROM users WHERE id = %(friend_id)s"
+        data = {'friend_id': friend_id}
         result = connectToMySQL(DB).query_db(query, data)
         if result:
-            return cls(result[0])
-        else:
-            return False
-    
-    @classmethod
-    def get_all(cls) :
-        query="SELECT * FROM friends ;"
-        results = connectToMySQL(DB).query_db(query)
-        all_friends=[]
-        for row in results :
-            friend=cls(row)
-            all_friends.append(friend)
-        return all_friends
-    
+            return result[0]
+        return None
 
     
     @classmethod
-    def delete(cls,data) :
-        query="DELETE FROM friends WHERE id=%(id)s ;"
-        return connectToMySQL(DB).query_db(query,data)
+    def remove_friend(cls, user_id, friend_id):
+        query = """
+            DELETE FROM friends
+            WHERE (user_id = %(user_id)s AND friend_id = %(friend_id)s)
+            OR (user_id = %(friend_id)s AND friend_id = %(user_id)s);
+        """
+        data = {
+            'user_id': user_id,
+            'friend_id': friend_id
+        }
+        connectToMySQL(DB).query_db(query, data)

@@ -16,7 +16,7 @@
                 <ul>
                     <li><a href="/dashboard">HOME</a></li>
                     <li><a href="/profile">PROFILE</a></li>
-                    <li><a href="/search">ADD FRIEND</a></li>
+                    <li><a href="/friends/suggestions">ADD FRIEND</a></li>
                 </ul>
                 <div class="dropdown">
                     <img src="../static/icons/Gear.png" alt="settings" class="image">
@@ -33,29 +33,32 @@
                 <img src="../static/icons/user_icon.png" alt="user_icon">
                 <div class="info">
                     <ul>
-                        <li>Username</li>
-                        <li>Location</li>
-                        <li>Intrested In</li>
+                        <li><span style="text-decoration: underline;">My name :</span> {{user.username}}</li>
+                        <li><span style="text-decoration: underline;">My location : </span> {{user.location}}</li>
+                        <li> <span style="text-decoration: underline;">My interests : </span> {{user.interests}}</li>
                     </ul>
                 </div>
             </div>
             <div class="nav_bar">
-                <a href="#" class="profile">Profile/Friends</a>
+                <a href="#" class="profile">Profile- Friends</a>
                 <a href="#" class="friend"></a>
             </div>
             <div class="main">
             <div class="user_details_container">
                 <div class="left">
                 <div class="about-me-section">
-                    <p>About Me</p>
+                    <p>Bio</p>
                     <div class="bio">
-                        <form action="">
-                            <textarea name="bio" placeholder="Bio"></textarea>
+                        <form action="/update/bio" method="post">
+                            <textarea name="about_me" placeholder="Bio">{{user.about_me}}</textarea>
                             <button type="submit">Save</button>
                         </form>
                     </div>
-                    <div class="achievements_section">
-                        <p>Achievements</p>
+                    <!-- <div class="achievements_section">
+                        <p class="d-flex gap-2 align-items-center">
+                            My Achievements
+                            <img src="../static/icons/image.png" alt="" width="40px" height="40px"> 
+                        </p>
                         <div class="trophies">
                             <p>Title 1</p>
                         </div>
@@ -65,7 +68,7 @@
                         <div class="trophies">
                             <p>Title 3</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                     
                     
@@ -85,29 +88,28 @@
             <div class="friend_details_container">
                 <div class="left">
                     <div class="title_section_about_me">Friend List</div>
-                    <div class="friend_section">
-                    <p>Wael Ben Slimen</p>
-                    <div class="images">
-                        <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                        <a href=""><img src="../static/icons/user.png" alt=""></a>
-                    </div>
-                    </div>
+
+                        <input type="text" placeholder="look for a friend ... " style="border-radius: 5px;">
+                    {% for friend in all_friends%}
+                    <!-- <form action="/search/friend" method="get">
+                        <input type="text" name="search_query" placeholder="Search for a friend">
+                        <button type="submit">Search</button>
+                    </form> -->
                     
                     <div class="friend_section">
-                    <p>Wided Msakem</p>
+                    <p>{{friend.username}}</p>
                     <div class="images">
                         <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                        <a href=""><img src="../static/icons/user.png" alt=""></a>
+                        <a href="/friend/{{friend.id}}"><img src="../static/icons/user.png" alt=""></a>
+                        <form action="/remove/friend/" method="post">
+                            <input type="hidden" name="friend_id" value="{{ friend.id }}">
+                            <button type="submit" style="border: none; background-color: white;" class="btn_remove" ><img src="../static/icons/delete.png" alt=""></button>
+                        </form>
                     </div>
                     </div>
+                    {% endfor %}
                     
-                    <div class="friend_section">
-                    <p>Mortatha Houch</p>
-                    <div class="images">
-                        <a href=""><img src="../static/icons/msg.png" alt=""></a>
-                        <a href=""><img src="../static/icons/user.png" alt=""></a>
-                    </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
             </div>

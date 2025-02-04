@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/one_friend.css">
+    <title>User Profile</title>
+</head>
+<body>
+    <div class="container" style="width: 100vw; height: 100vh;">
+        <div class="user_info">
+            <nav>
+                <ul>
+                    <li><a href="/dashboard">HOME</a></li>
+                    <li><a href="/profile/friends">PROFILE</a></li>
+                    <li><a href="/search">ADD FRIEND</a></li>
+                </ul>
+                <div class="dropdown">
+                    <img src="../static/icons/Gear.png" alt="settings" class="image">
+                    <div class="dropdown_content">
+                        <p><a href="/edit/form">Edit</a></p>
+                        <p><a href="/offline">Rest from battle</a></p>
+                        <form action="/logout" method="post">
+                            <button type="submit">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div class="user_section d-flex justify-content-between" >
+                <div class="d-flex gap-5 align-items-center">
+                    <div class="d-flex flex-column gap-5">
+                        <img src="../static/icons/user_icon.png" alt="user_icon" style="border:4px solid {{'green' if friend.is_active else 'red'}} ; border-radius:50% ;padding:0;">
+                        <a href="/profile/friends"><img src="../static/icons/left arrow.png" alt="" width="50px" height="50px" style="border-radius: 50%;padding: 0;"></a>
+                    </div>
+                    
+                    <div class="info">
+                        <ul>
+                            <li style="width: 400px;"><span style="text-decoration: underline;">Friend's name </span> : {{friend.username}}</li>
+                            <li style="width: 400px;"><span style="text-decoration: underline;">Friend's location </span> : {{friend.location if friend.location else "Unknown"}} </li>
+                            <li style="width: 400px;"><span style="text-decoration: underline;">Friend's interests </span> : {{friend.interests if friend.interests else "Unknown"}}</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <form action="/remove/friend/" method="post">
+                    <input type="hidden" name="friend_id" value="{{ friend.id }}">
+                    <button type="submit"  class="btn_remove" >Unfriend</button>
+                </form>
+            </div>
+            <div class="main">
+            <div class="user_details_container">
+                <div class="left">
+                <div class="about-me-section">
+                    <p>Bio</p>
+                    <div class="bio">
+                        {{friend.about_me}}
+                    </div>
+                    <div class="achievements_section">
+                        <p class="d-flex gap-2 align-items-center">
+                            {{friend.username}}'s Achievements 
+                            <img src="../static/icons/image.png" alt="" width="40px" height="40px">
+                        </p>
+                        <div class="trophies">
+                            <p>Title 1</p>
+                        </div>
+                        <div class="trophies">
+                            <p>Title 2</p>
+                        </div>
+                        <div class="trophies">
+                            <p>Title 3</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="right">
+                    <div class="level">
+                        <h1 class="title_section_lvl">Progress</h1>
+                        <div class="circle">
+                            <h3>Level {{friend.char_lvl}}</h3>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="../static/js/nav-bar.js"></script>
+    <script src="../static/js/user_profile.js"></script>
+</body>
+</html>
+
+</body>
+</html>

@@ -12,36 +12,17 @@
     <title>Document</title>
 </head>
 <body>
-<<<<<<< Updated upstream
-    {% include 'partials/navbar.html' %}
-
-    <section class="container-fluid mt-5 d-flex flex-column position-relative">
-        <nav>
-            <ul>
-                <li><a href="">HOME</a></li>
-                <li><a href="">PROFILE</a></li>
-                <li><a href="">ADD FRIEND</a></li>
-            </ul>
-            <div class="dropdown">
-                <img src="../static/icons/Gear.png" alt="settings" class="image">
-                <div class="dropdown_content">
-                    <p><a href="" class="btn-secondary">Edit</a></p>
-                    <p><a href="" class="btn-secondary">Rest from battle</a></p>
-                    <p><a href="" class="btn-danger">logout</a></p>
-                </div>
-=======
     <nav>
         <ul>
-            <li><a href="">HOME</a></li>
-            <li><a href="">PROFILE</a></li>
-            <li><a href="">ADD FRIEND</a></li>
+            <li><a href="/dashboard">HOME</a></li>
+            <li><a href="/profile/friends">PROFILE</a></li>
+            <li><a href="/friends/suggestions">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
             <img src="../static/icons/Gear.png" alt="settings" class="image">
             <div class="dropdown_content">
                 <p><a href="" class="btn-secondary">Rest from battle</a></p>
                 <p><a href="" class="btn-danger">logout</a></p>
->>>>>>> Stashed changes
             </div>
         </div>
     </nav>
@@ -64,10 +45,10 @@
             {% for msg in get_flashed_messages(category_filter=["confirm-password"]) %}
                         <p class="text-danger"> {{msg}} </p>
                         {% endfor %}
-            <input name="interests" type="text" placeholder="interested in" class="form-control">
-            <input name="location" type="text" class="form-control" placeholder="location" class="form-control">
-            <textarea name="about_me" placeholder="about me" class="form-control"></textarea >
-            <input type="file" placeholder="upload a photo" class="form-control">
+            <input name="interests" type="text" placeholder="interested in" class="form-control" value="{{user.interests}}">
+            <input name="location" type="text" class="form-control" placeholder="location" class="form-control" value="{{user.location}}">
+            <!-- <textarea name="about_me" placeholder="about me" class="form-control">{{user.about_me}}</textarea > -->
+            <input type="file" placeholder="upload a photo" class="form-control" name="image">
             <button type="submit" style="padding: 10px 50px; border-radius: 10px;background-color: #1D293D ; color: white;">Save</button>
         </form>
     </section>

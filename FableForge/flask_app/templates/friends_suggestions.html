@@ -10,67 +10,69 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="../static/css/friends_suggestions.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <nav class="d-flex justify-content-between col-12 mt-3">
         <ul>
-            <li><a href="">HOME</a></li>
-            <li><a href="">PROFILE</a></li>
-            <li><a href="">ADD FRIEND</a></li>
+            <li><a href="/dashboard">HOME</a></li>
+            <li><a href="/profile/friends">PROFILE</a></li>
+            
         </ul>
+        <div class="form-group d-flex flex-row justify-content-center align-items-center">
+            <!-- <input class="form-control" type="text" placeholder=" Search ..." name="search_text" id="search_text"/>
+            <img src="../static/icons/search2.png" alt="" width="30px" class="search_button"> -->
+            <!-- <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+            </div> -->
+        </div>
+        <div id="result" style="margin-top: 8px;"></div>
         <div class="dropdown">
-            <img src="../static/icons/Gear.png" alt="gear" class="gear">
-            <div class="dropdown_menu">
-                <a href="" class="dropdown_item">EDIT PROFILE</a>
-                <a href="" class="dropdown_item">REST FROM BATTLE</a>
-                <a href="" class="dropdown_item">LOGOUT</a>
+            <img src="../static/icons/Gear.png" alt="gear" class="image">
+            <div class="dropdown_content">
+                <a href="" class="dropdown_item text-dark">EDIT PROFILE</a>
+                <a href="" class="dropdown_item text-dark">REST FROM BATTLE</a>
+                <a href="" class="dropdown_item text-dark">LOGOUT</a>
             </div>
         </div>
     </nav>
     <section class="d-flex justify-content-center align-items-center flex-column gap:3rem" style="width: 100vw;min-height: 100vh;">
-        <h1 style="margin-bottom: 4rem; color:aliceblue">FRIENDS SUGGESTIONS</h1>
+        <h1 style="margin-bottom: 4rem; color:#9891be ;">- FRIENDS SUGGESTIONS -</h1>
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="card">
+            {% for not_friend in not_friends %}
+                <div class="swiper-slide h-100">
+                    <div class="card h-100">
                         <div class="card-body">
-                            <img src="../static/icons/blank-profile-picture-973460_640.webp" width="100px" height="100px" alt="Profile Image">
+                            <img src="{{ url_for('static', filename=not_friend.image if not_friend.image else 'icons/blank-profile-picture-973460_640.webp') }}" width="100px"  height="100px"         >
                         </div>
-                        <h3>Username</h3>
-                        <h5>User's interests</h5>
+                        <h3>{{not_friend.username}}</h3>
+                        <h5>{{not_friend.interests}}</h5>
                         <div class="card-footer">
-                        <button class="p-2" style="border-radius: 8px; border: none; background-color: #413190; color: aliceblue;"onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#5649c3';" 
-                        onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#413190';">
-                        Add friend
-                        </button>
+                            <form action="/add_friend" method="post">
+                            <input type="hidden" name="friend_id" value="{{ not_friend.id }}">
+                            <button type="submit" class="myButton p-2" id="friendButton_{{ not_friend.id }}"
+                                    onclick="changetxt(event, {{ not_friend.id }} )"
+                                    style="border-radius: 8px; border: none; background-color: #413190; color: aliceblue;"
+                                    onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#5649c3';"
+                                    onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#413190';">
+                                Add friend
+                            </button>
+                            </form>
                     </div>
                 </div>
             </div>
-
-        <div class="swiper-slide">
-          <div class="card">
-            <div class="card-body">
-              <img src="../static/icons/blank-profile-picture-973460_640.webp" width="100px" height="100px" alt="Profile Image">
-            </div>
-            <h3>Username</h3>
-            <h5>User's interests</h5>
-            <div class="card-footer">
-              <button class="p-2" style="border-radius: 8px; border: none; background-color: #413190; color: aliceblue;">
-                Add friend
-              </button>
-            </div>
-          </div>
+            {% endfor %}
         </div>
-      </div>
-
-
         <div class="swiper-pagination"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
 </section>
 
-<script src="../static/js/nav-bar.js"></script>
+
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
@@ -78,6 +80,8 @@
     const swiper = new Swiper('.swiper', {
         effect: 'slide',
         direction: 'horizontal',
+        slidesPerView:3,
+        spaceBetween:10,
         pagination: {
         el: '.swiper-pagination',
         clickable: true,
@@ -87,7 +91,42 @@
         prevEl: '.swiper-button-prev',
     },
     });
-    
+    async function getData(url,value){
+        try {
+            const request = await fetch(url+value);
+            const response = await request.json();
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const input =document.querySelector("#search_text")
+    const search_button =document.querySelector(".search_button")
+    const dropDown=document.querySelector("div.dropdown-menu")
+    search_button.onclick =async function(){
+        const data = await getData("/friend/by-name/",input.value);
+        console.log(data);
+        
+        dropDown.innerHTML=""
+        if(data.friends && data.friends.length>0){
+            for (let i = 0; i< data.friends; i++) {
+                const friend = document.createElement("div")
+                const button = document.createElement("button")
+                const username = document.createElement("h3")
+                button.classList.add("btn")
+                button.classList.add("btn-primary")
+                friend.classList.add("dropdown-item")
+                friend.classList.add("d-flex")
+                friend.classList.add("justify-content-between")
+                friend.classList.add("align-items-center")
+                friend.classList.add("p-2");
+                friend.appendChild(username)
+                friend.appendChild(button)
+                dropDown.appendChild(friend)
+            }
+        }
+    }
 </script>
+<script src="../static/js/nav-bar.js"></script>
 </body>
 </html>

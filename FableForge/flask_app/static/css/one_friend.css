@@ -4,6 +4,7 @@
     font-family: "Luxurious Roman", serif;
     font-weight: 400;
     font-style: normal;
+    color: rgb(83, 81, 81);
     
 }
 
@@ -14,9 +15,6 @@ body {
     width: 100%;
     margin: 0 auto;
     overflow-x: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    
 }
 
 nav {
@@ -40,8 +38,9 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: #fff;
-    padding:5px 10px;
+    
 }
+
 nav ul li a:hover {
     background-color: #2d9153;
     border-radius: 20px;
@@ -49,7 +48,6 @@ nav ul li a:hover {
     color: aliceblue;
     transition:  0.3s  ease-in-out;
 }
-
 nav img {
     margin-right: 50px;
     cursor: pointer;
@@ -75,7 +73,7 @@ nav button {
     background-color: #f9f9f9;
     border-radius: 20px;
     min-width: 160px;
-    z-index: ;
+   
 }
 
 .dropdown_content a {
@@ -97,6 +95,7 @@ nav button {
 
 .dropdown_content.shown {
     display: block;
+    z-index: 100;
 }
 
 .dropdown_content:not(.shown) {
@@ -112,6 +111,7 @@ nav button {
     padding: 40px 50px;
     background-color: #7eb9fcba;
     border-radius: 30px;
+    position: relative;
 }
 
 .info ul {
@@ -122,7 +122,19 @@ nav button {
     font-size: larger;
 }
 
+.btn_remove{
 
+        position: absolute;
+        top: 10px; 
+        right: 10px; 
+        border-radius: 20px;
+        background-color: rgb(245, 50, 50);
+        border: none;
+        color: aliceblue;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: bold;
+    }
 
 .nav_bar {
     margin: 35px;
@@ -178,50 +190,20 @@ nav button {
 .about-me-section {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     align-items: start;
     padding: 10px 50px;
 }
 
-.about-me-section textarea {
-    width: 550px;
-    height: 100px;
-    padding: 10px;
-    border-radius: 30px;
-}
 
 .about-me-section button {
     border: none;
-    background-color: #2882bb;
+    background-color: #6B6BC3;
     padding: 0 45px;
-    color: #e0f3ff;
+    color: #fff;
     border-radius: 30px;
     margin-bottom: 10px;
 }
-.left input{
-
-        width: 100%;
-        max-width: 300px;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 40px;
-        background: linear-gradient(to right, #99d5ff, #5b97bd);
-        color: white;
-        font-size: 16px;
-        outline: none;
-        box-shadow: 0 4px 6px rgba(255, 245, 245, 0.1);
-        transition: all 0.2s ease;
-    }
-.left input::placeholder{
-    color:#001624 ;
-}
-    
-.left input:focus {
-        background: linear-gradient(to right, #5b97bd, #99d5ff);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: scale(1.05);
-        
-    }
-
 
 .achievements_section{
     display: flex;
@@ -236,7 +218,7 @@ nav button {
     width: 550px;
     height: 50px;
     border-radius: 30px;
-    border: 1px solid #767676;
+    /* border: 1px solid #767676; */
 }
 
 .trophies p {
@@ -286,64 +268,10 @@ nav button {
     border-radius: 5px;
 }
 
-
-/* ! User friend list Information Section ! */
-
-.friend_details_container .left{
-    display: flex;
-    width: 40%;
-    margin-left: 45px;
-
-    height: fit-content;
-}
-
-.title_section_about_me {
-    font-size: larger;
-    font-weight: bolder;
-    margin-left: 20px;
-}
-
-.friend_details_container .left .friend_section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 30px;
-}
-
-.friend_section p {
-    margin-bottom: 0;
-}
-
-.images {
-    display: flex;
-    gap: 20px;
-}
-
-.images img {
-    background-color: #ffffff;
-    padding: 3px;
-    width: 35px;
-    border-radius: 100%;
-}
-
-
-/* ! Animation ! */
-
-.left {
-    transition: 1s ease-in-out;
-}
-
-.main.active .user_details_container .left {
-    transform: scale(1) translate(2300px, -500px);
-}
-.main .friend_details_container .left {
-    position: absolute;
-    top: 540px;
-    transform: scale(0) translate(200px, -500px);
-}
-
-.main.active .friend_details_container .left {
-    transform: scale(1) ;
+.about-me-section .bio{
+    height: 100px;
+    width: 550px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 40px;
 }

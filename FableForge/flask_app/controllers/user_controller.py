@@ -69,6 +69,13 @@ def edit_user() :
     return redirect('/edit/form')
 
 
-@app.route('/friends/suggestions')
-def friends_suggestions_page() :
-    all_users=User.not_friends_users() :
+@app.route('/update/bio',methods=['POST'])
+def update_bio():
+    data = {
+        'user_id': session['user_id'],
+        'about_me' : request.form['about_me']
+        } 
+    
+    User.update_bio(data)
+    return redirect('/profile/friends')
+
