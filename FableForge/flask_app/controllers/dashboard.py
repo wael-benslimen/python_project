@@ -43,7 +43,7 @@ def create_quest():
         return redirect('/dashboard')
     return redirect('/dashboard')
 
-@app.route('/cancel/<int:id>', methods=['POST'])
+@app.route('/cancle/<int:id>', methods=['POST'])
 def delete_quest(id):
     global quest_deleted_count
     Task.delete({'id': id})

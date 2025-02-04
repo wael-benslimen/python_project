@@ -27,8 +27,8 @@
     <nav>
         <ul>
             <li><a href="/dashboard">HOME</a></li>
-            <li><a href="/profile">PROFILE</a></li>
-            <li><a href="/search">ADD FRIEND</a></li>
+            <li><a href="/profile/friends">PROFILE</a></li>
+            <li><a href="/friends/suggestions">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
             <img src="../static/icons/Gear.png" alt="settings" class="image">
@@ -194,30 +194,6 @@
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
     </div>
-    <div {% if user.char_lvl==20 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
-        <h5 class="text-center">pick your armor</h5>
-        <form action="/lvl_up" method="post" class="d-flex flex-column">
-
-            <div class="d-flex w-100 justify-content-between">
-                <div>
-                    <input type="radio" name="equipment" value="sword">
-                    <img src="../static/equipment_img/wepon_img/sword.png" alt="sword" class="equipments_icon"
-                        width="50px">
-                </div>
-                <div for="">
-                    <input type="radio" name="equipment" value="kunai">
-                    <img src="../static/equipment_img/wepon_img/kunai.png" alt="kunai" class="equipments_icon"
-                        width="50px">
-                </div>
-                <div for="">
-                    <input type="radio" name="equipment" value="bomb">
-                    <img src="../static/equipment_img/wepon_img/bomb.png" alt="bomb" class="equipments_icon"
-                        width="50px">
-                </div>
-            </div>
-            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
-        </form>
-    </div>
     <div {% if user.char_lvl==30 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
         <h5 class="text-center">pick your accessory</h5>
         <form action="/lvl_up" method="post" class="d-flex flex-column">
@@ -271,4 +247,5 @@
 </body>
 <script src="../static/js/nav-bar.js"></script>
 </body>
+
 </html>

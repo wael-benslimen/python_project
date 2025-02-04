@@ -142,6 +142,24 @@ class User:
         query = 'UPDATE users SET inv_items = %(inv_items)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
+    @classmethod
+    def not_friends_users(cls, logged_in_user_id):
+        query = """
+        SELECT users.* 
+        FROM users
+        LEFT JOIN friends AS friendships_1 ON users.id = friendships_1.friend_id AND friendships_1.user_id = %(logged_in_user_id)s
+        LEFT JOIN friends AS friendships_2 ON users.id = friendships_2.user_id AND friendships_2.friend_id = %(logged_in_user_id)s
+        WHERE users.id != %(logged_in_user_id)s
+        AND (friendships_1.friend_id IS NULL AND friendships_2.user_id IS NULL);
+        """
+        data = {'logged_in_user_id': logged_in_user_id}
+        results = connectToMySQL(DB).query_db(query, data)
+        users_not_friends = []
+        for row in results:
+            user_not_friend = cls(row)
+            users_not_friends.append(user_not_friend)
+        return users_not_friends
+    
     @staticmethod
     def validate_user(data):
         is_valid = True
