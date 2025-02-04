@@ -6,6 +6,9 @@ from flask_app.models.friends import Friend
 from flask_app.models.messages import Message
 # import schedule
 import time
+quest_created_count = 0
+quest_deleted_count = 0
+quest_done_count = 0 
 
 @app.route('/dashboard')
 def dashboard():
@@ -35,6 +38,8 @@ def create_quest():
         }
         Task.create(data)
         quest_created_count += 1
+        print("*" * 100)
+        print(quest_created_count,quest_deleted_count,quest_done_count)
         return redirect('/dashboard')
     return redirect('/dashboard')
 
