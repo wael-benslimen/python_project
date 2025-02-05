@@ -163,15 +163,17 @@
                     <h6>chat</h6>
                     <ul id="messages" class="w-100 d-flex flex-column justify-content-end" style="gap: 5px;">
                         {% for message in latest_messages %}
-                            {% if message.user_id == user.id %}
-                                <li class="message d-flex justify-content-around align-self-end bg-info" style="max-width: 80%;">
-                                    <p style="width: 100%;margin: 0;"> {{message.message}}</p>
-                                </li>
-                            {% else %}
-                                <li class="message d-flex justify-content-around align-self-start bg-light" style="max-width: 80%;">
-                                    <p style="width: 100%;margin: 0;"> {{message.message}}</p>
-                                </li>
-                            {% endif %}
+                        {% if message.user_id == user.id %}
+                        <li class="message d-flex justify-content-around align-self-end bg-primary"
+                            style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% else %}
+                        <li class="message d-flex justify-content-around align-self-start bg-light"
+                            style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                     <div class="signal p-1"></div>
