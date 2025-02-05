@@ -9,12 +9,11 @@ class Message :
         self.created_at=data['created_at']
         self.updated_at=data['updated_at']
         self.user_id=data['user_id']
-        self.friend_id=data['friend_id']
         
         
     @classmethod
     def create(cls,data) :
-        query="INSERT INTO messages (message,user_id,friend_id) VALUES %(message)s,%(user_id)s,%(friend_id)s ;"
+        query="INSERT INTO messages (message,user_id) VALUES (%(message)s,%(user_id)s) ;"
         return connectToMySQL(DB).query_db(query,data)
     
     
@@ -26,4 +25,17 @@ class Message :
         for row in results :
             message=cls(row)
             all_messages.append(message)
-        return all_messages 
+        return all_messages
+    
+    
+    @classmethod
+    def get_latest(cls):
+        query="SELECT * FROM messages ORDER BY created_at DESC LIMIT 10;"
+        result=connectToMySQL(DB).query_db(query)
+        latest_messages=[]
+        for row in result :
+            print(row)
+            message=cls(row)
+            latest_messages.append(message)
+        print(latest_messages)
+        return latest_messages

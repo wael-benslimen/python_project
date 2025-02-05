@@ -27,26 +27,24 @@
     <nav>
         <ul>
             <li><a href="/dashboard">HOME</a></li>
-            <li><a href="/profile">PROFILE</a></li>
-            <li><a href="/search">ADD FRIEND</a></li>
+            <li><a href="/profile/friends">PROFILE</a></li>
+            <li><a href="/friends/suggestions">ADD FRIEND</a></li>
         </ul>
         <div class="dropdown">
             <img src="../static/icons/Gear.png" alt="settings" class="image">
-            <div class="dropdown_content">
-                <p><a href="/edit/form">Edit</a></p>
-                <p><a href="/offline">Rest from battle</a></p>
-                <form action="/logout" method="post">
-                    <button type="submit">Logout</button>
-                </form>
-            </div>
         </div>
     </nav>
-
+    <div class="dropdown_content">
+        <p><a href="/edit/form">Edit</a></p>
+        <p><a href="/offline">Rest from battle</a></p>
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
     <section class="container-fluid">
-
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
             <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
-                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image">
+                <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image" class="avatar">
                 <h3 class="text-center">{{ user.username }}</h3>
                 <h3 class="text-center">lvl {{user.char_lvl}}</h3>
             </div>
@@ -134,19 +132,22 @@
                 <div>
 
                     <div class="character d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments=="kunai" and user.char_lvl>= 10
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_10.png" {% elif
-                        user.equipments=="kunai" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_kunai_lvl_20.png" {% elif
-                        user.equipments=="bomb" and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_10.png" {% elif
-                        user.equipments=="bomb" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_bomb_lvl_20.png" {% elif
-                        user.equipments=="sword" and 20> user.char_lvl >= 10
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_10.png" {% elif
-                        user.equipments=="sword" and user.char_lvl >= 20
-                        %}src="../static/characters_img/{{user.type}}_with_sword_lvl_20.png" {% else
-                        %}src="../static/characters_img/{{user.type}}.png" {% endif %} alt="">
+                        <img {% if user.equipments=="kunai" and user.char_lvl>= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20.png"
+                        {% elif user.equipments == "kunai" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_10.png"
+                        {% elif user.equipments == "bomb" and user.char_lvl >= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20.png"
+                        {% elif user.equipments == "bomb" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_10.png"
+                        {% elif user.equipments == "sword" and user.char_lvl >= 20 %}
+                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_20.png"
+                        {% elif user.equipments == "sword" and user.char_lvl >= 10 %}
+                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_10.png"
+                        {% else %}
+                        src="../static/characters_img/{{ user.type }}.png"
+                        {% endif %}
+                        alt="">
                         <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
                         <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                     </div>
@@ -158,13 +159,28 @@
                         <img src="" alt="" class="no_border">
                     </div>
                 </div>
-                <div class="chats d-flex flex-column justify-content-between align-items-center">
-                    <h6>friend name</h6>
+                <div class="chats d-flex flex-column justify-content-between">
+                    <h6>chat</h6>
+                    <ul id="messages" class="w-100 overflow-auto d-flex flex-column justify-content-end" style="gap: 5px;">
+                        {% for message in latest_messages %}
+                        {% if message.user_id == user.id %}
+                        <li class="message d-flex justify-content-around align-self-end bg-info p-1" style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% else %}
+                        <li class="message d-flex justify-content-around align-self-start bg-light p-1" style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <div class="signal"></div>
                     <div class="message d-flex justify-content-around align-items-center p-1">
-                        <form action="">
-                            <input type="text" class="form-control bg-transparent" placeholder="send message">
+                        <form id="chat-form" action="" class="d-flex justify-content-between align-items-center w-100">
+                            <input type="text" id="message-input" name="message" class="form-control bg-transparent"
+                                placeholder="send message">
+                            <button class="btn"><img src="../static/icons/plus.png" alt="" width="25px"></button>
                         </form>
-                        <img src="../static/icons/plus.png" alt="" width="25px">
                     </div>
                 </div>
             </div>
@@ -194,30 +210,6 @@
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
     </div>
-    <div {% if user.char_lvl==20 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
-        <h5 class="text-center">pick your armor</h5>
-        <form action="/lvl_up" method="post" class="d-flex flex-column">
-
-            <div class="d-flex w-100 justify-content-between">
-                <div>
-                    <input type="radio" name="equipment" value="sword">
-                    <img src="../static/equipment_img/wepon_img/sword.png" alt="sword" class="equipments_icon"
-                        width="50px">
-                </div>
-                <div for="">
-                    <input type="radio" name="equipment" value="kunai">
-                    <img src="../static/equipment_img/wepon_img/kunai.png" alt="kunai" class="equipments_icon"
-                        width="50px">
-                </div>
-                <div for="">
-                    <input type="radio" name="equipment" value="bomb">
-                    <img src="../static/equipment_img/wepon_img/bomb.png" alt="bomb" class="equipments_icon"
-                        width="50px">
-                </div>
-            </div>
-            <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
-        </form>
-    </div>
     <div {% if user.char_lvl==30 and user.exp==100 %} class="show_equipments" {% else %} class="equipments" {% endif %}>
         <h5 class="text-center">pick your accessory</h5>
         <form action="/lvl_up" method="post" class="d-flex flex-column">
@@ -265,10 +257,142 @@
             </div>
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
+        <section class="change-avatar hidden">
+            <form class="avatar-form" action="">
+                <h5>Change your avatar</h5>
+                <div>
+                    <input type="file" class="form-control avatar-input" id="">
+                    <img class="avatar-placeholder" src="{{user.image or '../static/placeholders/User_cicrle.png'}}"
+                        alt="">
+                </div>
+                <button type="button" class="btn btn-close bg-danger"><i class="fa-solid fa-xmark"></i></button>
+                <button type="submit" class="btn btn-primary submit-button" disabled>Save</button>
+            </form>
+        </section>
     </div>
     <script src="../static/js/dashboard_script.js"></script>
     <script src="../static/js/nav-bar.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:5000');
+        const chat_form = document.querySelector("form#chat-form")
+        const chat_message_input = chat_form["message"]
+        var chatMessages = document.querySelector('#messages');
+        const textInput = document.querySelector("input#message-input");
+        const sendButton = document.querySelector("button#send-button");
+        const changeAvatar = document.querySelector("section.change-avatar")
+        const closeButton = changeAvatar.querySelector("button.btn-close")
+        const avatar = document.querySelector("img.avatar")
+        const avatarPlaceholder = document.querySelector("img.avatar-placeholder")
+        const avatarInput = document.querySelector("input.avatar-input")
+        const avatarForm = document.querySelector("form.avatar-form");
+        const submitButton = document.querySelector("button.submit-button");
+        const signal = document.querySelector(".signal")
+        document.cookie = 'username={{user.username}}'
+        let newBlob = "";
+        closeButton.addEventListener("click", function () {
+            changeAvatar.classList.add("hidden")
+        })
+        avatar.addEventListener("click", function () {
+            changeAvatar.classList.remove("hidden")
+        })
+        function fileReader(file) {
+            return new Promise((resolve, reject) => {
+                if (!file.type.match('image.*')) {
+                    reject('Not an image!');
+                }
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    resolve(e.target.result);
+                }
+                reader.onerror = function (e) {
+                    reject(e);
+                }
+                reader.readAsDataURL(file);
+            })
+        }
+        avatarInput.addEventListener("change", async function () {
+            const avatarURL = await fileReader(avatarInput.files[0]);
+            if (avatarURL || typeof avatarURL === "string") {
+                avatarPlaceholder.src = avatarURL
+                newBlob = avatarURL
+                // var resize = new Croppie(avatarPlaceholder, {
+                //     viewport: { width: 100, height: 100,type:"circle" },
+                //     boundary: { width: 300, height: 300 },
+                //     showZoomer: true,
+                //     enableResize: true,
+                //     enableOrientation: true,
+                //     mouseWheelZoom: 'ctrl'
+                // });
+                // resize.result('base64').then(function(blob) {
+                //     console.log(blob);
+
+                // });
+                submitButton.disabled = false;
+            }
+        })
+        avatarForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            try {
+                const request = await fetch("/update-avatar", {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ avatar: newBlob })
+                })
+                if (!request.ok) {
+                    throw new Error(`HTTP error! status: ${request.status}`);
+                }
+                const data = await request.json();
+                avatarPlaceholder.src = data.avatar;
+                avatar.src = data.avatar;
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        document.body.classList.toggle("dark-theme", localStorage.getItem("theme") === "dark")
+        socket.on('connect', function () {
+            console.log('Connected to Socket.IO server');
+        });
+        socket.on('receive-message', function (msg) {
+            console.log('Received message:', msg);
+            if (msg.username == '{{ user.username }}') {
+                chatMessages.innerHTML += `<li class="message d-flex justify-content-around align-self-end bg-info p-1"><p>${msg.username}: ${msg.message}</p></li>`;
+            } else {
+                chatMessages.innerHTML += `<li class="message d-flex justify-content-around align-items-start bg-light p-1"><p>${msg.username}: ${msg.message}</p></li>`;
+            }
+        });
+        socket.on("typing", function (msg) {
+            console.log("User is typing...");
+            signal.innerHTML = `<div class="message d-flex justify-content-around align-items-center p-1"><p><i>${msg.username} is typing...</i></p></div>`;
+            setTimeout(() => {
+                signal.innerHTML = "";
+            }, 2000);
+        })
+        textInput.addEventListener('input', function () {
+            var message = chat_message_input.value;
+            if (textInput.value.length == 0) {
+                sendButton.disabled = true;
+            } else {
+                socket.emit('typing', { message, username: '{{ user.username }}' });
+            }
+        });
+        chat_form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            var message = chat_message_input.value;
+            if (message.length > 0) {
+                socket.emit('send-message', { message, username: '{{ user.username }}', user_id: '{{ session["user_id"] }}' });
+                message = '';
+            }
+        });
+        closeButton.addEventListener("click", function () {
+            section.classList.add("hidden")
+        })
+        changeAvatar.addEventListener("click", function () {
+            section.classList.remove("hidden")
+        })
+    </script>
 </body>
-<script src="../static/js/nav-bar.js"></script>
-</body>
+
 </html>
