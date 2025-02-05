@@ -2,9 +2,13 @@ from flask_app.config.mySQLConnection import connectToMySQL
 from flask import flash
 from flask_app import DB
 import re
+# import schedule
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
+        
+    
+    
     def __init__(self, data):
         self.id = data['id']
         self.username = data['username']
@@ -176,3 +180,6 @@ class User:
             is_valid = False
             flash("Passwords must match", "confirm-password")
         return is_valid
+    
+            
+    

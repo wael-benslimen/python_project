@@ -6,9 +6,7 @@ from flask_app.models.friends import Friend
 from flask_app.models.messages import Message
 # import schedule
 import time
-quest_created_count = 0
-quest_deleted_count = 0
-quest_done_count = 0 
+
 
 @app.route('/dashboard')
 def dashboard():
@@ -17,13 +15,16 @@ def dashboard():
     user = User.get_one_id({'id': session['user_id']})
     all_quests = Task.get_user_tasks({'user_id': session['user_id']})
     if user:
+        latest_messages = Message.get_latest()
+        print("*"*100)
+        print(latest_messages)
         if user.adminstration == "adminstration":
             latest_users = User.get_latest_users_count()
             active_users = User.get_active_users()
             users_count = User.get_users_count()
-            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count)
+            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_users=latest_users,active_users=active_users,users_count=users_count,latest_messages=latest_messages)
         else:
-            return render_template('dashboard.html', user=user, all_quests=all_quests)
+            return render_template('dashboard.html', user=user, all_quests=all_quests,latest_messages=latest_messages)
     else:
         flash("Invalid user_id", "error")
         return redirect('/register')
@@ -36,6 +37,7 @@ def create_quest():
             **request.form,
             'user_id': session['user_id']
         }
+        print(session)
         Task.create(data)
         quest_created_count += 1
         print("*" * 100)
@@ -75,17 +77,7 @@ def lvl_up():
     Task.lvl_plus({'id': session['user_id']})
     return redirect('/dashboard')
 
-# schedule.every().day.at("12:00").do(User.depleat_HP)
 
-@app.route('/depleate_hp', methods=['POST'])
-def depleate_hp():
-    global quest_created_count, quest_deleted_count, quest_done_count
-    if (quest_created_count - quest_deleted_count) > quest_done_count:
-        data = {
-            'id': session['user_id']
-        }
-        User.depleate_hp(data)
-    return redirect('/dashboard')
 
 
 @app.route('/inv_items', methods=['POST'])
@@ -111,3 +103,6 @@ def inv_item():
     print(user.inv_items)
     User.update_inv({'id': session['user_id'], 'inv_items': user.inv_items})
     return redirect('/dashboard')
+
+
+

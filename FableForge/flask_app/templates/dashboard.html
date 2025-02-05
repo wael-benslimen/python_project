@@ -159,11 +159,22 @@
                         <img src="" alt="" class="no_border">
                     </div>
                 </div>
-                <div class="chats d-flex flex-column justify-content-between align-items-center">
-                    <h6>friend name</h6>
-                    <div class="signal"></div>
-                    <ul id="messages">
+                <div class="chats d-flex flex-column justify-content-between">
+                    <h6>chat</h6>
+                    <ul id="messages" class="w-100 overflow-auto d-flex flex-column justify-content-end" style="gap: 5px;">
+                        {% for message in latest_messages %}
+                        {% if message.user_id == user.id %}
+                        <li class="message d-flex justify-content-around align-self-end bg-info p-1" style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% else %}
+                        <li class="message d-flex justify-content-around align-self-start bg-light p-1" style="max-width: 80%;">
+                            <p style="width: 100%;margin: 0;"> {{message.message}}</p>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
                     </ul>
+                    <div class="signal"></div>
                     <div class="message d-flex justify-content-around align-items-center p-1">
                         <form id="chat-form" action="" class="d-flex justify-content-between align-items-center w-100">
                             <input type="text" id="message-input" name="message" class="form-control bg-transparent"
@@ -371,7 +382,7 @@
             event.preventDefault();
             var message = chat_message_input.value;
             if (message.length > 0) {
-                socket.emit('send-message', { message, username: '{{ user.username }}' });
+                socket.emit('send-message', { message, username: '{{ user.username }}', user_id: '{{ session["user_id"] }}' });
                 message = '';
             }
         });
