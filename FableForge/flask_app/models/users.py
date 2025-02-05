@@ -28,6 +28,7 @@ class User:
         self.updated_at = data['updated_at']
         self.is_active = data.get('is_active', 0)
         self.inv_items = data.get('inv_items', 'applehprevivebean')
+        self.views = data.get('views', 0)
     @classmethod    
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
@@ -163,6 +164,31 @@ class User:
             user_not_friend = cls(row)
             users_not_friends.append(user_not_friend)
         return users_not_friends
+    
+    
+    
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "is_active": self.is_active,
+            "adminstration": self.adminstration,
+            "char_lvl": self.char_lvl,
+            "location": self.location,
+            "about_me": self.about_me,
+            "interests": self.interests,
+            "exp": self.exp,
+            "HP": self.HP,
+            "type": self.type,
+            "equipments": self.equipments,
+            "image": self.image,
+            "views": self.views or 0,
+        }
+    
     
     @staticmethod
     def validate_user(data):

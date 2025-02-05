@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: url(../themes/light\ mode\ back\ ground.png);
+    /* background-image: url(../themes/light\ mode\ back\ ground.png); */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -172,14 +172,13 @@ nav button {
 .about-me-section p, .achievements_section p {
     font-size: larger;
     font-weight: bolder;
-    margin-left: 20px;
 }
 
 .about-me-section {
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 10px 50px;
+    padding: 5px 10px;
 }
 
 .about-me-section textarea {
@@ -253,7 +252,7 @@ nav button {
     gap: 20px;
     vertical-align: top;
     background-color: hsla(212, 95%, 74%, 0.729);
-    padding: 110px 20px;
+    padding: 10px;
     border-radius: 30px;
     width: 35%;
 }

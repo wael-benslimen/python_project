@@ -31,7 +31,6 @@ def dashboard():
 
 @app.route('/create_quest', methods=['POST'])
 def create_quest():
-    global quest_created_count
     if Task.validate_task(request.form):
         data = {
             **request.form,
@@ -39,7 +38,6 @@ def create_quest():
         }
         print(session)
         Task.create(data)
-        quest_created_count += 1
         print("*" * 100)
         print(quest_created_count,quest_deleted_count,quest_done_count)
         return redirect('/dashboard')
@@ -47,16 +45,12 @@ def create_quest():
 
 @app.route('/cancle/<int:id>', methods=['POST'])
 def delete_quest(id):
-    global quest_deleted_count
     Task.delete({'id': id})
-    quest_deleted_count += 1
     return redirect('/dashboard')
 
 @app.route('/finished/<int:id>', methods=['POST'])
 def finished_quest(id):
     user = User.get_one_id({'id': session['user_id']})
-    global quest_done_count
-    quest_done_count += 1
     if user.exp < 100:
         Task.lvl_up({'id': session['user_id']})
         Task.delete({'id': id})
