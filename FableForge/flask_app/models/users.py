@@ -1,6 +1,7 @@
 from flask_app.config.mySQLConnection import connectToMySQL
 from flask import flash
 from flask_app import DB
+import math
 import re
 # import schedule
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -66,13 +67,14 @@ class User:
     def get_latest_users_count(cls):
         query = "SELECT COUNT(*) FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY);"
         result = connectToMySQL(DB).query_db(query)
-        return result[0]
+        return result[0]["COUNT(*)"]
     
     @classmethod
     def get_active_users(cls):
         query = "SELECT COUNT(*) FROM users WHERE adminstration = 'user' AND is_active = 1;"
         result = connectToMySQL(DB).query_db(query)
-        return result[0]
+        print(result)
+        return result[0]["COUNT(*)"]
     
     @classmethod
     def select_char(cls, data):
@@ -88,7 +90,8 @@ class User:
     def get_users_count(cls):
         query = "SELECT COUNT(*) FROM users;"
         result = connectToMySQL(DB).query_db(query)
-        return result[0]
+        print(result[0]["COUNT(*)"])
+        return result[0]["COUNT(*)"]
     
     @classmethod
     def get_by_email(cls, data):
@@ -244,3 +247,34 @@ class User:
     def update_avatar(cls,data):
         query = 'UPDATE users SET image = %(image)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
+    @classmethod
+    def get_latest_users(cls,data:dict):
+        query = "SELECT * FROM users WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY) AND users.adminstration = 'user' ORDER BY created_at DESC LIMIT %(limit)s OFFSET %(offset)s;"
+        result = connectToMySQL(DB).query_db(query,data)
+        latest_users = [
+            cls({**row, "created_at": row["created_at"].strftime("%Y-%m-%d")}) 
+            for row in result
+        ]
+        return latest_users
+    @classmethod
+    def get_latest_users_by_amount(cls,data):
+        query = "SELECT * FROM users WHERE users.adminstration = 'user' ORDER BY created_at DESC LIMIT %(limit)s OFFSET %(offset)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        all_users = []
+        for row in result:
+            all_users.append(cls(row))
+        return all_users
+    @classmethod
+    def get_users_grouped_by_month(cls):
+        query = "SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) as count FROM users WHERE users.adminstration = 'user' GROUP BY month ORDER BY month DESC;"
+        result = connectToMySQL(DB).query_db(query)
+        return result
+    @classmethod
+    def get_latest_users_count_compared(cls) -> int:
+        query = """SELECT COUNT(*) 
+        FROM users 
+        WHERE users.adminstration = 'user' 
+        AND created_at BETWEEN DATE_SUB(NOW(), INTERVAL 14 DAY) AND DATE_SUB(NOW(), INTERVAL 7 DAY);"""
+        result = connectToMySQL(DB).query_db(query)
+        print(result[0]['COUNT(*)'])
+        return result[0]['COUNT(*)']

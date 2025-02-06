@@ -1,4 +1,4 @@
-from flask import render_template, session, redirect, request, flash
+from flask import render_template, session, redirect, request, flash,jsonify
 from flask_app import app
 from flask_app.models.users import User
 from flask_app.models.tasks import Task
@@ -7,6 +7,8 @@ from flask_app.models.messages import Message
 import schedule
 import time
 import threading
+import math
+
 
 @app.route('/dashboard')
 def dashboard():
@@ -28,7 +30,54 @@ def dashboard():
     else:
         flash("Invalid user_id", "error")
         return redirect('/register')
+@app.route("/users/<int:p>")
+def get_users(p):
+    users:list[User] = User.get_users_by_amount({"limit": 10, "offset": p})
+    return jsonify({"users": [user.to_dict() for user in users],"page":p}), 200
 
+@app.route("/latest-users/<int:p>")
+def get_latest_users(p):
+    users:list[User] = User.get_latest_users({"limit": 10, "offset": p})
+    return jsonify({"users": [user.to_dict() for user in users],"page":p}), 200
+@app.route('/admin_dashboard')
+def admin_dashboard() :
+    if 'user_id' in session:
+        user = User.get_one_id({'id': session['user_id']})
+        all_quests = Task.get_user_tasks({'user_id': session['user_id']})
+        if user:
+            if user.adminstration == "adminstration":
+                latest_users_count:int = User.get_latest_users_count()
+                active_users:int = User.get_active_users()
+                latest_users = [u.to_dict() for u in User.get_latest_users({"limit": 10, "offset": 0}) if isinstance(u, User)]
+                users_count:int = User.get_users_count()
+                users:list[User] = [u.to_dict() for u in User.get_users_by_amount({"limit":10, "offset":0}) if isinstance(u, User)]
+                users_pages_count:int = math.ceil(User.get_users_count()/10)
+                latest_users_pages_count:int = math.ceil(latest_users_count/10)
+                users_grouped_by_month = User.get_users_grouped_by_month()
+                progress = User.get_latest_users_count() - User.get_latest_users_count_compared()
+                return render_template(
+                    'admin_dashboard.html', 
+                    user=user, 
+                    all_quests=all_quests,
+                    latest_users_count=latest_users_count,
+                    latest_users=latest_users,
+                    active_users=active_users,
+                    users_count=users_count,
+                    users=users,
+                    pages_count=users_pages_count,
+                    latest_users_pages_count=latest_users_pages_count,
+                    users_grouped_by_month=users_grouped_by_month,
+                    page=1,
+                    progress=progress/len(users)
+                )
+            else:
+                return redirect("/dashboard")
+        else:
+            flash("Invalid user_id", "error")
+            return redirect('/register')
+    else:
+        flash("Invalid user_id", "error")
+        return redirect('/register')
 @app.route('/create_quest', methods=['POST'])
 def create_quest():
     if Task.validate_task(request.form):

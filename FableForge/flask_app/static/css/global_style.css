@@ -1,0 +1,60 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: .5s;
+}
+body{
+    overflow-x: hidden;
+    font-family: 'Press Start 2P', cursive;
+}
+body:not(.dark-theme) *:not(button){
+    color: rgb(0, 0, 0);
+}
+body.dark-theme{
+    background-color: rgba(33, 33, 33, 0.75);
+    backdrop-filter: blur(10px);
+}
+body.dark-theme *{
+    color: #ffffff;
+}
+body table * {
+    color: #000000;
+}
+body.dark-theme table *:not(button) {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-theme .glassmorphism {
+    background: rgba(33, 33, 33, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.table {
+    margin-top: 20px;
+}
+.badge {
+    font-size: 0.9rem;
+}
+.toggle-menu {
+    background: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.toggle-menu:hover {
+    background: #0056b3;
+}

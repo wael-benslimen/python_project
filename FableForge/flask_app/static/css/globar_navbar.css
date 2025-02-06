@@ -1,0 +1,10 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+header{
+    background-color: rgba(21, 21, 21, 0.75);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}

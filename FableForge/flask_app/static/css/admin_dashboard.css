@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+    transition:.5s all ease-in-out;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+aside{
+    width: 200px;
+    padding: 100px 10px;
+    z-index: 10;
+    backdrop-filter: blur(20px);
+    transition:.5s transform ease-in-out;
+    background-color: rgba(149, 149, 149, 0.75);
+    backdrop-filter: blur(10px);
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+aside ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0;
+    gap: 10px;
+    width: 100%;
+}
+aside :where(ul > li > a ,ul > li){
+    width: 100%;
+    padding: 2.5px 5px;
+}
+aside ul li:hover{
+    background-color: #333;
+    color: white;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+aside.fade-out{
+    transform: translateX(-200px);
+}
+aside:not(.fade-out){
+    transform: translateX(0);
+}
+aside button{
+    position: absolute;
+    top: 100px;
+    right: -10px;
+}
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: clamp(300px,40%,450px);
+}
+.user-card{
+    width: clamp(300px,33%,350px);
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+.user-card-image{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-card-content{
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+}
+.user-card-name{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.ser-card-email{
+    font-size: 1rem;
+    color: #666;
+}
+.user-card-action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

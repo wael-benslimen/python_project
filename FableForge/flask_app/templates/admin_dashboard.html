@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollSmoother.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="../static/css/admin_dashboard.css">
+    <link rel="stylesheet" href="../static/css/globar_navbar.css">
+    <link rel="stylesheet" href="../static/css/global_style.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    {% include 'partials/navbar.html' %}
+    <main class="container mt-5 pt-5 shadow glassmorphism gap-2">
+        <section class="w-100">
+            <div class="row bg-transparent g-3">
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm">
+                        <h2 class="h5">Total Users</h2>
+                        <p class="h3">{{users_count}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm">
+                        <h2 class="h5">Active Users</h2>
+                        <p class="h3">{{active_users}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm position-relative">
+                        <h2 class="h5">New Users</h2>
+                        <p class="h3">{{latest_users_count}}</p>
+                        <span class="badge position-absolute text-light {{'bg-success' if progress > 0 else 'bg-danger'}}" style="top: 10px;right: 10px;">{{'+' if progress > 0 else '-'}}{{progress*100}}%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <section class="row mt-4">
+            <div class="col-md-6">
+                <div class="d-flex flex-column gap-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Users added per month</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas class="w-100" id="chart-1"></canvas>
+                            {% block javascript %}
+                                <script>
+                                    const data = JSON.parse('{{ users_grouped_by_month | tojson }}');
+                                    console.log(data);
+
+                                    new Chart(document.getElementById("chart-1"), {
+                                        type: "line",
+                                        data: {
+                                            labels: data.map((item) => item.month),
+                                            datasets: [
+                                                {
+                                                    label: "Users per Month",
+                                                    data: data.map((item) => item.count),
+                                                    fill: false,
+                                                    borderColor: "rgb(75, 192, 192)",
+                                                    lineTension: 0.5,
+                                                },
+                                            ],
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            plugins: {
+                                                legend: {
+                                                    position: "top",
+                                                },
+                                                title: {
+                                                    display: false,
+                                                },
+                                            },
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true,
+                                                    ticks: {
+                                                        callback: function (value) {
+                                                            return parseInt(value);
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    });
+                                </script>
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-column gap-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Users</h3>
+                            <div class="w-100 d-flex justify-content-between align-items-center gap-1">
+                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                    <button class="btn btn-outline-primary text-primary numeric-users-sort">
+                                        <i class="fa-solid fa-arrow-down-9-1"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary text-primary alphanumeric-users-sort">
+                                        <i class="fa-solid fa-arrow-down-z-a"></i>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                    <input type="text" class="form-control">
+                                    <button class="btn btn-outline-primary text-primary search-users">
+                                        <ion-icon name="search-outline"></ion-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            {% block js %}
+                                <script>
+                                    const usersData = JSON.parse('{{ users | tojson }}');
+                                    const numberUsersSort = document.querySelector("button.numeric-users-sort")
+                                    const alphanumericUsersSort = document.querySelector("button.alphanumeric-users-sort")
+                                    const searchButton = document.querySelector("button.search-users")
+                                    numberUsersSort.addEventListener("click",function(){
+                                        usersData.sort((a, b) => a.id - b.id);
+                                        updateUsersTable(usersData);
+                                    })
+                                    
+                                    alphanumericUsersSort.addEventListener("click",function(){
+                                        usersData.sort((a, b) => a.username.localeCompare(b.username));
+                                        updateUsersTable(usersData);
+                                    })
+                                    
+                                    searchButton.addEventListener("click",function(){
+                                        const searchInput = document.querySelector("input.form-control").value
+                                        const filteredUsers = usersData.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()))
+                                        updateUsersTable();
+                                    })
+                                    function updateUsersTable(){
+                                        const usersBody = document.querySelector(".users-data tbody")
+                                        usersBody.innerHTML = ""
+                                        usersData.forEach(u => {
+                                            const row = document.createElement("tr")
+                                            row.innerHTML = `
+                                                <td>${u.id}</td>
+                                                <td>
+                                                    <img src="${u.image}" alt="${u.username}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                </td>
+                                                <td>${u.username}</td>
+                                                <td>${u.email}</td>
+                                                <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                                                <td>${u.created_at}</td>
+                                            `
+                                            usersBody.appendChild(row)
+                                        })
+                                    }
+                                </script>
+                            {% endblock %}
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped table-bordered users-data">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Avatar</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Registration Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%if users %}
+                                        {% for u in users %}
+                                            <tr>
+                                                <td>{{ u.id }}</td>
+                                                <td>
+                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                </td>
+                                                <td>{{ u.username }}</td>
+                                                <td>{{ u.email }}</td>
+                                                <td><span class="badge {{'bg-success' if u.is_active else 'bg-warning' }} text-light">{{"in battle" if u.is_active else "in relax"}}</span></td>
+                                                <td>{{ u.created_at }}</td>
+                                                <td>
+                                                    <button class="btn btn-info">
+                                                        <a href="{{'/user/'+(u.id|string)}}" target="_blank" class="link-info text-light">View</a>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    {% endif %}
+                                    {% if not users %}
+                                        <p>No users found.</p>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            {% if pages_count %}
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    {% for i in range(0, pages_count) %}
+                                        <button class="btn btn-primary search-latest {{'btn-primary' if i+1 == page else 'btn-secondary'}}">{{i+1}}</button>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>New Users</h3>
+                            <div class="w-100 d-flex justify-content-between align-items-center gap-1">
+                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                    <button class="btn btn-outline-primary text-primary">
+                                        <i class="fa-solid fa-arrow-down-9-1"></i>
+                                    </button>
+                                    <button class="btn btn-outline-primary text-primary">
+                                        <i class="fa-solid fa-arrow-down-z-a"></i>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center gap-1">
+                                    <input type="text" class="form-control">
+                                    <button class="btn btn-outline-primary text-primary">
+                                        <ion-icon name="search-outline"></ion-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% block js1 %}
+                                <script>
+                                    const latestUsers = JSON.parse('{{ latest_users | tojson }}');
+                                    const numberLatestSort = document.querySelector("button.numeric-users-sort")
+                                    const alphanumericLatestSort = document.querySelector("button.alphanumeric-users-sort")
+                                    const searchLatestUsers = document.querySelector("button.search-users")
+                                    
+                                    numberLatestSort.addEventListener("click",function(){
+                                        latestUsers.sort((a, b) => a.id - b.id);
+                                        updateLatestUsersTable(latestUsers);
+                                    })
+                                    
+                                    alphanumericLatestSort.addEventListener("click",function(){
+                                        latestUsers.sort((a, b) => a.username.localeCompare(b.username));
+                                        updateLatestUsersTable(latestUsers);
+                                    })
+                                    
+                                    searchLatestUsers.addEventListener("click",function(){
+                                        const searchInput = document.querySelector("input.form-control").value
+                                        const filteredLatestUsers = latestUsers.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()))
+                                        updateLatestUsersTable(filteredLatestUsers);
+                                    })
+                                    
+                                    function updateLatestUsersTable(){
+                                        const latestUsersBody = document.querySelector(".latest-users-data tbody")
+                                        latestUsersBody.innerHTML = ""
+                                        latestUsers.forEach(u => {
+                                            const row = document.createElement("tr")
+                                            row.innerHTML = `
+                                                <td>${u.id}</td>
+                                                <td>
+                                                    <img src="${u.image}" alt="${u.username}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                </td>
+                                                <td>${u.username}</td>
+                                                <td>${u.email}</td>
+                                                <td><span class="badge ${u.is_active?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                                                <td>${u.created_at}</td>
+                                            `
+                                            latestUsersBody.appendChild(row)
+                                        })
+                                    }
+                                </script>
+                            {% endblock %}
+                            <table class="table table-striped table-bordered latest-users-data">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Avatar</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Registration Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%if users %}
+                                        {% for u in latest_users %}
+                                            <tr>
+                                                <td>{{ u.id }}</td>
+                                                <td>
+                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                </td>
+                                                <td>{{ u.username }}</td>
+                                                <td>{{ u.email }}</td>
+                                                <td><span class="badge {{"bg-success" if u.is_active else "bg-warning"}} text-light">{{"in battle" if u.is_active else "in relax"}}</span></td>
+                                                <td>{{ u.created_at }}</td>
+                                                <td>
+                                                    <button class="btn btn-info">
+                                                        <a href="{{'/user/'+(u.id|string)}}" target="_blank" class="link-info text-light">View</a>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    {% endif %}
+                                    {% if not users %}
+                                        <p>No users found.</p>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            {% if latest_users_pages_count %}
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    {% for i in range(0, latest_users_pages_count) %}
+                                        <button class="btn btn-primary search-latest {{'btn-primary' if i+1 == page else 'btn-secondary'}}">{{i+1}}</button>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-100 d-flex flex-column justify-content-center align-items-center gap-1">
+            <div class="w-100 d-flex flex-row justify-content-center align-items-center gap-1">
+                <div class="form-group d-flex flex-row justify-content-center align-items-center gap-1">
+                    <input type="search" name="name" placeholder="name" id="name" class="form-control">
+                </div>
+                <div class="form-group d-flex flex-row justify-content-center align-items-center gap-1">
+                    <input type="email" name="email" placeholder="email" id="email" class="form-control">
+                </div>
+                <div class="form-group d-flex flex-row justify-content-center align-items-center gap-1">
+                <input type="date" name="created_at_from" placeholder="created_at_from" id="created_at_from" class="form-control">
+                </div>
+                <div class="form-group d-flex flex-row justify-content-center align-items-center gap-1">
+                    <input type="date" name="created_at_to" placeholder="created_at_to" id="created_at_to" class="form-control">
+                </div>
+                <button class="btn btn-primary search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2 flex-wrap users-container w-100">
+                
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+    const aside = document.querySelector("aside")
+    document.body.classList.toggle("dark-theme",localStorage.getItem("theme") === "dark")
+    const searchUsers = document.querySelectorAll("button.search-button")
+    const searchLatest = document.querySelectorAll("button.search-latest")
+    const usersBody = document.querySelector("table.users-data tbody")
+    const latestUsersBody = document.querySelector("table.latest-users-data tbody")
+    const usersContainer = document.querySelector("div.users-container")
+    const search_button = document.querySelector("button.search-button")
+    const inputs = {
+        name: document.querySelector("input[name='name']"),
+        email: document.querySelector("input[name='email']"),
+        created_at_from: document.querySelector("input[name='created_at_from']"),
+        created_at_to: document.querySelector("input[name='created_at_to']")
+    }
+    search_button.addEventListener("click",async function() {
+        try {
+            const request  = await fetch(`/users/search?name=${inputs.name.value}&email=${inputs.email.value}&created_at_from=${inputs.created_at_from.value}&created_at_to=${inputs.created_at_to.value}`)
+            const data = await request.json()
+            if(data.users && Array.isArray(data.users)){
+                console.log(data);
+                usersContainer.innerHTML = ""
+                data.users.forEach((user)=>{
+                    const userCard = document.createElement("div")
+                    userCard.classList.add("user-card")
+                    userCard.innerHTML = `
+                        <div class="user-card-image">
+                            <img src="${user.image}" alt="${user.username}" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="user-card-content">
+                            <h5 class="user-card-name">${user.username}</h5>
+                            <p class="user-card-email">${user.email}</p>
+                        </div>
+                        <div class="user-card-action">
+                            <button class="btn btn-info">
+                                <a href="${'/user/'+(user.id)}" target="_blank" class="link-info text-light">View</a>
+                            </button>
+                        </div>
+                        `
+                    usersContainer.appendChild(userCard)
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })
+    searchUsers.forEach(button => {
+        button.addEventListener("click",async function() {
+            const page = parseInt(button.textContent)
+            let users = await getData(`/users/${page}`)
+            if(Array.isArray(users)){
+                usersBody.innerHTML = ""
+                users.forEach(u => {
+                    const row = document.createElement("tr")
+                    row.innerHTML = `
+                        <td>${u.id}</td>
+                        <td>${u.username}</td>
+                        <td>${u.email}</td>
+                        <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                        <td>${u.created_at}</td>
+                    `
+                    usersBody.appendChild(row)
+                })
+            }
+        })
+    })
+    searchLatest.forEach(button => {
+        button.addEventListener("click",async function() {
+            const page = parseInt(button.textContent)
+            let latestUsers = await getData(`/latest-users/${page-1}`)
+            latestUsersBody.innerHTML = ""
+            if(Array.isArray(latestUsers.users)){
+                latestUsers.forEach(u => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${u.id}</td>
+                        <td>${u.username}</td>
+                        <td>${u.email}</td>
+                        <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                        <td>${u.created_at}</td>
+                    `
+                    tableBody.appendChild(row)
+                })
+            }
+        })
+    })
+    async function getData(url){
+        try{
+            const response = await fetch(url)
+            const data = await response.json()
+            return data
+        }catch(e){
+            console.log(e);
+        }
+    }
+</script>
+</html>
