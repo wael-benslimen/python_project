@@ -7,6 +7,7 @@
     overflow-x: hidden;
 }
 
+
 body {
     background-image: url('../themes/light\ mode\ back\ ground.png');
     background-size: cover;
@@ -395,8 +396,68 @@ section.change-avatar.hidden {
     display: none;
     transition: clip-path .5s ease-in-out;
 }
+<<<<<<< Updated upstream
 img.avatar{
     width: 50px;
     height: 50px;
     border-radius: 20%;
+=======
+
+section.change-avatar:not(.hidden) {
+    clip-path: circle(100% at 50% 50%);
+    transition: clip-path .5s ease-in-out;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .user_info, .hp, .inventory {
+        width: 100%;
+        border: none;
+    }
+
+    .hpbar {
+        width: 100%;
+    }
+
+    .chats, .quests, .character {
+        width: 100%;
+        height: auto;
+    }
+
+    .character {
+        margin-top: 20px;
+    }
+
+    .chats {
+        margin-top: 20px;
+    }
+
+    .quests {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hpbar {
+        width: 90%;
+    }
+
+    .chats, .quests, .character {
+        width: 100%;
+    }
+
+    .character img {
+        width: 80%;
+    }
+>>>>>>> Stashed changes
 }

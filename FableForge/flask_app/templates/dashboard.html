@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,16 +46,18 @@
     </div>
     <section class="container-fluid">
         <header class="nav d-flex justify-content-between flex-wrap mt-3 col-12">
-            <div class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap">
+            <div
+                class="nav-item user_info d-flex flex-column align-items-center justify-content-center flex-wrap col-12 col-md-2">
                 <img src="{{user.image or '../static/placeholders/User_cicrle.png'}}" alt="user_image" class="avatar">
                 <h3 class="text-center">{{ user.username }}</h3>
                 <h3 class="text-center">lvl {{user.char_lvl}}</h3>
             </div>
-            <div class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap">
+            <div
+                class="nav-item hp d-flex flex-column align-items-center justify-content-center flex-wrap col-12 col-md-8">
                 <h1>HP</h1>
                 <span class="hpbar"><span class="hpbar_filler" style="width: {{user.HP}}%;"></span></span>
             </div>
-            <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap">
+            <div class="nav-item inventory d-flex flex-column justify-content-center flex-wrap col-12 col-md-2">
                 <h3 class="align-self-center">inventory</h3>
                 <form action="/inv_items" method="post">
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
@@ -84,9 +87,9 @@
                 </form>
             </div>
         </header>
-        <main class="d-flex justify-content-around mt-5 col-12">
-            <div class="cards d-flex">
-                <div class="quests d-flex flex-column flex-wrap justify-content-between">
+        <main class="d-flex flex-column flex-md-row justify-content-around mt-5 col-12">
+            <div class="cards d-flex flex-column flex-md-row justify-content-between">
+                <div class="quests d-flex flex-column flex-wrap justify-content-between col-md-2">
                     <h5>Quests</h5>
                     <div class="quest_view p-3">
                         <ul class="d-flex flex-column justify-content-center gap">
@@ -131,45 +134,33 @@
                     <button class="plus_btn align-self-end" onclick="toggleClass()"><img src="../static/icons/plus.png"
                             alt="" width="50px"></button>
                 </div>
-                <div>
-
-                    <div class="character d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments=="kunai" and user.char_lvl> 30 %}
-                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20_and_{{user.pet}}.png"
-                        {% elif user.equipments == "kunai" and user.char_lvl >= 20 %}
-                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20.png"
-                        {% elif user.equipments == "kunai" and user.char_lvl >= 10 %}
-                        src="../static/characters_img/{{ user.type }}_with_kunai_lvl_10.png"
-                        {% elif user.equipments == "bomb" and user.char_lvl > 30 %}
-                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20_and_{{user.pet}}.png"
-                        {% elif user.equipments == "bomb" and user.char_lvl >= 20 %}
-                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20.png"
-                        {% elif user.equipments == "bomb" and user.char_lvl >= 10 %}
-                        src="../static/characters_img/{{ user.type }}_with_bomb_lvl_10.png"
-                        {% elif user.equipments == "sword" and user.char_lvl > 30 %}
-                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_20_and_{{ user.pet }}.png"
-                        {% elif user.equipments == "sword" and user.char_lvl >= 20 %}
-                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_20.png"
-                        {% elif user.equipments == "sword" and user.char_lvl >= 10 %}
-                        src="../static/characters_img/{{ user.type }}_with_sword_lvl_10.png"
-                        {% else %}
-                        src="../static/characters_img/{{ user.type }}.png"
-                        {% endif %}
-                        alt="">
-                        <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
-                        <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
-                    </div>
-                    <div class="char_equipments d-flex flex-column justify-content-center align-items-center">
-                        <img {% if user.equipments=="kunai" %} src="../static/equipment_img/wepon_img/kunai.png" {% elif
-                            user.equipments=="sword" %} src="../static/equipment_img/wepon_img/sword.png" {% elif
-                            user.equipments=='bomb' %} src='../static/equipment_img/wepon_img/bomb.png' {% endif %}
-                            alt="">
-                        <img {% if user.pet=="hourse" %} src="../static/equipment_img/pets_img/hourse.png" {% elif
-                            user.pet=="dog" %} src="../static/equipment_img/pets_img/dog.png" {% elif user.pet=='cat' %}
-                            src='../static/equipment_img/pets_img/cat.png' {% endif %} alt="">
-                    </div>
+                <div class="character d-flex flex-column justify-content-center align-items-center col-md-8">
+                    <img {% if user.equipments=="kunai" and user.char_lvl> 30 %}
+                    src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20_and_{{user.pet}}.png"
+                    {% elif user.equipments == "kunai" and user.char_lvl >= 20 %}
+                    src="../static/characters_img/{{ user.type }}_with_kunai_lvl_20.png"
+                    {% elif user.equipments == "kunai" and user.char_lvl >= 10 %}
+                    src="../static/characters_img/{{ user.type }}_with_kunai_lvl_10.png"
+                    {% elif user.equipments == "bomb" and user.char_lvl > 30 %}
+                    src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20_and_{{user.pet}}.png"
+                    {% elif user.equipments == "bomb" and user.char_lvl >= 20 %}
+                    src="../static/characters_img/{{ user.type }}_with_bomb_lvl_20.png"
+                    {% elif user.equipments == "bomb" and user.char_lvl >= 10 %}
+                    src="../static/characters_img/{{ user.type }}_with_bomb_lvl_10.png"
+                    {% elif user.equipments == "sword" and user.char_lvl > 30 %}
+                    src="../static/characters_img/{{ user.type }}_with_sword_lvl_20_and_{{ user.pet }}.png"
+                    {% elif user.equipments == "sword" and user.char_lvl >= 20 %}
+                    src="../static/characters_img/{{ user.type }}_with_sword_lvl_20.png"
+                    {% elif user.equipments == "sword" and user.char_lvl >= 10 %}
+                    src="../static/characters_img/{{ user.type }}_with_sword_lvl_10.png"
+                    {% else %}
+                    src="../static/characters_img/{{ user.type }}.png"
+                    {% endif %}
+                    alt="">
+                    <h3>EXP <br> {{user.exp}}% {{user.type}}</h3>
+                    <span class="exp"><span class="expfiller" style=" width: {{user.exp}}%;"></span></span>
                 </div>
-                <div class="chats d-flex flex-column justify-content-between">
+                <div class="chats d-flex flex-column justify-content-between col-12 col-md-2">
                     <h6>chat</h6>
                     <ul id="messages" class="w-100 d-flex flex-column justify-content-end" style="gap: 5px;">
                         {% for message in latest_messages %}
