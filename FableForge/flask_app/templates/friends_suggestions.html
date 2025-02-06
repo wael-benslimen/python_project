@@ -46,7 +46,7 @@
                 <div class="swiper-slide h-100">
                     <div class="card h-100">
                         <div class="card-body">
-                            <img src="{{ url_for('static', filename=not_friend.image if not_friend.image else 'icons/blank-profile-picture-973460_640.webp') }}"
+                            <img src="{{not_friend.image or '../static/placeholders/User_cicrle.png'}}"
                                 width="100px" height="100px">
                         </div>
                         <h3>{{not_friend.username}}</h3>

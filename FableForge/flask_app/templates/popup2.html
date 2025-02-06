@@ -9,33 +9,31 @@
     <title>FableForge</title>
 </head>
 <body>
-    <div class="container">
-        <div class="bground">
-            <h1>What types do you prefer</h1>
-            <div class="characters">
-                <form action="/select/interests" method="post">
-                    <div class="right">
-                    <label for="option1">
-                        <input type="radio" id="option1" name="interests" value="Sports"><p>Sports</p>
-                        <img src="../static/icons/ball.png" class="basketball" alt="basketball">
-                    </label>
-                    <label for="option2">
-                        <input type="radio" id="option2" name="interests" value="Reading"><p>Reading</p>
-                        <img src="../static/icons/books.png" class="books" alt="books">
-                    </label>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="container">
+            <div class="bground container">
+                <h1>What's your interests</h1>
+                <div class="characters">
+                    <form action="/select/interests" method="post">
+                        <div class="right">
+                            <div for="option1" class="d-flex">
+                                <input type="radio" id="option1" name="interests" value="Sports"><p>Sports</p>
+                            </div>
+                            <div for="option2" class="d-flex">
+                                <input type="radio" id="option2" name="interests" value="Reading"><p>Reading</p>
+                            </div>
+                        </div>
+                        <div class="left">
+                            <div for="option3" class="d-flex">
+                                <input type="radio" id="option3" name="interests" value="Gaming"><p>Gaming</p>
+                            </div>
+                            <div for="option4" class="d-flex">
+                                <input type="radio" id="option4" name="interests" value="Entertainment"><p>Entertainment</p>
+                            </div>
+                        </div>
+                        <button type="submit">Finish</button>
+                    </form>
                 </div>
-                <div class="left">
-                    <label for="option3">
-                        <input type="radio" id="option3" name="interests" value="Gaming"><p>Gaming</p>
-                        <img src="../static/icons/controller.png" class="controller" alt="controller">
-                    </label>
-                    <label for="option4">
-                        <input type="radio" id="option4" name="interests" value="Entertainment"><p>Entertainment</p>
-                        <img src="../static/icons/tv.png" class="tv" alt="tv">
-                    </label>
-                </div>
-                <button type="submit">Finish</button>
-                </form>
             </div>
         </div>
     </div>

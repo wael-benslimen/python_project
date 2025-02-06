@@ -49,10 +49,22 @@ def delete_quest(id):
 
 @app.route('/finished/<int:id>', methods=['POST'])
 def finished_quest(id):
-    user = User.get_one_id({'id': session['user_id']})    
-    if user.exp < 100:
-        Task.lvl_up({'id': session['user_id']})
-        Task.delete({'id': id})
+    user = User.get_one_id({'id': session['user_id']}) 
+    task = Task.select_id({"id":id})  
+    print('8'*100)
+    print(task['task_difficulty'])
+    if user.exp < 95:
+        if task["task_difficulty"] == 1:
+            Task.lvl_up_easy({'id': session['user_id']})
+            Task.delete({'id': id})
+        elif task["task_difficulty"] == 2:
+            Task.lvl_up_medium({'id': session['user_id']})
+            Task.delete({'id': id})
+        elif task["task_difficulty"] == 3:
+            Task.lvl_up_hard({'id': session['user_id']})
+            Task.delete({'id': id})
+
+            
     else:
         Task.reset_exp({'id': session['user_id']})
         Task.lvl_plus({'id': session['user_id']})

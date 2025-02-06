@@ -9,6 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <title>User Profile</title>
     <style>
+
+        body {
+            background-image: url(../static/themes/light\ mode\ back\ ground.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
         .navbar {
             margin-bottom: 20px;
         }
@@ -59,36 +65,12 @@
     </style>
 </head>
 <body>
-    <div class="container vh-100 d-flex flex-column justify-content-center">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/dashboard">User Profile</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" href="/dashboard">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/profile/friends">Profile</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/friends/suggestions">Add Friend</a></li>
-                    </ul>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="settingsMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-cog"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="settingsMenu">
-                            <li><a class="dropdown-item" href="/edit/form">Edit</a></li>
-                            <li><a class="dropdown-item" href="/offline">Rest from battle</a></li>
-                            <li><form action="/logout" method="post"><button type="submit" class="dropdown-item">Logout</button></form></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    {% include './partials/navbar.html' %}
+    <div class="container vh-100 d-flex flex-column justify-content-center mt-5">
 
-        <div class="row">
+        <div class="row bground">
             <div class="col-md-4 text-center">
-                <img src="../static/icons/user_icon.png" alt="user_icon" class="img-fluid border border-{{'success' if friend.is_active else 'danger'}}">
+                <img src="{{friend.image or '../static/placeholders/User_cicrle.png'}}" alt="user_icon" class="border border-{{'success' if friend.is_active else 'danger'}}" style="width: 200px; height: 200px; border-radius: 50%;">
                 <a href="/profile/friends" class="d-block mt-3"><i class="fas fa-arrow-left"></i> Back to Friends</a>
             </div>
 
@@ -120,7 +102,7 @@
                             src="../static/characters_img/{{ friend.type }}_with_sword_lvl_10.png"
                         {% else %}
                             src="../static/characters_img/{{ friend.type }}.png"
-                        {% endif %} alt="character image" class="img-fluid" width="150">
+                        {% endif %} alt="character image" width="150">
                     </div>
                 </div>
             </div>
@@ -149,13 +131,12 @@
                 {% else %}
                     <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 10px;">
                         <p class="text-muted">No quests available</p>
-                        <img src="../static/characters_img/not-found.jpg" alt="" style="width: clamp(300px,30%,450px);">
                     </div>
                 {% endif %}
             </div>
         </div>
 
-        <footer class="mt-auto py-3 bg-light text-center">
+        <footer class="mt-auto py-3 text-center">
             <p>&copy; 2025 User Profile. All rights reserved.</p>
         </footer>
     </div>

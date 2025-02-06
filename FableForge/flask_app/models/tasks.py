@@ -15,7 +15,7 @@ class Task:
     @classmethod
     def create(cls, data):
         query = """INSERT INTO tasks (task_name, task_description, task_difficulty, user_id) 
-                   VALUES (%(task_name)s, %(task_description)s, %(task_difficulty)s, %(user_id)s);"""
+                VALUES (%(task_name)s, %(task_description)s, %(task_difficulty)s, %(user_id)s);"""
         return connectToMySQL(DB).query_db(query, data)
 
     @classmethod
@@ -42,10 +42,23 @@ class Task:
             task = cls(row)
             all_tasks.append(task)
         return all_tasks
+    
+    @classmethod
+    def select_id(cls, data):
+        query = """select * from tasks where id = %(id)s"""
+        return connectToMySQL(DB).query_db(query,data)[0]
 
     @classmethod
-    def lvl_up(cls, data):
+    def lvl_up_easy(cls, data):
         query = "UPDATE users SET exp = exp + 5 WHERE id=%(id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    @classmethod
+    def lvl_up_medium(cls, data):
+        query = "UPDATE users SET exp = exp + 10 WHERE id=%(id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    @classmethod
+    def lvl_up_hard(cls, data):
+        query = "UPDATE users SET exp = exp + 15 WHERE id=%(id)s;"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod

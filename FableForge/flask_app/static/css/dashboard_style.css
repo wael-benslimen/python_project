@@ -327,12 +327,6 @@ section.change-avatar.hidden {
     display: none;
     transition: clip-path .5s ease-in-out;
 }
-<<<<<<< Updated upstream
-img.avatar{
-    width: 50px;
-    height: 50px;
-    border-radius: 20%;
-=======
 
 section.change-avatar:not(.hidden) {
     clip-path: circle(100% at 50% 50%);
@@ -390,5 +384,4 @@ section.change-avatar:not(.hidden) {
     .character img {
         width: 80%;
     }
->>>>>>> Stashed changes
 }
