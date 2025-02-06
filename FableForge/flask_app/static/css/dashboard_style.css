@@ -384,4 +384,27 @@ section.change-avatar:not(.hidden) {
     .character img {
         width: 80%;
     }
+<<<<<<< Updated upstream
+=======
+}
+
+svg.stroke-animation.animating path {
+    animation-name: animating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    stroke-dasharray: 200000;
+    stroke-dashoffset: 200000;
+    animation-delay: calc(var(--delay) * 0.25s);
+}
+
+@keyframes animating {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    
+    100% {
+        stroke-dashoffset: 200000;
+    }
+>>>>>>> Stashed changes
 }
