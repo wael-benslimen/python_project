@@ -39,7 +39,6 @@ def create_quest():
         print(session)
         Task.create(data)
         print("*" * 100)
-        print(quest_created_count,quest_deleted_count,quest_done_count)
         return redirect('/dashboard')
     return redirect('/dashboard')
 
@@ -50,11 +49,7 @@ def delete_quest(id):
 
 @app.route('/finished/<int:id>', methods=['POST'])
 def finished_quest(id):
-<<<<<<< Updated upstream
-    user = User.get_one_id({'id': session['user_id']})
-=======
     user = User.get_one_id({'id': session['user_id']})    
->>>>>>> Stashed changes
     if user.exp < 100:
         Task.lvl_up({'id': session['user_id']})
         Task.delete({'id': id})
@@ -102,5 +97,12 @@ def inv_item():
     User.update_inv({'id': session['user_id'], 'inv_items': user.inv_items})
     return redirect('/dashboard')
 
-
+@app.route('/max_lvl', methods=['POST'])
+def max_lvl():
+    data = {
+        'id': session['user_id']
+    }
+    Task.reset_exp(data)
+    Task.lvl_plus(data)
+    return redirect('/dashboard')
 

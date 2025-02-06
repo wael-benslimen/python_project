@@ -29,6 +29,7 @@ class User:
         self.is_active = data.get('is_active', 0)
         self.inv_items = data.get('inv_items', 'applehprevivebean')
         self.views = data.get('views', 0)
+        self.pet = data.get('pet', 'none')
     @classmethod    
     def register(cls, data):
         query = "INSERT INTO users(username, email, password) VALUES (%(username)s, %(email)s, %(password)s);"
@@ -174,7 +175,10 @@ class User:
             users_not_friends.append(user_not_friend)
         return users_not_friends
     
-    
+    @classmethod
+    def add_pet(cls, data):
+        query = 'UPDATE users SET pet = %(pet)s WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
     
     
     def to_dict(self):
