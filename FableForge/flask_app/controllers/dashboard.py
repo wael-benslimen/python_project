@@ -50,7 +50,11 @@ def delete_quest(id):
 
 @app.route('/finished/<int:id>', methods=['POST'])
 def finished_quest(id):
+<<<<<<< Updated upstream
     user = User.get_one_id({'id': session['user_id']})
+=======
+    user = User.get_one_id({'id': session['user_id']})    
+>>>>>>> Stashed changes
     if user.exp < 100:
         Task.lvl_up({'id': session['user_id']})
         Task.delete({'id': id})
