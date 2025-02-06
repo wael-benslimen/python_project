@@ -157,12 +157,12 @@
                     <ul id="messages" class="w-100 d-flex flex-column justify-content-end" style="gap: 5px;">
                         {% for message in latest_messages %}
                         {% if message.user_id == user.id %}
-                        <li class="message d-flex justify-content-around align-self-end bg-primary"
+                        <li class="message d-flex justify-content-around align-self-end bg-primary p-1"
                             style="max-width: 80%;">
                             <p style="width: 100%;margin: 0;"> {{message.message}}</p>
                         </li>
                         {% else %}
-                        <li class="message d-flex justify-content-around align-self-start bg-light"
+                        <li class="message d-flex justify-content-around align-self-start bg-light p-1"
                             style="max-width: 80%;">
                             <p style="width: 100%;margin: 0;"> {{message.message}}</p>
                         </li>

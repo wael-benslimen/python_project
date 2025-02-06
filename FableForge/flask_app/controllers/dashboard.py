@@ -95,7 +95,7 @@ def inv_item():
         Task.lvl_plus(data)
         user.inv_items = user.inv_items.replace('apple', '')
     if request.form['item'] == 'bean':
-        Task.lvl_up(data)
+        Task.lvl_up_hard(data)
         user.inv_items = user.inv_items.replace('bean', '')
     if request.form['item'] == 'revive':
         User.max_HP(data)
