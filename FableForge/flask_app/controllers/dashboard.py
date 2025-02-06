@@ -4,9 +4,9 @@ from flask_app.models.users import User
 from flask_app.models.tasks import Task
 from flask_app.models.friends import Friend
 from flask_app.models.messages import Message
-# import schedule
+import schedule
 import time
-
+import threading
 
 @app.route('/dashboard')
 def dashboard():
@@ -82,9 +82,6 @@ def lvl_up():
     Task.lvl_plus({'id': session['user_id']})
     return redirect('/dashboard')
 
-
-
-
 @app.route('/inv_items', methods=['POST'])
 def inv_item():
     user = User.get_one_id({'id': session['user_id']})
@@ -122,3 +119,34 @@ def max_lvl():
     Task.lvl_plus(data)
     return redirect('/dashboard')
 
+@app.route('/restart', methods=['POST'])
+def restart():
+    data = {
+        'id': session['user_id']
+    }
+    User.max_HP(data)
+    User.reset_inv(data)
+    Task.reset_exp(data)
+    User.reset_lvl(data)
+    User.reset_pet(data)
+    User.reset_equipment(data)
+    return redirect('/dashboard')
+
+def check_tasks():
+    print("*"*100)
+    print("Checking tasks")
+    users = User.get_all()
+    for user in users:
+        user_tasks = Task.get_user_tasks({'user_id': user.id})
+        if user_tasks:
+            User.depleat_HP({'id': user.id})
+
+def run_scheduler():
+    schedule.every().day.at("00:00").do(check_tasks)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+scheduler_thread = threading.Thread(target=run_scheduler)
+scheduler_thread.daemon = True
+scheduler_thread.start()

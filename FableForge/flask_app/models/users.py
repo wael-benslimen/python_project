@@ -130,7 +130,7 @@ class User:
     
     @classmethod
     def depleat_HP(cls, data):
-        query = 'UPDATE users SET HP = HP - 25 WHERE id = %(id)s;'
+        query = 'UPDATE users SET HP = HP - 13 WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -180,6 +180,27 @@ class User:
         query = 'UPDATE users SET pet = %(pet)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
     
+    
+    @classmethod
+    def reset_lvl(cls, data):
+        query = 'UPDATE users SET char_lvl = 1 WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    
+    @classmethod
+    def reset_inv(cls, data):
+        query = 'UPDATE users SET inv_items = "applehprevivebean" WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def reset_equipment(cls, data):
+        query = 'UPDATE users SET equipments = "" WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def reset_pet(cls, data):
+        query = 'UPDATE users SET pet = "none" WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
     
     def to_dict(self):
         return {
