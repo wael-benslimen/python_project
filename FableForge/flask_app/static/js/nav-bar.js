@@ -1,8 +1,6 @@
-// const image = document.querySelector(".image")
-// const dropdown = document.querySelector(".dropdown_content")
+const image = document.querySelector(".image");
+const dropdown = document.querySelector(".dropdown_content");
 
-// image.onclick=function () {
-//     dropdown.classList.toggle("shown")
-//     console.log(dropdown.classList.contains("shown"))
-    
-// }
+image.onclick = function () {
+    dropdown.classList.toggle("show");
+};
