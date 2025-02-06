@@ -90,7 +90,17 @@ def create_quest():
         print("*" * 100)
         return redirect('/dashboard')
     return redirect('/dashboard')
-
+@app.route("/user/<int:id>")
+def user_by_id(id):
+    if "user_id" in session:
+        found_user = User.get_one_id({"id":session["user_id"]})
+        if found_user:
+            user = User.get_one_id({"id":id})
+            return render_template("profile.html",user=user.to_dict())
+        else:
+            return redirect("/")
+    else:
+        return redirect("/")
 @app.route('/cancle/<int:id>', methods=['POST'])
 def delete_quest(id):
     Task.delete({'id': id})
