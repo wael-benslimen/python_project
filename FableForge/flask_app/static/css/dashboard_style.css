@@ -48,8 +48,10 @@ nav ul li form input {
 nav img {
     margin-right: 1.8rem;
     cursor: pointer;
-    width: 40px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
+    border-radius: 20%;
 }
 
 .dropdown_menu {
@@ -340,7 +342,7 @@ section.change-avatar {
     align-items: center;
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(10px) grayscale(10);
+    backdrop-filter: blur(10px) grayscale(2);
 }
 
 section.change-avatar>form {
@@ -358,64 +360,11 @@ section.change-avatar>form {
     overflow: hidden;
     position: relative;
 }
-
-section.change-avatar img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    pointer-events: none;
-    background-color: #f9f9f9;
-    scale: 1;
-}
-
-section.change-avatar input:hover img {
-    scale: 1.2;
-    transition: scale .5s ease-in-out;
-}
-
-section.change-avatar form button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-section.change-avatar.hidden {
-    clip-path: circle(0% at 50% 50%);
-    transition: clip-path .5s ease-in-out;
-}
-
-section.change-avatar:not(.hidden) {
-    clip-path: circle(100% at 50% 50%);
-    transition: clip-path .5s ease-in-out;
-}
-section.change-avatar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    backdrop-filter: blur(10px) grayscale(10);
-    z-index: 100;
-}
-
-section.change-avatar>form {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: background-color .5s ease-in-out;
-    overflow: hidden;
+section.change-avatar>form > div{
     position: relative;
+    overflow: hidden;
 }
-
-section.change-avatar img {
+section.change-avatar>form > div img {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -425,36 +374,29 @@ section.change-avatar img {
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: none;
 }
-
-section.change-avatar input {
+section.change-avatar>form > div input {
     width: 100px;
     height: 100px;
     opacity: 0;
 }
-
-section.change-avatar input:hover img {
+section.change-avatar input:hover ~ img {
     scale: 1.2;
     transition: scale .5s ease-in-out;
 }
 
-section.change-avatar form button.bg-danger {
+section.change-avatar form button.btn-close {
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-section.change-avatar form div {
-    position: relative;
-}
-
 section.change-avatar.hidden {
-    clip-path: circle(0% at 50% 50%);
+    display: none;
     transition: clip-path .5s ease-in-out;
 }
-
-section.change-avatar:not(.hidden) {
-    clip-path: circle(100% at 50% 50%);
-    transition: clip-path .5s ease-in-out;
+img.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
 }

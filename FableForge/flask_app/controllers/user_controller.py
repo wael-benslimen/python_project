@@ -1,4 +1,4 @@
-from flask import render_template,session,redirect,request,flash
+from flask import render_template,session,redirect,request,flash,jsonify
 from flask_app import app
 from flask_app.models.users import User
 from flask_bcrypt import Bcrypt 
@@ -106,4 +106,19 @@ def update_bio():
     
     User.update_bio(data)
     return redirect('/profile/friends')
-
+@app.route("/update-avatar", methods=["PUT"])
+def update_avatar():
+    if "user_id" in session:
+        user = User.get_one_id({"id": session["user_id"]})
+        if user:
+            data = request.get_json()
+            avatar = data.get("avatar")
+            if avatar and len(avatar) > 0:
+                user.update_avatar({"id":session["user_id"], "image":avatar})
+                return jsonify({"avatar": user.image}), 200
+            else:
+                return jsonify({"error": "Invalid avatar data."}), 400
+        else:
+            return jsonify({"error": "User not found."}), 404
+    else:
+        return jsonify({"error": "User is not authenticated."}), 401

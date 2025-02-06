@@ -21,6 +21,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../static/css/dashboard_style.css">
     <link rel="stylesheet" href="../static/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -243,21 +244,20 @@
             </div>
             <input type="submit" class="btn_form w-50 align-self-center" value="Equip">
         </form>
-        <section class="change-avatar hidden">
-            <form class="avatar-form" action="">
-                <h5>Change your avatar</h5>
-                <div>
-                    <input type="file" class="form-control avatar-input" id="">
-                    <img class="avatar-placeholder" src="{{user.image or '../static/placeholders/User_cicrle.png'}}"
-                        alt="">
-                </div>
-                <button type="button" class="btn btn-close bg-danger"><i class="fa-solid fa-xmark"></i></button>
-                <button type="submit" class="btn btn-primary submit-button" disabled>Save</button>
-            </form>
-        </section>
     </div>
+    <section class="change-avatar hidden">
+        <form class="avatar-form" action="">
+            <h5>Change your avatar</h5>
+            <div>
+                <input type="file" class="form-control avatar-input" id="">
+                <img class="avatar-placeholder" src="{{user.image or '../static/placeholders/User_cicrle.png'}}"
+                    alt="">
+            </div>
+            <button type="submit" class="btn btn-primary submit-button" disabled>Save</button>
+        </form>
+    </section>
+</body>
     <script src="../static/js/dashboard_script.js"></script>
-    <script src="../static/js/nav-bar.js"></script>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <script>
         var socket = io.connect('http://localhost:5000');
@@ -276,12 +276,9 @@
         const signal = document.querySelector(".signal")
         document.cookie = 'username={{user.username}}'
         let newBlob = "";
-        closeButton.addEventListener("click", function () {
-            changeAvatar.classList.add("hidden")
-        })
-        avatar.addEventListener("click", function () {
-            changeAvatar.classList.remove("hidden")
-        })
+        avatar.onclick = function () {
+            changeAvatar.classList.remove("hidden");
+        }
         function fileReader(file) {
             return new Promise((resolve, reject) => {
                 if (!file.type.match('image.*')) {
@@ -333,6 +330,8 @@
                 const data = await request.json();
                 avatarPlaceholder.src = data.avatar;
                 avatar.src = data.avatar;
+                changeAvatar.classList.add("hidden");
+                location.reload()
             } catch (error) {
                 console.log(error);
             }
@@ -376,13 +375,9 @@
                 message = '';
             }
         });
-        closeButton.addEventListener("click", function () {
-            section.classList.add("hidden")
-        })
         changeAvatar.addEventListener("click", function () {
-            section.classList.remove("hidden")
+            changeAvatar.classList.remove("hidden")
         })
     </script>
-</body>
 
 </html>

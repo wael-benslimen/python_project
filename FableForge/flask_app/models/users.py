@@ -219,6 +219,7 @@ class User:
             is_valid = False
             flash("Passwords must match", "confirm-password")
         return is_valid
-    
-            
-    
+    @classmethod
+    def update_avatar(cls,data):
+        query = 'UPDATE users SET image = %(image)s WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data)
