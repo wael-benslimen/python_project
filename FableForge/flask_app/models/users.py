@@ -109,7 +109,7 @@ class User:
     @classmethod
     def update(cls, data):
         query = """UPDATE users SET username = %(username)s, email = %(email)s, password = %(password)s,
-                location = %(location)s, about_me = %(about_me)s, interests = %(interests)s WHERE id = %(id)s;"""
+                location = %(location)s, interests = %(interests)s WHERE id = %(id)s;"""
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -146,6 +146,15 @@ class User:
     def update_inv(cls, data):
         query = 'UPDATE users SET inv_items = %(inv_items)s WHERE id = %(id)s;'
         return connectToMySQL(DB).query_db(query, data)
+    
+    
+    
+    @classmethod
+    def update_bio(cls,data) :
+        query="UPDATE users SET about_me = %(about_me)s WHERE id = %(user_id)s ;"
+        return connectToMySQL(DB).query_db(query, data)
+    
+    
     
     @classmethod
     def not_friends_users(cls, logged_in_user_id):
