@@ -1,4 +1,9 @@
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
     nav {
         background-color: #f8f9fa;
         background: rgba(255, 255, 255, 0.2);
@@ -17,8 +22,6 @@
         display: flex;
         gap: 20px;
         list-style: none;
-        padding-left: 0;
-        margin-top: 15px;
         overflow: hidden;
     }
 
@@ -29,7 +32,7 @@
     nav ul li a {
         text-decoration: none;
         color: #fff;
-        padding: 5px 10px;
+        padding: 0px 10px;
         overflow: hidden;
     }
 
@@ -103,8 +106,8 @@
     }
 </style>
 <nav class="d-flex justify-content-between w-100 mt-3">
-    <ul>
-        <li><img src="" alt=""></li>
+    <ul class="d-flex align-items-center mb-0">
+        <li><img src="../../static/icons/fable forge logo.png" alt=""></li>
         <li><a href="/dashboard">HOME</a></li>
         <li><a href="/profile/friends">PROFILE</a></li>
         <li><a href="/friends/suggestions">ADD FRIEND</a></li>
