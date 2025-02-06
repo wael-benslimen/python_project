@@ -1,165 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-<link rel="stylesheet" href="../static/css/friends_suggestions.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Luxurious+Roman&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../static/css/friends_suggestions.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
+
 <body>
-    <nav class="d-flex justify-content-between col-12 mt-3">
-        <ul>
-            <li><a href="/dashboard">HOME</a></li>
-            <li><a href="/profile/friends">PROFILE</a></li>
-            <li><a href="">ADD FRIEND</a></li>
-        </ul>
-        <!-- <div class="form-group d-flex flex-row justify-content-center align-items-center">
-            <input class="form-control" type="text" placeholder=" Search ..." name="search_text" id="search_text"/>
-            <img src="../static/icons/search2.png" alt="" width="30px" class="search_button">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
-            </div>
-        </div> -->
-        <div id="result" style="margin-top: 8px;"></div>
-        <div class="dropdown" >
-            <img src="../static/icons/Gear.png" alt="gear" class="image">
-            <div class="dropdown_content" style="background-color: #e7cdc2;">
-                <a href="" class="dropdown_item text-dark">EDIT PROFILE</a>
-                <a href="" class="dropdown_item text-dark">REST FROM BATTLE</a>
-                <a href="" class="dropdown_item text-dark">LOGOUT</a>
-            </div>
-        </div>
-    </nav>
-    <section class="d-flex justify-content-center align-items-center flex-column gap:3rem" style="width: 100vw;min-height: 100vh;">
-        <div class="title_section_about_me d-flex flex-column justify-content-center align-items-center " style="gap: 10px;">
+    {% include './partials/navbar.html' %}
+    <section class="d-flex justify-content-center align-items-center flex-column gap:3rem"
+        style="width: 100vw;min-height: 100vh;">
+        <div class="title_section_about_me d-flex flex-column justify-content-center align-items-center "
+            style="gap: 10px;">
             <div class="d-flex gap-3" style="background-color: aliceblue;padding: 20px;background: rgba(255,255,255,0.2);
             border: 2px solid rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(30px); border-radius: 10px;">
-                <input type="text" placeholder="Search here ... " style="border-radius: 5px;" class="search_input form-control">
-                <button class="btn btn-primary search-button" style="background-color: #6c6492;color: aliceblue;border:none; box-shadow: 0 0 5px #b39af5, 0 0 10px #b39af5, 0 0 20px #b39af5; margin-left: 20px;">Search</button>
+                <input type="text" placeholder="Search here ... " style="border-radius: 5px;"
+                    class="search_input form-control">
+                <button class="btn btn-primary search-button"
+                    style="background-color: #6c6492;color: aliceblue;border:none; box-shadow: 0 0 5px #b39af5, 0 0 10px #b39af5, 0 0 20px #b39af5; margin-left: 20px;">Search</button>
             </div>
-            <div class="users_section d-flex flex-row justify-content-center align-items-center flex-wrap" style="gap: 10px;"></div>
+            <div class="users_section d-flex flex-row justify-content-center align-items-center flex-wrap"
+                style="gap: 10px;"></div>
         </div>
         <h1 style="margin-bottom: 4rem; color:#9891be ;">- FRIENDS SUGGESTIONS -</h1>
         <div class="swiper">
             <div class="swiper-wrapper">
-            {% for not_friend in not_friends %}
+                {% for not_friend in not_friends %}
                 <div class="swiper-slide h-100">
                     <div class="card h-100">
                         <div class="card-body">
-                            <img src="{{ url_for('static', filename=not_friend.image if not_friend.image else 'icons/blank-profile-picture-973460_640.webp') }}" width="100px"  height="100px"         >
+                            <img src="{{ url_for('static', filename=not_friend.image if not_friend.image else 'icons/blank-profile-picture-973460_640.webp') }}"
+                                width="100px" height="100px">
                         </div>
                         <h3>{{not_friend.username}}</h3>
                         <h5>{{not_friend.interests}}</h5>
                         <div class="card-footer">
                             <form action="/add_friend" method="post">
-                            <input type="hidden" name="friend_id" value="{{ not_friend.id }}">
-                            <button type="submit" class="myButton p-2" id="friendButton_{{ not_friend.id }}"
+                                <input type="hidden" name="friend_id" value="{{ not_friend.id }}">
+                                <button type="submit" class="myButton p-2" id="friendButton_{{ not_friend.id }}"
                                     onclick="changetxt(event, {{ not_friend.id }} )"
                                     style="border-radius: 8px; border: none; background-color: #413190; color: aliceblue;"
                                     onmouseover="this.style.transform='scale(1.1)'; this.style.backgroundColor='#5649c3';"
                                     onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#413190';">
-                                Add friend
-                            </button>
+                                    Add friend
+                                </button>
                             </form>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
-</section>
+    </section>
 
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
-<script>
-    const swiper = new Swiper('.swiper', {
-        effect: 'slide',
-        direction: 'horizontal',
-        slidesPerView:3,
-        spaceBetween:10,
-        pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    });
-    async function getData(url,value){
-        try {
-            const request = await fetch(url+value);
-            const response = await request.json();
-            return response;
-        } catch (error) {
-            console.log(error);
+    <script>
+        const swiper = new Swiper('.swiper', {
+            effect: 'slide',
+            direction: 'horizontal',
+            slidesPerView: 3,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        async function getData(url, value) {
+            try {
+                const request = await fetch(url + value);
+                const response = await request.json();
+                return response;
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
-    
-    // const input =document.querySelector("#search_text")
-    // const search_button =document.querySelector(".search_button")
-    // const dropDown=document.querySelector("div.dropdown-menu")
-    // search_button.onclick =async function(){
-    //     const data = await getData("/friend/by-name/",input.value);
-    //     console.log(data);
-        
-    //     dropDown.innerHTML=""
-    //     if(data.friends && data.friends.length>0){
-    //         for (let i = 0; i< data.friends; i++) {
-    //             const friend = document.createElement("div")
-    //             const button = document.createElement("button")
-    //             const username = document.createElement("h3")
-    //             button.classList.add("btn")
-    //             button.classList.add("btn-primary")
-    //             friend.classList.add("dropdown-item")
-    //             friend.classList.add("d-flex")
-    //             friend.classList.add("justify-content-between")
-    //             friend.classList.add("align-items-center")
-    //             friend.classList.add("p-2");
-    //             friend.appendChild(username)
-    //             friend.appendChild(button)
-    //             dropDown.appendChild(friend)
-    //         }
-    //     }
-    // }
-//     user.addEventListener('click', () => {
-//     main.classList.toggle('active');
-// });
 
-const search_input = document.querySelector(".search_input");
-const search_button = document.querySelector(".search-button");
-const users_section = document.querySelector(".users_section");
-search_button.addEventListener('click',async () => {
-    await search_user();
-});
-async function search_user() {
-    const response = await fetch('/friend/by-interests/' + search_input.value);
-    const data = await response.json();
-    const {users} = data
-    users_section.innerHTML = '';
-    if(users){
-        for (let i = 0; i < users.length; i++) {
-            const friend = document.createElement('div');
-            friend.style = "border-radius: 10px;box-shadow: 0 0 10px rgba(0,0,0,0.1)"
-            friend.innerHTML = `
+        // const input =document.querySelector("#search_text")
+        // const search_button =document.querySelector(".search_button")
+        // const dropDown=document.querySelector("div.dropdown-menu")
+        // search_button.onclick =async function(){
+        //     const data = await getData("/friend/by-name/",input.value);
+        //     console.log(data);
+
+        //     dropDown.innerHTML=""
+        //     if(data.friends && data.friends.length>0){
+        //         for (let i = 0; i< data.friends; i++) {
+        //             const friend = document.createElement("div")
+        //             const button = document.createElement("button")
+        //             const username = document.createElement("h3")
+        //             button.classList.add("btn")
+        //             button.classList.add("btn-primary")
+        //             friend.classList.add("dropdown-item")
+        //             friend.classList.add("d-flex")
+        //             friend.classList.add("justify-content-between")
+        //             friend.classList.add("align-items-center")
+        //             friend.classList.add("p-2");
+        //             friend.appendChild(username)
+        //             friend.appendChild(button)
+        //             dropDown.appendChild(friend)
+        //         }
+        //     }
+        // }
+        //     user.addEventListener('click', () => {
+        //     main.classList.toggle('active');
+        // });
+
+        const search_input = document.querySelector(".search_input");
+        const search_button = document.querySelector(".search-button");
+        const users_section = document.querySelector(".users_section");
+        search_button.addEventListener('click', async () => {
+            await search_user();
+        });
+        async function search_user() {
+            const response = await fetch('/friend/by-interests/' + search_input.value);
+            const data = await response.json();
+            const { users } = data
+            users_section.innerHTML = '';
+            if (users) {
+                for (let i = 0; i < users.length; i++) {
+                    const friend = document.createElement('div');
+                    friend.style = "border-radius: 10px;box-shadow: 0 0 10px rgba(0,0,0,0.1)"
+                    friend.innerHTML = `
                 <div class="card d-flex flex-column align-items-center p-2" style='min-width: 250px; max-width: 300px;gap:10px;'>
                         <img class='card-header' src="${users[i].image ? users[i].image : ''}" alt="${users[i].username}" width="50" height="50" style="border-radius: 50%">
                         <div class="card-body d-flex flex-column">
-                            <h2>${users[i]?.username.length > 15? users[i]?.username.slice(0,14)+'...':users[i]?.username} </h2>
+                            <h2>${users[i]?.username.length > 15 ? users[i]?.username.slice(0, 14) + '...' : users[i]?.username} </h2>
                             <form action="/add_friend" method="post">
                                 <input type="hidden" name="friend_id" value="${users[i].id}">
                                 <button type="submit" class="btn btn-primary" id="friendButton_${users[i].id}"
@@ -174,12 +166,13 @@ async function search_user() {
                     </div>
                 </div>
             `
-            users_section.appendChild(friend);
+                    users_section.appendChild(friend);
+                }
+            }
         }
-    }
-}
-</script>
-<script src="../static/js/nav-bar.js"></script>
+    </script>
+    <script src="../static/js/nav-bar.js"></script>
 
 </body>
+
 </html>

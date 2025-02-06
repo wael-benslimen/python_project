@@ -2,8 +2,7 @@
     nav {
         background-color: #f8f9fa;
         background: rgba(255, 255, 255, 0.2);
-        margin: 10px auto;
-        padding: 10px 20px;
+        padding: 0.5% 5%;
         border-radius: 30px;
         display: flex;
         justify-content: space-between;
@@ -11,7 +10,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
             0 6px 20px rgba(0, 0, 0, 0.2);
         overflow: hidden;
-        max-width: 1200px;
+        width: 100%;
     }
 
     nav ul {
@@ -44,9 +43,9 @@
 
     .dropdown_content {
         display: none;
-        position: absolute;
+        position: fixed;
         right: 0;
-        top: 9%;
+        top: 5%;
         background-color: #f9f9f9;
         border-radius: 20px;
         min-width: 160px;
@@ -56,6 +55,7 @@
 
     .dropdown_content a {
         text-decoration: none;
+        color: black;
         color: #413190;
         display: block;
         padding: 10px;
@@ -102,7 +102,7 @@
         }
     }
 </style>
-<nav class="d-flex justify-content-between col-12 mt-3">
+<nav class="d-flex justify-content-between w-100 mt-3">
     <ul>
         <li><a href="/dashboard">HOME</a></li>
         <li><a href="/profile/friends">PROFILE</a></li>
@@ -111,7 +111,6 @@
     <div class="dropdown">
         <img src="../static/icons/Gear.png" alt="gear" class="image">
     </div>
-
 </nav>
 <div class="dropdown_content text-center" style="background-color: #e7cdc2;">
     <a href="/edit/form" class="dropdown_item">EDIT PROFILE</a>
