@@ -100,8 +100,12 @@ def inv_item():
 @app.route('/max_lvl', methods=['POST'])
 def max_lvl():
     data = {
+        **request.form,
         'id': session['user_id']
     }
+    print('*'*100)
+    print(data)
+    User.add_pet(data)
     Task.reset_exp(data)
     Task.lvl_plus(data)
     return redirect('/dashboard')
