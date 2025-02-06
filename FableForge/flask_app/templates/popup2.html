@@ -8,33 +8,35 @@
     <link rel="stylesheet" href="../static/css/popup2.css">
     <title>FableForge</title>
 </head>
-<body>
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="container">
-            <div class="bground container">
-                <h1>What's your interests</h1>
-                <div class="characters">
-                    <form action="/select/interests" method="post">
-                        <div class="right">
-                            <div for="option1" class="d-flex">
-                                <input type="radio" id="option1" name="interests" value="Sports"><p>Sports</p>
-                            </div>
-                            <div for="option2" class="d-flex">
-                                <input type="radio" id="option2" name="interests" value="Reading"><p>Reading</p>
-                            </div>
-                        </div>
-                        <div class="left">
-                            <div for="option3" class="d-flex">
-                                <input type="radio" id="option3" name="interests" value="Gaming"><p>Gaming</p>
-                            </div>
-                            <div for="option4" class="d-flex">
-                                <input type="radio" id="option4" name="interests" value="Entertainment"><p>Entertainment</p>
-                            </div>
-                        </div>
-                        <button type="submit">Finish</button>
-                    </form>
+<body class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="card p-4">
+            <h1 class="text-center">What's your interests</h1>
+            <form action="/select/interests" method="post" class="row g-3">
+                <div class="col-12 col-md-6">
+                    <div class="form-check d-flex justify-content-start align-items-center gap-2">
+                        <input class="form-check-input" style="width: 30px;height: 30px;" type="radio" id="option1" name="interests" value="Sports">
+                        <label class="form-check-label" style="font-size: 30px;" for="option1">Sports</label>
+                    </div>
+                    <div class="form-check d-flex justify-content-start align-items-center gap-2">
+                        <input class="form-check-input" style="width: 30px;height: 30px;" type="radio" id="option2" name="interests" value="Reading">
+                        <label class="form-check-label" style="font-size: 30px;" for="option2">Reading</label>
+                    </div>
                 </div>
-            </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-check d-flex justify-content-start align-items-center gap-2">
+                        <input class="form-check-input" style="width: 30px;height: 30px;" type="radio" id="option3" name="interests" value="Gaming">
+                        <label class="form-check-label" style="font-size: 30px;" for="option3">Gaming</label>
+                    </div>
+                    <div class="form-check d-flex justify-content-start align-items-center gap-2">
+                        <input class="form-check-input" style="width: 30px;height: 30px;" type="radio" id="option4" name="interests" value="Entertainment">
+                        <label class="form-check-label" style="font-size: 30px;" for="option4">Entertainment</label>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary rounded-5 py-3 px-5"><span>Finish</span></button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
