@@ -3,7 +3,7 @@ from flask_app import app
 from flask_app.models.users import User
 from flask_bcrypt import Bcrypt 
 bcrypt=Bcrypt(app)
-
+import datetime
 @app.route('/register')
 def index():
     return render_template("index.html")
@@ -122,3 +122,24 @@ def update_avatar():
             return jsonify({"error": "User not found."}), 404
     else:
         return jsonify({"error": "User is not authenticated."}), 401
+
+
+@app.route("/users/search")
+def filter_users():
+    username = request.args.get('username')
+    email = request.args.get('email')
+    created_at_from = request.args.get('created_at_from')
+    created_at_to = request.args.get('created_at_to')
+    params = {}
+
+    if email:
+        params['email'] = email
+    if created_at_from:
+        params['created_at_from'] = datetime.datetime.strptime(created_at_from, '%Y-%m-%d')
+    if created_at_to:
+        params['created_at_to'] = datetime.datetime.strptime(created_at_to, '%Y-%m-%d')
+    if username:
+        params['username'] = username
+    all_users = User.get_all()
+    users = [user.to_dict() for user in all_users if all(str(user.to_dict().get(key)).startswith(value) for key, value in params.items())]
+    return jsonify({"users": users}), 200

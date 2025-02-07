@@ -278,3 +278,7 @@ class User:
         result = connectToMySQL(DB).query_db(query)
         print(result[0]['COUNT(*)'])
         return result[0]['COUNT(*)']
+    @classmethod
+    def increment_view(cls,data):
+        query = 'UPDATE users SET views = views + 1 WHERE id = %(id)s;'
+        return connectToMySQL(DB).query_db(query, data) 

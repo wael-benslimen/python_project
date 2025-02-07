@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management App</title>
+    <link rel="shortcut icon" href="../static/icons/fable forge logo.png" type="image/x-icon">
+    <title>Admin Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -18,7 +19,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     {% include 'partials/navbar.html' %}
-    <main class="container mt-5 pt-5 shadow glassmorphism gap-2">
+    <main class="container d-flex flex-column mt-5 pt-5 shadow glassmorphism gap-2">
         <section class="w-100">
             <div class="row bg-transparent g-3">
                 <div class="col-md-4">
@@ -43,8 +44,8 @@
             </div>
         </section>
     
-        <section class="row mt-4">
-            <div class="col-md-6">
+        <section class="row mt-4 d-flex flex-column justify-content-center align-items-center">
+            <div class="col-md-10">
                 <div class="d-flex flex-column gap-3">
                     <div class="card">
                         <div class="card-header">
@@ -99,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-10">
                 <div class="d-flex flex-column gap-3">
                     <div class="card">
                         <div class="card-header">
@@ -123,41 +124,42 @@
                             {% block js %}
                                 <script>
                                     const usersData = JSON.parse('{{ users | tojson }}');
-                                    const numberUsersSort = document.querySelector("button.numeric-users-sort")
-                                    const alphanumericUsersSort = document.querySelector("button.alphanumeric-users-sort")
-                                    const searchButton = document.querySelector("button.search-users")
-                                    numberUsersSort.addEventListener("click",function(){
+                                    const numberUsersSort = document.querySelector("button.numeric-users-sort");
+                                    const alphanumericUsersSort = document.querySelector("button.alphanumeric-users-sort");
+                                    const searchButton = document.querySelector("button.search-users");
+                                    numberUsersSort.addEventListener("click", function() {
                                         usersData.sort((a, b) => a.id - b.id);
                                         updateUsersTable(usersData);
-                                    })
+                                    });
                                     
-                                    alphanumericUsersSort.addEventListener("click",function(){
+                                    alphanumericUsersSort.addEventListener("click", function() {
                                         usersData.sort((a, b) => a.username.localeCompare(b.username));
                                         updateUsersTable(usersData);
-                                    })
+                                    });
                                     
-                                    searchButton.addEventListener("click",function(){
-                                        const searchInput = document.querySelector("input.form-control").value
-                                        const filteredUsers = usersData.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()))
-                                        updateUsersTable();
-                                    })
-                                    function updateUsersTable(){
-                                        const usersBody = document.querySelector(".users-data tbody")
-                                        usersBody.innerHTML = ""
-                                        usersData.forEach(u => {
-                                            const row = document.createElement("tr")
+                                    searchButton.addEventListener("click", function() {
+                                        const searchInput = document.querySelector("input.form-control").value;
+                                        const filteredUsers = usersData.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()));
+                                        updateUsersTable(filteredUsers);
+                                    });
+                                    
+                                    function updateUsersTable(users) {
+                                        const usersBody = document.querySelector(".users-data tbody");
+                                        usersBody.innerHTML = "";
+                                        users.forEach(u => {
+                                            const row = document.createElement("tr");
                                             row.innerHTML = `
                                                 <td>${u.id}</td>
                                                 <td>
-                                                    <img src="${u.image}" alt="${u.username}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                    <img src="${u.image}" alt="${u.username}" class="img-fluid rounded-circle" style="width: 50px;height:50px;">
                                                 </td>
                                                 <td>${u.username}</td>
                                                 <td>${u.email}</td>
-                                                <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                                                <td><span class="badge ${u.is_active ? "bg-success" : "bg-warning"} text-light">${u.is_active ? "in battle" : "in relax"}</span></td>
                                                 <td>${u.created_at}</td>
-                                            `
-                                            usersBody.appendChild(row)
-                                        })
+                                            `;
+                                            usersBody.appendChild(row);
+                                        });
                                     }
                                 </script>
                             {% endblock %}
@@ -176,12 +178,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {%if users %}
+                                    {% if users %}
                                         {% for u in users %}
                                             <tr>
                                                 <td>{{ u.id }}</td>
                                                 <td>
-                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;height: 50px;">
                                                 </td>
                                                 <td>{{ u.username }}</td>
                                                 <td>{{ u.email }}</td>
@@ -193,7 +195,7 @@
                                                     </button>
                                                 </td>
                                             </tr>
-                                            {% endfor %}
+                                        {% endfor %}
                                     {% endif %}
                                     {% if not users %}
                                         <p>No users found.</p>
@@ -209,21 +211,25 @@
                             {% endif %}
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-10 mt-4">
+                <div class="d-flex flex-column gap-3">
                     <div class="card">
                         <div class="card-header">
                             <h3>New Users</h3>
                             <div class="w-100 d-flex justify-content-between align-items-center gap-1">
                                 <div class="d-flex justify-content-center align-items-center gap-1">
-                                    <button class="btn btn-outline-primary text-primary">
+                                    <button class="btn btn-outline-primary text-primary numeric-latest-users-sort">
                                         <i class="fa-solid fa-arrow-down-9-1"></i>
                                     </button>
-                                    <button class="btn btn-outline-primary text-primary">
+                                    <button class="btn btn-outline-primary text-primary alphanumeric-latest-users-sort">
                                         <i class="fa-solid fa-arrow-down-z-a"></i>
                                     </button>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center gap-1">
                                     <input type="text" class="form-control">
-                                    <button class="btn btn-outline-primary text-primary">
+                                    <button class="btn btn-outline-primary text-primary search-latest-users">
                                         <ion-icon name="search-outline"></ion-icon>
                                     </button>
                                 </div>
@@ -233,31 +239,31 @@
                             {% block js1 %}
                                 <script>
                                     const latestUsers = JSON.parse('{{ latest_users | tojson }}');
-                                    const numberLatestSort = document.querySelector("button.numeric-users-sort")
-                                    const alphanumericLatestSort = document.querySelector("button.alphanumeric-users-sort")
-                                    const searchLatestUsers = document.querySelector("button.search-users")
+                                    const numberLatestSort = document.querySelector("button.numeric-latest-users-sort");
+                                    const alphanumericLatestSort = document.querySelector("button.alphanumeric-latest-users-sort");
+                                    const searchLatestUsers = document.querySelector("button.search-latest-users");
                                     
-                                    numberLatestSort.addEventListener("click",function(){
+                                    numberLatestSort.addEventListener("click", function() {
                                         latestUsers.sort((a, b) => a.id - b.id);
                                         updateLatestUsersTable(latestUsers);
-                                    })
+                                    });
                                     
-                                    alphanumericLatestSort.addEventListener("click",function(){
+                                    alphanumericLatestSort.addEventListener("click", function() {
                                         latestUsers.sort((a, b) => a.username.localeCompare(b.username));
                                         updateLatestUsersTable(latestUsers);
-                                    })
+                                    });
                                     
-                                    searchLatestUsers.addEventListener("click",function(){
-                                        const searchInput = document.querySelector("input.form-control").value
-                                        const filteredLatestUsers = latestUsers.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()))
+                                    searchLatestUsers.addEventListener("click", function() {
+                                        const searchInput = document.querySelector("input.form-control").value;
+                                        const filteredLatestUsers = latestUsers.filter(u => u.username.toLowerCase().includes(searchInput.toLowerCase()));
                                         updateLatestUsersTable(filteredLatestUsers);
-                                    })
+                                    });
                                     
-                                    function updateLatestUsersTable(){
-                                        const latestUsersBody = document.querySelector(".latest-users-data tbody")
-                                        latestUsersBody.innerHTML = ""
-                                        latestUsers.forEach(u => {
-                                            const row = document.createElement("tr")
+                                    function updateLatestUsersTable(users) {
+                                        const latestUsersBody = document.querySelector(".latest-users-data tbody");
+                                        latestUsersBody.innerHTML = "";
+                                        users.forEach(u => {
+                                            const row = document.createElement("tr");
                                             row.innerHTML = `
                                                 <td>${u.id}</td>
                                                 <td>
@@ -265,11 +271,11 @@
                                                 </td>
                                                 <td>${u.username}</td>
                                                 <td>${u.email}</td>
-                                                <td><span class="badge ${u.is_active?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
+                                                <td><span class="badge ${u.is_active ? "bg-success" : "bg-warning"} text-light">${u.is_active ? "in battle" : "in relax"}</span></td>
                                                 <td>${u.created_at}</td>
-                                            `
-                                            latestUsersBody.appendChild(row)
-                                        })
+                                            `;
+                                            latestUsersBody.appendChild(row);
+                                        });
                                     }
                                 </script>
                             {% endblock %}
@@ -286,26 +292,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {%if users %}
+                                    {% if latest_users %}
                                         {% for u in latest_users %}
                                             <tr>
                                                 <td>{{ u.id }}</td>
                                                 <td>
-                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;">
+                                                    <img src="{{ u.image }}" alt="{{ u.username }}" class="img-fluid rounded-circle" style="width: 50px;height: 50px;">
                                                 </td>
                                                 <td>{{ u.username }}</td>
                                                 <td>{{ u.email }}</td>
-                                                <td><span class="badge {{"bg-success" if u.is_active else "bg-warning"}} text-light">{{"in battle" if u.is_active else "in relax"}}</span></td>
+                                                <td><span class="badge {{'bg-success' if u.is_active else 'bg-warning'}} text-light">{{"in battle" if u.is_active else "in relax"}}</span></td>
                                                 <td>{{ u.created_at }}</td>
                                                 <td>
                                                     <button class="btn btn-info">
-                                                        <a href="{{'/user/'+(u.id|string)}}" target="_blank" class="link-info text-light">View</a>²
+                                                        <a href="{{'/user/'+(u.id|string)}}" target="_blank" class="link-info text-light">View</a>
                                                     </button>
                                                 </td>
                                             </tr>
-                                            {% endfor %}
+                                        {% endfor %}
                                     {% endif %}
-                                    {% if not users %}
+                                    {% if not latest_users %}
                                         <p>No users found.</p>
                                     {% endif %}
                                 </tbody>
@@ -343,101 +349,105 @@
             </div>
         </section>
     </main>
+    <script>
+        const aside = document.querySelector("aside");
+        document.body.classList.toggle("dark-theme", localStorage.getItem("theme") === "dark");
+        const searchUsers = document.querySelectorAll("button.search-button");
+        const searchLatest = document.querySelectorAll("button.search-latest");
+        const usersBody = document.querySelector("table.users-data tbody");
+        const latestUsersBody = document.querySelector("table.latest-users-data tbody");
+        const usersContainer = document.querySelector("div.users-container");
+        const search_button = document.querySelector("button.search-button");
+        const inputs = {
+            name: document.querySelector("input[name='name']"),
+            email: document.querySelector("input[name='email']"),
+            created_at_from: document.querySelector("input[name='created_at_from']"),
+            created_at_to: document.querySelector("input[name='created_at_to']")
+        };
+        search_button.addEventListener("click", async function() {
+            try {
+                const request = await fetch(`/users/search?name=${inputs.name.value}&email=${inputs.email.value}&created_at_from=${inputs.created_at_from.value}&created_at_to=${inputs.created_at_to.value}`);
+                const data = await request.json();
+                if (data.users && Array.isArray(data.users)) {
+                    console.log(data);
+                    usersContainer.innerHTML = "";
+                    data.users.forEach((user) => {
+                        const userCard = document.createElement("div");
+                        userCard.classList.add("user-card");
+                        userCard.classList.add("d-flex");
+                        userCard.classList.add("flex-column");
+                        userCard.classList.add("justify-content-center");
+                        userCard.classList.add("align-items-center");
+                        userCard.innerHTML = `
+                            <div class="w-100 user-card-image d-flex justify-content-center align-items-center">
+                                <img src="${user.image}" alt="${user.username}" class="img-fluid rounded-circle" style="width:100px;height:100px;">
+                            </div>
+                            <div class="user-card-content">
+                                <h5 class="user-card-name">${user.username}</h5>
+                                <p class="user-card-email">${user.email}</p>
+                            </div>
+                            <div class="user-card-action">
+                                <button class="btn btn-info">
+                                    <a href="${'/user/' + (user.id)}" target="_blank" class="link-info text-light">View</a>
+                                </button>
+                            </div>
+                        `;
+                        usersContainer.appendChild(userCard);
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+        searchUsers.forEach(button => {
+            button.addEventListener("click", async function() {
+                const page = parseInt(button.textContent);
+                let {users} = await getData(`/users/${page}`);
+                if (Array.isArray(users)) {
+                    usersBody.innerHTML = "";
+                    users.forEach(u => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${u.id}</td>
+                            <td>${u.username}</td>
+                            <td>${u.email}</td>
+                            <td><span class="badge ${u.is_active == 1 ? "bg-success" : "bg-warning"} text-light">${u.is_active ? "in battle" : "in relax"}</span></td>
+                            <td>${u.created_at}</td>
+                        `;
+                        usersBody.appendChild(row);
+                    });
+                }
+            });
+        });
+        searchLatest.forEach(button => {
+            button.addEventListener("click", async function() {
+                const page = parseInt(button.textContent);
+                let latestUsers = await getData(`/latest-users/${page - 1}`);
+                latestUsersBody.innerHTML = "";
+                if (Array.isArray(latestUsers.users)) {
+                    latestUsers.users.forEach(u => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${u.id}</td>
+                            <td>${u.username}</td>
+                            <td>${u.email}</td>
+                            <td><span class="badge ${u.is_active == 1 ? "bg-success" : "bg-warning"} text-light">${u.is_active ? "in battle" : "in relax"}</span></td>
+                            <td>${u.created_at}</td>
+                        `;
+                        latestUsersBody.appendChild(row);
+                    });
+                }
+            });
+        });
+        async function getData(url) {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
 </body>
-<script>
-    const aside = document.querySelector("aside")
-    document.body.classList.toggle("dark-theme",localStorage.getItem("theme") === "dark")
-    const searchUsers = document.querySelectorAll("button.search-button")
-    const searchLatest = document.querySelectorAll("button.search-latest")
-    const usersBody = document.querySelector("table.users-data tbody")
-    const latestUsersBody = document.querySelector("table.latest-users-data tbody")
-    const usersContainer = document.querySelector("div.users-container")
-    const search_button = document.querySelector("button.search-button")
-    const inputs = {
-        name: document.querySelector("input[name='name']"),
-        email: document.querySelector("input[name='email']"),
-        created_at_from: document.querySelector("input[name='created_at_from']"),
-        created_at_to: document.querySelector("input[name='created_at_to']")
-    }
-    search_button.addEventListener("click",async function() {
-        try {
-            const request  = await fetch(`/users/search?name=${inputs.name.value}&email=${inputs.email.value}&created_at_from=${inputs.created_at_from.value}&created_at_to=${inputs.created_at_to.value}`)
-            const data = await request.json()
-            if(data.users && Array.isArray(data.users)){
-                console.log(data);
-                usersContainer.innerHTML = ""
-                data.users.forEach((user)=>{
-                    const userCard = document.createElement("div")
-                    userCard.classList.add("user-card")
-                    userCard.innerHTML = `
-                        <div class="user-card-image">
-                            <img src="${user.image}" alt="${user.username}" class="img-fluid rounded-circle">
-                        </div>
-                        <div class="user-card-content">
-                            <h5 class="user-card-name">${user.username}</h5>
-                            <p class="user-card-email">${user.email}</p>
-                        </div>
-                        <div class="user-card-action">
-                            <button class="btn btn-info">
-                                <a href="${'/user/'+(user.id)}" target="_blank" class="link-info text-light">View</a>
-                            </button>
-                        </div>
-                        `
-                    usersContainer.appendChild(userCard)
-                })
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    })
-    searchUsers.forEach(button => {
-        button.addEventListener("click",async function() {
-            const page = parseInt(button.textContent)
-            let users = await getData(`/users/${page}`)
-            if(Array.isArray(users)){
-                usersBody.innerHTML = ""
-                users.forEach(u => {
-                    const row = document.createElement("tr")
-                    row.innerHTML = `
-                        <td>${u.id}</td>
-                        <td>${u.username}</td>
-                        <td>${u.email}</td>
-                        <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
-                        <td>${u.created_at}</td>
-                    `
-                    usersBody.appendChild(row)
-                })
-            }
-        })
-    })
-    searchLatest.forEach(button => {
-        button.addEventListener("click",async function() {
-            const page = parseInt(button.textContent)
-            let latestUsers = await getData(`/latest-users/${page-1}`)
-            latestUsersBody.innerHTML = ""
-            if(Array.isArray(latestUsers.users)){
-                latestUsers.forEach(u => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${u.id}</td>
-                        <td>${u.username}</td>
-                        <td>${u.email}</td>
-                        <td><span class="badge ${u.is_active==1?"bg-success" : "bg-warning"} text-light">${u.is_active?"in battle" : "in relax"}}</span></td>
-                        <td>${u.created_at}</td>
-                    `
-                    tableBody.appendChild(row)
-                })
-            }
-        })
-    })
-    async function getData(url){
-        try{
-            const response = await fetch(url)
-            const data = await response.json()
-            return data
-        }catch(e){
-            console.log(e);
-        }
-    }
-</script>
 </html>

@@ -70,7 +70,7 @@ aside button{
 }
 .user-card{
     width: clamp(300px,33%,350px);
-    height: 200px;
+    height: 300px;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

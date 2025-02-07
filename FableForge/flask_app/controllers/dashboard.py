@@ -96,6 +96,7 @@ def user_by_id(id):
         found_user = User.get_one_id({"id":session["user_id"]})
         if found_user:
             user = User.get_one_id({"id":id})
+            user.increment_view({"id":id})
             return render_template("profile.html",user=user.to_dict())
         else:
             return redirect("/")
