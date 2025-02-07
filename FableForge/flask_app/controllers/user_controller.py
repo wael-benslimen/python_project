@@ -123,7 +123,6 @@ def update_avatar():
     else:
         return jsonify({"error": "User is not authenticated."}), 401
 
-
 @app.route("/users/search")
 def filter_users():
     username = request.args.get('username')
@@ -131,7 +130,6 @@ def filter_users():
     created_at_from = request.args.get('created_at_from')
     created_at_to = request.args.get('created_at_to')
     params = {}
-
     if email:
         params['email'] = email
     if created_at_from:
@@ -141,5 +139,18 @@ def filter_users():
     if username:
         params['username'] = username
     all_users = User.get_all()
-    users = [user.to_dict() for user in all_users if all(str(user.to_dict().get(key)).startswith(value) for key, value in params.items())]
-    return jsonify({"users": users}), 200
+    filtered_users = []
+    for user in all_users:
+        user_dict = user.to_dict()
+        match = True
+        if 'email' in params and not user_dict['email'].startswith(params['email']):
+            match = False
+        if 'created_at_from' in params and user_dict['created_at'] < params['created_at_from']:
+            match = False
+        if 'created_at_to' in params and user_dict['created_at'] > params['created_at_to']:
+            match = False
+        if 'username' in params and not user_dict['username'].startswith(params['username']):
+            match = False
+        if match:
+            filtered_users.append(user_dict)
+    return jsonify({"users": filtered_users}), 200

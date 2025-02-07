@@ -53,7 +53,7 @@ def admin_dashboard() :
                 users:list[User] = [u.to_dict() for u in User.get_users_by_amount({"limit":10, "offset":0}) if isinstance(u, User)]
                 users_pages_count:int = math.ceil(User.get_users_count()/10)
                 latest_users_pages_count:int = math.ceil(latest_users_count/10)
-                users_grouped_by_month = User.get_users_grouped_by_month()
+                users_grouped_by_day = User.get_users_grouped_by_day()
                 progress = User.get_latest_users_count() - User.get_latest_users_count_compared()
                 return render_template(
                     'admin_dashboard.html', 
@@ -66,7 +66,7 @@ def admin_dashboard() :
                     users=users,
                     pages_count=users_pages_count,
                     latest_users_pages_count=latest_users_pages_count,
-                    users_grouped_by_month=users_grouped_by_month,
+                    users_grouped_by_day=users_grouped_by_day,
                     page=1,
                     progress=progress/len(users)
                 )

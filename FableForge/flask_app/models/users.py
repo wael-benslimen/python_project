@@ -265,8 +265,8 @@ class User:
             all_users.append(cls(row))
         return all_users
     @classmethod
-    def get_users_grouped_by_month(cls):
-        query = "SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) as count FROM users WHERE users.adminstration = 'user' GROUP BY month ORDER BY month DESC;"
+    def get_users_grouped_by_day(cls):
+        query = "SELECT DATE_FORMAT(created_at, '%Y-%m-%d') AS day, COUNT(*) as count FROM users WHERE users.adminstration = 'user' GROUP BY day ORDER BY day;"
         result = connectToMySQL(DB).query_db(query)
         return result
     @classmethod

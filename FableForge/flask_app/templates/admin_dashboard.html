@@ -55,16 +55,20 @@
                             <canvas class="w-100" id="chart-1"></canvas>
                             {% block javascript %}
                                 <script>
-                                    const data = JSON.parse('{{ users_grouped_by_month | tojson }}');
+                                    const data = JSON.parse('{{ users_grouped_by_day | tojson }}');
+                                    const ctx = document.getElementById("chart-1")
                                     console.log(data);
-
-                                    new Chart(document.getElementById("chart-1"), {
+                                    gradient = ctx.createLinearGradient(0, 25, 0, 300);
+                                    gradient.addColorStop(0, colors.purple.half);
+                                    gradient.addColorStop(0.35, colors.purple.quarter);
+                                    gradient.addColorStop(1, colors.purple.zero);
+                                    new Chart(ctx, {
                                         type: "line",
                                         data: {
-                                            labels: data.map((item) => item.month),
+                                            labels: data.map((item) => item.day),
                                             datasets: [
                                                 {
-                                                    label: "Users per Month",
+                                                    label: "Users per Day",
                                                     data: data.map((item) => item.count),
                                                     fill: false,
                                                     borderColor: "rgb(75, 192, 192)",
@@ -367,11 +371,11 @@
         search_button.addEventListener("click", async function() {
             try {
                 const request = await fetch(`/users/search?name=${inputs.name.value}&email=${inputs.email.value}&created_at_from=${inputs.created_at_from.value}&created_at_to=${inputs.created_at_to.value}`);
-                const data = await request.json();
-                if (data.users && Array.isArray(data.users)) {
+                const {users} = await request.json();
+                usersContainer.innerHTML = "";
+                if (users && Array.isArray(users)) {
                     console.log(data);
-                    usersContainer.innerHTML = "";
-                    data.users.forEach((user) => {
+                    users.forEach((user) => {
                         const userCard = document.createElement("div");
                         userCard.classList.add("user-card");
                         userCard.classList.add("d-flex");
